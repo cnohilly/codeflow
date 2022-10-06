@@ -8,6 +8,23 @@ const typeDefs = gql`
         email: String
     }
 
+    type Post {
+        _id: ID
+        postText: String
+        username: String
+        createdAt: String
+        reactionCount: Int
+        reactions: [Reaction]
+    }
+
+    type Reply {
+        _id: ID
+        replyBody: String
+        createdAt: String
+        username: String
+        replies: [Reply]
+    }
+
     type Auth {
         token: ID!
         user: User   
