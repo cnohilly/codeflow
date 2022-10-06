@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, Badge, Button } from 'react-bootstrap';
+import { Col, Card, Badge, Button } from 'react-bootstrap';
 
 const Project = () => {
   return (
