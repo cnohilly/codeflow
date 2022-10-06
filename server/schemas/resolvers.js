@@ -63,7 +63,7 @@ const resolvers = {
         },
         addPost: async (parent, args, context) => {
             if (context.user) {
-                const post = await Post.create({ ...args, createdBy: context.user._id });
+                let post = await Post.create({ ...args, createdBy: context.user._id });
                 // .populate('createdBy')
                 // .populate('replies');
 
@@ -72,6 +72,12 @@ const resolvers = {
                     { $push: { posts: post._id } },
                     { new: true }
                 );
+
+                post = await post.populate(['createdBy',
+                    {
+                        path: 'replies',
+                        populate: ['createdBy', 'replies']
+                    }]);
 
                 return post;
             }
