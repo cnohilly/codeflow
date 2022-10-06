@@ -22,7 +22,7 @@ const Header = () => {
               />{' '}
               Navbar
             </Navbar.Brand>
-            {/*  */}
+            {/* menu button */}
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
