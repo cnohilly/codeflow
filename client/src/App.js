@@ -36,7 +36,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <main className="App custom-height">
+      <main className="App custom-height bg-secondary">
         <Home />
       </main >
       <Footer />
