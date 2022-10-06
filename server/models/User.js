@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const { Post } = require('./Post');
 
 const userSchema = new Schema(
     {
@@ -23,7 +24,13 @@ const userSchema = new Schema(
             minlength: 5,
             match: [/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&.#~&*_-])[A-Za-z0-9@$!%*?&.#~&*_-]+$/,
                 'Password must contain a capital letter, lowercase letter, a number, and a special character (@$!%*?&.#~&*_-).']
-        }
+        },
+        posts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Post'
+            }
+        ]
     }
 );
 
@@ -34,6 +41,10 @@ userSchema.pre('save', async function (next) {
     }
 
     next();
+});
+
+userSchema.pre('deleteOne', { document: false, query: true }, async function () {
+    await Post.deleteMany({ createdBy: this._id });
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
