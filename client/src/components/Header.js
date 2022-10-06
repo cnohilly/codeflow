@@ -5,8 +5,8 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 const Header = () => {
   return (
     // section for Header component
-    <header>
-        <Navbar bg="black" variant="dark" sticky="top" expand="md" >
+    <header className="sticky-top">
+        <Navbar bg="black" variant="dark" expand="md" >
           <Container fluid className="px-3">
             {/* brand image and name */}
             <Navbar.Brand 
