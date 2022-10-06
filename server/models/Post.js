@@ -1,10 +1,9 @@
 const { Schema, model } = require('mongoose');
 const { dateFormat } = require('../utils/helpers');
-const replySchema = require('./Reply');
 
 const postSchema = new Schema(
     {
-        postText: {
+        postBody: {
             type: String,
             required: 'Post must include text.',
             minlength: 1,
@@ -15,11 +14,18 @@ const postSchema = new Schema(
             default: Date.now,
             get: date => dateFormat(date)
         },
-        username: {
-            type: String,
-            required: true
+        createdBy: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+            immutable: true
         },
-        replies: [replySchema]
+        replies: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Reply'
+            }
+        ]
     },
     {
         toJSON: {

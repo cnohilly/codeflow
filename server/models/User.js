@@ -23,7 +23,13 @@ const userSchema = new Schema(
             minlength: 5,
             match: [/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&.#~&*_-])[A-Za-z0-9@$!%*?&.#~&*_-]+$/,
                 'Password must contain a capital letter, lowercase letter, a number, and a special character (@$!%*?&.#~&*_-).']
-        }
+        },
+        posts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Post'
+            }
+        ]
     }
 );
 

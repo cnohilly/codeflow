@@ -8,16 +8,32 @@ const replySchema = new Schema(
             required: true,
             maxlength: 300
         },
-        username: {
-            type: String,
-            required: true
+        createdBy: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+            immutable: true
         },
         createdAt: {
             type: Date,
             default: Date.now,
             get: date => dateFormat(date)
         },
-        replies: [replySchema]
+        postId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Post',
+            required: true
+        },
+        parentReplyId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Reply'
+        },
+        replies: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Reply'
+            }
+        ]
     },
     {
         toJSON: {
@@ -26,4 +42,6 @@ const replySchema = new Schema(
     }
 );
 
-module.exports = replySchema;
+const Reply = model('Reply', replySchema);
+
+module.exports = Reply;
