@@ -19,8 +19,11 @@ const resolvers = {
                 return User.findById(userId)
                     .select('posts')
                     .sort({ createdAt: -1 })
-                    .populate('createdBy')
-                    .populate('replies');
+                    .populate(['createdBy',
+                        {
+                            path: 'replies',
+                            populate: ['createdBy', 'replies']
+                        }]);
             }
             return Post.find()
                 .sort({ createdAt: -1 })
@@ -32,8 +35,11 @@ const resolvers = {
         },
         post: async (parent, { _id }) => {
             return Post.findOne({ _id })
-                .populate('replies')
-                .populate('createdBy');
+                .populate(['createdBy',
+                    {
+                        path: 'replies',
+                        populate: ['createdBy', 'replies']
+                    }]);
         }
     },
 
@@ -64,8 +70,6 @@ const resolvers = {
         addPost: async (parent, args, context) => {
             if (context.user) {
                 let post = await Post.create({ ...args, createdBy: context.user._id });
-                // .populate('createdBy')
-                // .populate('replies');
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
@@ -73,11 +77,7 @@ const resolvers = {
                     { new: true }
                 );
 
-                post = await post.populate(['createdBy',
-                    {
-                        path: 'replies',
-                        populate: ['createdBy', 'replies']
-                    }]);
+                post = await post.populate('createdBy');
 
                 return post;
             }
@@ -103,7 +103,6 @@ const resolvers = {
                     )
                 }
                 reply = await reply.populate('createdBy');
-                reply = await reply.populate('replies');
 
                 return reply;
             }
