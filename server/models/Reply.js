@@ -42,6 +42,10 @@ const replySchema = new Schema(
     }
 );
 
+replySchema.virtual('replyCount').get(function () {
+    return (this.replies ? this.replies.length : 0);
+});
+
 const Reply = model('Reply', replySchema);
 
 module.exports = Reply;

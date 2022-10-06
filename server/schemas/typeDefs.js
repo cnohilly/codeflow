@@ -6,6 +6,7 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        posts: [Post]
     }
 
     type Post {
@@ -21,7 +22,8 @@ const typeDefs = gql`
         _id: ID
         replyBody: String
         createdAt: String
-        username: String
+        createdBy: User
+        replyCount: Int
         replies: [Reply]
     }
 
@@ -41,7 +43,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addPost(postBody: String!): Post
-        addReply(postID: ID!, parentReplyID: ID, replyBody: String!): Post
+        addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
     }
 `;
 

@@ -17,8 +17,7 @@ const postSchema = new Schema(
         createdBy: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
-            immutable: true
+            required: true
         },
         replies: [
             {
