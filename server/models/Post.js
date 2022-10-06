@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { dateFormat } = require('../utils/helpers');
+const { Reply } = require('./Reply');
 
 const postSchema = new Schema(
     {
@@ -36,6 +37,13 @@ const postSchema = new Schema(
 postSchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
+
+const preDelete = async () => {
+    await Reply.deleteMany({ postId: this._id });
+}
+
+postSchema.pre('deleteOne', { document: false, query: true }, preDelete);
+postSchema.pre('deleteMany', { document: true, query: true }, preDelete);
 
 const Post = model('Post', postSchema);
 

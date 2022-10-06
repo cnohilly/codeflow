@@ -108,6 +108,21 @@ const resolvers = {
             }
 
             throw new AuthenticationError("You need to be logged in!");
+        },
+        deletePost: async (parent, { _id }, context) => {
+            if (context.user) {
+                let post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
+                    .select('-replies -replyCount')
+                    .populate('createdBy');
+
+                if (!post) {
+                    throw new AuthenticationError("You do not have permission to do that!");
+                }
+
+                return post;
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         }
     }
 }

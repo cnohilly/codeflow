@@ -44,6 +44,9 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addPost(postBody: String!): Post
         addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
+        deleteUser(_id: ID!): User
+        deletePost(_id: ID!): Post
+        deleteReply(_id: ID!): Reply
     }
 `;
 
