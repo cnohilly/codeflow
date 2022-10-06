@@ -23,3 +23,7 @@ code {
 .custom-height {
   min-height: calc(100vh - 56px - 321px);
 }
+
+.scroll-margin {
+  scroll-margin-top: 4rem;
+}

@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
     // section for Homepage
-    <div id="home">
+    <div id="home" className="scroll-margin">
       {/* section for hero */}
       <section id="hero" className="py-4 py-md-5 text-center bg-dark text-white">
         <div className="py-md-5">
