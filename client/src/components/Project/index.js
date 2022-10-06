@@ -1,5 +1,6 @@
 import React from 'react';
-import { Col, Card, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
 const Project = () => {
   return (
@@ -28,9 +29,29 @@ const Project = () => {
             officiis placeat deleniti nobis ipsa velit inventore? 
             Veritatis id, ex impedit fugiat reprehenderit aspernatur facilis.
           </Card.Text>
-          <Card.Link href="#" className="text-decoration-none text-muted">
-            # of comments
-          </Card.Link>
+          <div className="d-flex align-items-center justify-content-between">
+            <Card.Link 
+              href="#" 
+              className="text-decoration-none text-muted"
+            >
+              # of comments
+            </Card.Link>
+            <div>
+              <Button 
+                href="#" 
+                variant="primary" 
+                className="me-3"
+              >
+                Go to project
+              </Button>
+              <Button 
+                href="#"
+                variant="primary"
+              >
+                Github
+              </Button>
+            </div>
+          </div>
         </Card.Body>
       </Card>
     </Col>
