@@ -27,3 +27,44 @@ code {
 .scroll-margin {
   scroll-margin-top: 4rem;
 }
+
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+
+nav a {
+  padding: 6px 10px;
+  margin: 0 15px;
+  transition: all 0.2s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* FORM */
+.form-label,
+.form-input,
+.form-textarea {
+  display: block;
+}
+
+.form-label {
+  font-size: 1.2rem;
+  margin: 0.625rem 0 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  border: 2px solid ;
+  border-radius: 50px;
+}
+
+
+

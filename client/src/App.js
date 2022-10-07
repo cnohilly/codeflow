@@ -13,6 +13,9 @@ import Footer from './components/Footer';
 
 import Home from './pages/Home';
 
+import Login from './pages/Login';
+import Signup from './pages/Signup'
+
 const httpLink = createHttpLink({
   uri: '/graphql'
 });
@@ -35,13 +38,31 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header />
-      <main className="App custom-height bg-secondary">
-        <Home />
-      </main >
-      <Footer />
+      <Router>
+        <div className="App custom-height bg-secondary">
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route
+                path="/"
+                element={<Home />}
+              />
+              <Route
+                path="/login"
+                element={<Login />}
+              />
+              <Route
+                path="/signup"
+                element={<Signup />}
+              />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }
+
 
 export default App;
