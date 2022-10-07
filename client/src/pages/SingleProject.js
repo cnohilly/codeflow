@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Card, Form, Button, FloatingLabel } from 'react-bootstrap';
 import Project from '../components/Project';
+import Comment from '../components/Comment';
 
 const SingleProject = () => {
 
@@ -26,7 +27,7 @@ const SingleProject = () => {
                 <Form.Control
                   id="comment-textarea"
                   as="textarea"
-                  placeholder="Leave a comment here"
+                  placeholder="Add a comment"
                   style={{ height: '100px' }}
                   className="bg-dark text-white"
                 />
@@ -44,9 +45,13 @@ const SingleProject = () => {
       <hr className="border border-white"/>
 
       {/* comment list */}
-      
       <div>
-
+        <Row xs={1} className="g-4">
+          <Comment />
+          <Comment />
+          <Comment />
+          <Comment />
+        </Row>
       </div>
     </Container>
   );
