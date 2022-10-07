@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Row, Card, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { Card, Form, Button, FloatingLabel } from 'react-bootstrap';
 
 const CommentForm = () => {
   
   return (
+    // comment form card
     <Card className="mt-3 bg-dark bg-gradient shadow">
       <Card.Body>
         <Form>

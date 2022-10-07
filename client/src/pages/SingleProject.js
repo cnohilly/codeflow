@@ -3,6 +3,7 @@ import { Container, Row, Card, Form, Button, FloatingLabel } from 'react-bootstr
 import Project from '../components/Project';
 import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
+import ReplyForm from '../components/ReplyForm';
 
 const SingleProject = () => {
 
@@ -23,6 +24,7 @@ const SingleProject = () => {
         <Row xs={1} className="g-4">
           {/* .map() */}
           <Comment />
+          <ReplyForm />
           <Comment />
           <Comment />
           <Comment />
