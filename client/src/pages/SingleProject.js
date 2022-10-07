@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Card, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Project from '../components/Project';
 import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';

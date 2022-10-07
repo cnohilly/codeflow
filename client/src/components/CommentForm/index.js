@@ -27,7 +27,7 @@ const CommentForm = () => {
           </Form.Group>
           <div className="d-flex justify-content-end mt-3">
             {/* comment button */}
-            <Button variant="primary" type="submit" className="rounded-pill">
+            <Button variant="primary" type="submit" size="sm" className="rounded-pill">
               Comment
             </Button>
           </div>

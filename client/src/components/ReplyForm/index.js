@@ -27,13 +27,13 @@ const ReplyForm = () => {
               </FloatingLabel>
             </Form.Group>
             <div className="d-flex justify-content-end mt-3">
-              {/* cancel button */}
-              <Button variant="danger" type="button" size="sm" className="rounded-pill px-4 me-3">
-                Cancel
-              </Button>
               {/* reply button */}
-              <Button variant="primary" type="submit" size="sm" className="rounded-pill px-4">
+              <Button variant="primary" type="submit" size="sm" className="rounded-pill px-4 me-2">
                 Reply
+              </Button>
+              {/* cancel button */}
+              <Button variant="danger" type="button" size="sm" className="rounded-pill px-4">
+                Cancel
               </Button>
             </div>
           </Form>
