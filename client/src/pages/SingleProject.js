@@ -34,7 +34,8 @@ const SingleProject = () => {
               </FloatingLabel>
             </Form.Group>
             <div className="d-flex justify-content-end mt-3">
-              <Button variant="primary" type="submit">
+              {/* comment button */}
+              <Button variant="primary" type="submit" className="rounded-pill">
                 Comment
               </Button>
             </div>
@@ -47,6 +48,7 @@ const SingleProject = () => {
       {/* comment list */}
       <div>
         <Row xs={1} className="g-4">
+          {/* .map() */}
           <Comment />
           <Comment />
           <Comment />
