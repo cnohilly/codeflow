@@ -87,7 +87,6 @@ const resolvers = {
         addReply: async (parent, args, context) => {
             if (context.user) {
                 let reply = await Reply.create({ ...args, createdBy: context.user._id });
-                console.log(args.parentReplyId);
                 if (args.parentReplyId) {
                     await Reply.findByIdAndUpdate(
                         { _id: args.parentReplyId },
@@ -118,6 +117,8 @@ const resolvers = {
                 if (!post) {
                     throw new AuthenticationError("You do not have permission to do that!");
                 }
+
+                // await Reply.deleteMany({ postId: post._id });
 
                 return post;
             }

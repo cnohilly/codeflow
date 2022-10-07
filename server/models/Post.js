@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { dateFormat } = require('../utils/helpers');
-const { Reply } = require('./Reply');
+const { Reply } = require('../models');
 
 const postSchema = new Schema(
     {
@@ -38,12 +38,22 @@ postSchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
 
+
 const preDelete = async () => {
+    console.log("Deleting Post and Replies");
+    // const doc = await this.model.findOne(this.getFilter());
     await Reply.deleteMany({ postId: this._id });
+    // console.log(this.replies);
+    // if (this.replies) {
+    //     this.replies.forEach(reply => {
+    //         console.log(reply);
+    //         reply.remove();
+    //     });
+    // }
 }
 
-postSchema.pre('deleteOne', { document: false, query: true }, preDelete);
-postSchema.pre('deleteMany', { document: true, query: true }, preDelete);
+postSchema.pre('findOneAndDelete', { document: false, query: true }, preDelete);
+postSchema.pre('deleteMany', { document: false, query: true }, preDelete);
 
 const Post = model('Post', postSchema);
 
