@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
+import SingleProject from './pages/SingleProject';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -37,7 +38,8 @@ function App() {
     <ApolloProvider client={client}>
       <Header />
       <main className="App custom-height bg-secondary">
-        <Home />
+        {/* <Home /> */}
+        <SingleProject />
       </main >
       <Footer />
     </ApolloProvider>
