@@ -42,7 +42,7 @@ const Project = () => {
               href="#" 
               className="text-decoration-none text-muted"
             >
-              # of comments
+              # comments
             </Card.Link>
 
             {/* will need to fix placement later  */}
