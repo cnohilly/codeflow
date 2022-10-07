@@ -7,9 +7,8 @@ const Comment = () => {
     <Col>
       {/* comment card */}
       <Card className="shadow">
-        <Card.Body>
-        <div class="d-flex">
-          <div class="flex-shrink-0">
+        <Card.Body className="d-flex">
+          <div className="flex-shrink-0">
             {/* profile image */}
             <img 
               src="https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png" 
@@ -17,7 +16,7 @@ const Comment = () => {
               style={{ width: "36px" }}
             />
           </div>
-          <div class="flex-grow-1 ms-3">
+          <div className="flex-grow-1 ms-3">
             {/* comment user info */}
             <Card.Subtitle 
               className="my-2"
@@ -29,7 +28,6 @@ const Comment = () => {
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos a alias aliquam veritatis cupiditate dolore qui sit inventore possimus, natus odio molestiae illum quis officiis sed laborum labore saepe impedit.
             </Card.Text>
           </div>
-        </div>
         </Card.Body>
       </Card>
     </Col>
