@@ -6,7 +6,7 @@ const ProjectForm = () => {
   return (
     // project form card
     <Col>
-      <Card className="bg-dark bg-gradient text-white shadow">
+      <Card className="bg-dark bg-gradient text-white shadow mb-4">
         <Card.Body>
           <Form>
             {/* project title input */}

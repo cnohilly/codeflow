@@ -12,10 +12,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
-import SingleProject from './pages/SingleProject';
 
 import Login from './pages/Login';
 import Signup from './pages/Signup'
+import SingleProject from './pages/SingleProject';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -40,26 +40,28 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="App custom-height bg-secondary">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route
-                path="/login"
-                element={<Login />}
-              />
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
+        <Header />
+        <main className="App custom-height bg-secondary">
+          <Routes>
+            <Route
+              path="/single-project"
+              element={<SingleProject />}
+            />
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+          </Routes>
+        </main>
+        <Footer />
       </Router>
     </ApolloProvider>
   );

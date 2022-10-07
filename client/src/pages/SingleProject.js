@@ -4,7 +4,6 @@ import Project from '../components/Project';
 import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
 import ReplyForm from '../components/ReplyForm';
-import ProjectForm from '../components/ProjectForm';
 
 const SingleProject = () => {
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Project from '../components/Project';
+import ProjectForm from '../components/ProjectForm';
 
 const Home = () => {
 
@@ -14,8 +15,13 @@ const Home = () => {
           <h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h2>
         </div>
       </section>
+      
+
       {/* container for project card list */}
       <Container id="home-project-list" className="py-4 ">
+
+        <ProjectForm />
+
         <Row xs={1} className="g-4">
           {/* list of projects on homepage */}
           <Project></Project>

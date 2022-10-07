@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import Auth from '../../utils/auth'
 
@@ -18,7 +18,7 @@ const Header = () => {
             
             
             {/* brand image and name */}
-            <Link to="/">
+            <NavLink to="/" className="nav-link">
               <Navbar.Brand>
                 <img
                   src="/logo192.png"
@@ -29,17 +29,26 @@ const Header = () => {
                 />{' '}
                 Codename-Poseidon
               </Navbar.Brand>
-            </Link>  
-              {/* menu button */}
+            </NavLink>  
 
-            
+            {/* menu button */}
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
             <Navbar.Collapse id="responsive-navbar-nav">
-              <nav className="text-center ms-auto">
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
-                <Link to="/">Profile</Link>
-              </nav>
+              <Nav className="ms-auto">
+                <NavLink to="/single-project" className="ms-auto nav-link">
+                  Single Project for testing
+                </NavLink>
+                <NavLink to="/login" className="ms-auto nav-link">
+                  Login
+                </NavLink>
+                <NavLink to="/signup" className="ms-auto nav-link">
+                  Signup
+                </NavLink>
+                <NavLink to="/profile" className="ms-auto nav-link">
+                  Profile
+                </NavLink>
+              </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>

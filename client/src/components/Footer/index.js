@@ -11,13 +11,14 @@ const Footer = () => {
     // section for Footer component
     <footer className="pt-5 pb-4 bg-black text-center text-md-start text-white">
       <Container>
-        <Row xs={1} md={4}>
+        <Row xs={1} md={5}>
           <Col>
             <h5 className="text-uppercase">About us</h5>
             <p>
             Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, Braulio Loaiza, and Ian Zyvith
             </p>
           </Col>
+          <Col></Col>
           <Col>
             <h5 className="text-uppercase">Company</h5>
             <ul className="list-unstyled">

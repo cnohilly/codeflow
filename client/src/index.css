@@ -29,7 +29,7 @@ code {
 }
 
 
-a {
+/* a {
   color: white;
   text-decoration: none;
 }
@@ -43,7 +43,7 @@ nav a {
 
 nav a:hover {
   color: white;
-}
+} */
 
 /* FORM */
 .form-label,
