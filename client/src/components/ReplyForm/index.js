@@ -32,7 +32,7 @@ const ReplyForm = () => {
                 Reply
               </Button>
               {/* cancel button */}
-              <Button variant="danger" type="button" size="sm" className="rounded-pill px-4">
+              <Button variant="danger" type="button" size="sm" className="rounded-pill px-3">
                 Cancel
               </Button>
             </div>
@@ -43,4 +43,4 @@ const ReplyForm = () => {
   );
 };
 
-export default ReplyForm
+export default ReplyForm;
