@@ -5,7 +5,7 @@ import ReplyForm from '../ReplyForm';
 // import ReplyList from '../ReplyList';
 
 const Comment = () => {
-  const areChildrenHidden = false
+  const [areChildrenHidden, setAreChildrenHidden] = useState(false)
 
   return (
     // comment card
@@ -88,8 +88,12 @@ const Comment = () => {
       </Card>
       
       {/* button to show replies */}
-      <Button variant="warning" type="button" aria-label="Show Replies"
+      <Button 
+        variant="primary" 
+        type="button" 
+        aria-label="Show Replies"
         className={`${!areChildrenHidden ? "d-none" : "" }`}
+        onClick={() => setAreChildrenHidden(false)}
       >
         Show Replies
       </Button>
@@ -97,7 +101,14 @@ const Comment = () => {
       {/* container for nested child comments */}
       {/* testing layout for lists */}
       <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
-        <Button aria-label="Hide Replies" className="p-0 pe-1"/>
+        {/* collapsing line button for hiding replies */}
+        <Button 
+          variant="primary" 
+          type="button" 
+          aria-label="Hide Replies" 
+          className="p-0 pe-1"
+          onClick={() => setAreChildrenHidden(true)}
+        />
         <div>
           {/* temporary heading for container 1 */}
           <Row xs={1} className="g-3 ms-2">
