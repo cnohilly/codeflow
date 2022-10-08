@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from "react-bootstrap";
 import Auth from "../../utils/auth";
 
@@ -32,21 +31,31 @@ const Header = () => {
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <nav className="text-center ms-auto">
-              {Auth.loggedIn() ? (
-                <>
-                  <NavLink to="/" className='ms-auto nav-link'>Profile</NavLink>
-                  <a href="/" onClick={logout}>
-                    Logout
-                  </a>
-                </>
-              ) : (
-                <>
-                  <NavLink to="/login" className='ms-auto nav-link'>Login</NavLink>
-                  <NavLink to="/signup" className='ms-auto nav-link'>Signup</NavLink>
-                </>
-              )}
-            </nav>
+            {Auth.loggedIn() ? (
+              <Nav className="ms-auto">
+
+                {/* testing page */}
+                <NavLink to="/single-project" className='ms-auto nav-link'>
+                  Single Project Page for testing
+                </NavLink>
+
+                <NavLink to="/" className='ms-auto nav-link'>Profile</NavLink>
+                <a href="/" onClick={logout}>
+                  Logout
+                </a>
+              </Nav>
+            ) : (
+              <Nav className="ms-auto">
+
+                {/* testing page */}
+                <NavLink to="/single-project" className='ms-auto nav-link'>
+                  Single Project Page for testing
+                </NavLink>
+
+                <NavLink to="/login" className='ms-auto nav-link'>Login</NavLink>
+                <NavLink to="/signup" className='ms-auto nav-link'>Signup</NavLink>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
