@@ -19,6 +19,11 @@ const replySchema = new Schema(
             default: Date.now,
             get: date => dateFormat(date)
         },
+        isDeleted: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         postId: {
             type: Schema.Types.ObjectId,
             ref: 'Post',

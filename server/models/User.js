@@ -25,6 +25,17 @@ const userSchema = new Schema(
             match: [/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&.#~&*_-])[A-Za-z0-9@$!%*?&.#~&*_-]+$/,
                 'Password must contain a capital letter, lowercase letter, a number, and a special character (@$!%*?&.#~&*_-).']
         },
+        profileImage: {
+            type: String,
+            match: [/\.(jpg|jpeg|png|webp|svg)$/,
+                'Must be a valid image link.']
+        },
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
         posts: [
             {
                 type: Schema.Types.ObjectId,

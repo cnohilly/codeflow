@@ -1,18 +1,39 @@
-const { User, Post, Reply } = require('../models');
+const { User, Post, Comment, Reply } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                    .populate([
+                        {
+                            path: 'friends',
+                            populate: 'friends'
+                        },
+                        {
+                            path: 'posts',
+                            populate: 'createdBy'
+                        }
+                    ]);
+
+                return userData;
+
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
         users: async () => {
             return User.find()
                 .select('-__v -password')
-                .populate('posts');
+                .populate(['posts', 'friends']);
         },
-        user: async (parent, { username }) => {
-            return User.findOne({ username })
+        user: async (parent, { input }) => {
+            return User.findOne({ ...input })
                 .select('-__v -password')
-                .populate('posts');
+                .populate(['posts', 'friends']);
         },
         posts: async (parent, { userId }) => {
             if (userId) {
@@ -38,7 +59,7 @@ const resolvers = {
                 .populate(['createdBy',
                     {
                         path: 'replies',
-                        populate: ['createdBy', 'replies']
+                        populate: ['createdBy', 'replies', 'parentReplyId']
                     }]);
         }
     },
@@ -108,19 +129,66 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         },
+        editUser: async (parent, { input, _id }, context) => {
+            if (context.user) {
+                if (context.user._id === _id) {
+                    const user = await User.findByIdAndUpdate(
+                        _id,
+                        { ...input },
+                        { new: true }
+                    ).select('-__v -password')
+                        .populate('posts');
+
+                    const token = signToken(user);
+
+                    return { token, user };
+                }
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        deleteUser: async (parent, { _id }, context) => {
+            if (context.user) {
+                if (context.user._id === _id) {
+                    const user = await User.findByIdAndDelete(_id);
+
+                    return user;
+                }
+                throw new AuthenticationError("You do not have permission to do that!");
+
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
+        },
         deletePost: async (parent, { _id }, context) => {
             if (context.user) {
-                let post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
-                    .select('-replies -replyCount')
+                const post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
                     .populate('createdBy');
 
                 if (!post) {
                     throw new AuthenticationError("You do not have permission to do that!");
                 }
 
-                // await Reply.deleteMany({ postId: post._id });
+                await Reply.deleteMany({ postId: post._id });
 
                 return post;
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        deleteReply: async (parent, { _id }, context) => {
+            if (context.user) {
+                const reply = await Reply.findOneAndUpdate(
+                    { _id, createdBy: context.user._id },
+                    { isDeleted: true },
+                    { new: true })
+                    .populate('createdBy');
+
+                if (!reply) {
+                    throw new AuthenticationError("You do not have permission to do that!");
+                }
+
+                return reply;
             }
 
             throw new AuthenticationError("You need to be logged in!");

@@ -6,14 +6,18 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        profileImage: String
+        friends: [User]
         posts: [Post]
     }
 
     type Post {
         _id: ID
         postBody: String
-        createdBy: User
         createdAt: String
+        createdBy: User
+        repoLink: String
+        deployedLink: String
         replyCount: Int
         replies: [Reply]
     }
@@ -23,6 +27,9 @@ const typeDefs = gql`
         replyBody: String
         createdAt: String
         createdBy: User
+        postId: Post
+        parentReplyId: Reply
+        isDeleted: Boolean
         replyCount: Int
         replies: [Reply]
     }
@@ -32,9 +39,23 @@ const typeDefs = gql`
         user: User   
     }
 
+    
+    input EditUserInput {
+        username: String,
+        email: String,
+        password: String,
+        profileImage: String
+    }
+
+    input UserSearchInput {
+        _id: ID
+        username: String,
+    }
+    
     type Query {
+        me: User
         users: [User]
-        user(username: String!): String
+        user(input: UserSearchInput!): User
         posts: [Post]
         post(_id: ID!): Post
     }
@@ -44,6 +65,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addPost(postBody: String!): Post
         addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
+        editUser(input: EditUserInput, _id: ID!): Auth
         deleteUser(_id: ID!): User
         deletePost(_id: ID!): Post
         deleteReply(_id: ID!): Reply
