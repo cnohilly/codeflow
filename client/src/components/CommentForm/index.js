@@ -11,13 +11,12 @@ const CommentForm = () => {
           <Form.Group controlId="commentForm">
             {/* label */}
             <FloatingLabel 
-              controlId="floatingTextarea" 
+              controlId="comment-textarea" 
               label="Add a comment"
               className="text-muted"
             >
               {/* comment textarea */}
               <Form.Control
-                id="comment-textarea"
                 as="textarea"
                 placeholder="Add a comment"
                 style={{ height: '100px' }}
