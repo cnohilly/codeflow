@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import Project from '../components/Project';
+import { Container } from 'react-bootstrap';
 import ProjectForm from '../components/ProjectForm';
+import ProjectList from '../components/ProjectList';
 
 const Home = () => {
 
@@ -20,16 +20,12 @@ const Home = () => {
       {/* container for project card list */}
       <Container id="home-project-list" className="py-4 ">
 
+        {/* Project Form */}
         <ProjectForm />
 
-        <Row xs={1} className="g-4">
-          {/* list of projects on homepage */}
-          <Project></Project>
-          
-          <Project></Project>
-          
-          <Project></Project>
-        </Row>
+        {/* Project List */}
+        <ProjectList />
+      
       </Container>
     </div>
   );

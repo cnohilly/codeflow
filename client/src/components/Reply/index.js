@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Card, Button, ButtonGroup } from 'react-bootstrap';
+import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 const Reply = () => {
 
@@ -18,6 +18,7 @@ const Reply = () => {
               />
             </div>
             <div className="flex-grow-1">
+              
               <div className="ms-3">
                 {/* reply user info */}
                 <Card.Subtitle 
@@ -32,20 +33,29 @@ const Reply = () => {
                   deleniti voluptate corrupti quam mollitia placeat, suscipit incidunt vitae quas.
                 </Card.Text>
               </div>
-              <ButtonGroup aria-label="Button group" className="mt-1 ms-1">
+              
+              <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
                 {/* like button */}
-                <Button variant="link" type="button" className="link-info">
-                  <i className="bi bi-heart-fill"></i>
-                </Button>
-                {/* reply button */}
-                <Button variant="link" type="button" className="link-warning">
-                  <i className="bi bi-pencil-square"></i>
-                </Button>
-                {/* delete button */}
-                <Button variant="link" type="button" className="link-danger">
-                  <i className="bi bi-trash-fill"></i>
-                </Button>
-              </ButtonGroup>
+                <div className="d-flex align-items-center me-2">
+                  <Button variant="link" type="button" className="link-info pe-2">
+                    <i className="bi bi-heart-fill"></i>
+                  </Button>
+                  {/* number of likes */}
+                  <div>
+                    # of Likes
+                  </div>
+                </div>
+                <ButtonGroup aria-label="Button group">
+                  {/* reply button */}
+                  <Button variant="link" type="button" className="link-warning">
+                    <i className="bi bi-pencil-square"></i>
+                  </Button>
+                  {/* delete button */}
+                  <Button variant="link" type="button" className="link-danger">
+                    <i className="bi bi-trash-fill"></i>
+                  </Button>
+                </ButtonGroup>
+              </ButtonToolbar>
             </div>
           </div>
         </Card.Body>

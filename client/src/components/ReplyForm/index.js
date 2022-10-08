@@ -12,13 +12,12 @@ const ReplyForm = () => {
             <Form.Group controlId="replyForm">
               {/* label */}
               <FloatingLabel 
-                controlId="floatingTextarea" 
+                controlId="reply-textarea" 
                 label="Add a reply"
                 className="text-muted"
               >
                 {/* reply textarea */}
                 <Form.Control
-                  id="reply-textarea"
                   as="textarea"
                   placeholder="Add a reply"
                   style={{ height: '100px' }}
