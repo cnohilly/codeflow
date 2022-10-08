@@ -1,40 +1,40 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-import Home from './pages/Home';
+import Home from "./pages/Home";
 
-import Login from './pages/Login';
-import Signup from './pages/Signup'
-import SingleProject from './pages/SingleProject';
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import SingleProject from "./pages/SingleProject";
+import ProfileMain from "./pages/ProfileMain";
 
 const httpLink = createHttpLink({
-  uri: '/graphql'
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
 
   return {
     ...headers,
-    authorization: token ? `Bearer ${token}` : ''
-  }
+    authorization: token ? `Bearer ${token}` : "",
+  };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
-
 
 function App() {
   return (
@@ -43,22 +43,11 @@ function App() {
         <Header />
         <main className="App custom-height bg-secondary">
           <Routes>
-            <Route
-              path="/single-project"
-              element={<SingleProject />}
-            />
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              path="/signup"
-              element={<Signup />}
-            />
+            <Route path="/single-project" element={<SingleProject />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<ProfileMain />} />
           </Routes>
         </main>
         <Footer />
@@ -66,6 +55,5 @@ function App() {
     </ApolloProvider>
   );
 }
-
 
 export default App;
