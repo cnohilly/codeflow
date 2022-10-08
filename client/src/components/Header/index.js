@@ -15,7 +15,7 @@ const Header = () => {
       <Navbar bg="black" variant="dark" expand="md">
         <Container fluid className="px-3">
           {/* brand image and name */}
-          <NavLink to="/" className="ms-auto nav-link">
+          <NavLink to="/" className="nav-link">
             <Navbar.Brand>
               <img
                 src="/logo192.png"
