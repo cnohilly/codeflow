@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Card, Button } from 'react-bootstrap';
+import { Col, Card, Button, ButtonGroup } from 'react-bootstrap';
 
 const Reply = () => {
 
@@ -17,24 +17,36 @@ const Reply = () => {
                 style={{ width: "36px" }}
               />
             </div>
-            <div className="flex-grow-1 ms-3">
-              {/* reply user info */}
-              <Card.Subtitle 
-                className="my-2"
-              >
-                User on 10/06/22
-              </Card.Subtitle>
-              {/* reply text */}
-              <Card.Text>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic dolor provident ipsa sunt fuga, amet eligendi, in odio, similique aliquid dolorum dolores assumenda maxime sint eveniet veritatis consequatur vel molestiae.
-              </Card.Text>
+            <div className="flex-grow-1">
+              <div className="ms-3">
+                {/* reply user info */}
+                <Card.Subtitle 
+                  className="my-2"
+                >
+                  UserReply on 10/06/22
+                </Card.Subtitle>
+                {/* reply text */}
+                <Card.Text>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum ullam 
+                  pariatur qui tempora ratione nostrum quae tenetur quo repellendus? Nostrum 
+                  deleniti voluptate corrupti quam mollitia placeat, suscipit incidunt vitae quas.
+                </Card.Text>
+              </div>
+              <ButtonGroup aria-label="Button group" className="mt-1 ms-1">
+                {/* like button */}
+                <Button variant="link" type="button" className="link-info">
+                  <i className="bi bi-heart-fill"></i>
+                </Button>
+                {/* reply button */}
+                <Button variant="link" type="button" className="link-warning">
+                  <i className="bi bi-pencil-square"></i>
+                </Button>
+                {/* delete button */}
+                <Button variant="link" type="button" className="link-danger">
+                  <i className="bi bi-trash-fill"></i>
+                </Button>
+              </ButtonGroup>
             </div>
-          </div>
-          <div className="d-flex justify-content-end mt-3">
-            {/* reply button */}
-            <Button variant="primary" size="sm" className="rounded-pill px-4">
-              Reply
-            </Button>
           </div>
         </Card.Body>
       </Card>

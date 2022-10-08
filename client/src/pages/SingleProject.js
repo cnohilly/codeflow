@@ -4,6 +4,7 @@ import Project from '../components/Project';
 import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
 import ReplyForm from '../components/ReplyForm';
+import Reply from '../components/Reply';
 
 const SingleProject = () => {
 
@@ -25,6 +26,7 @@ const SingleProject = () => {
           {/* .map() */}
           <Comment />
           <ReplyForm />
+          <Reply />
           <Comment />
           <Comment />
           <Comment />
