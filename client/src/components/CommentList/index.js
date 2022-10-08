@@ -8,12 +8,12 @@ const CommentList = () => {
 
   return (
     <Row xs={1} className="g-3">
-        <Comment />
-        <ReplyForm />
-        <Reply />
-        <Comment />
-        <Comment />
-        <Comment />
+
+      {/* test comments */}
+      <Comment />
+      <Comment />
+      <Comment />
+
     </Row>
   );
 };

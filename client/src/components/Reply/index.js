@@ -4,8 +4,8 @@ import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 const Reply = () => {
 
   return (
+    // reply card
     <Col>
-      {/* reply card */}
       <Card className="bg-dark bg-gradient text-white shadow">
         <Card.Body>
           <div className="d-flex">
@@ -24,7 +24,7 @@ const Reply = () => {
                 <Card.Subtitle 
                   className="my-2"
                 >
-                  UserReply on 10/06/22
+                  UserReply on 11/11/22
                 </Card.Subtitle>
                 {/* reply text */}
                 <Card.Text>
@@ -37,7 +37,12 @@ const Reply = () => {
               <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
                 {/* like button */}
                 <div className="d-flex align-items-center me-2">
-                  <Button variant="link" type="button" className="link-info pe-2">
+                  <Button 
+                    variant="link" 
+                    type="button" 
+                    aria-label="Like" 
+                    className="link-primary pe-2"
+                  >
                     <i className="bi bi-heart-fill"></i>
                   </Button>
                   {/* number of likes */}
@@ -47,11 +52,30 @@ const Reply = () => {
                 </div>
                 <ButtonGroup aria-label="Button group">
                   {/* reply button */}
-                  <Button variant="link" type="button" className="link-warning">
+                  <Button 
+                    variant="link" 
+                    type="button" 
+                    aria-label="Reply" 
+                    className="link-info"
+                  >
+                    <i class="bi bi-chat-square-fill"></i>
+                  </Button>
+                  {/* edit button */}
+                  <Button 
+                    variant="link" 
+                    type="button" 
+                    aria-label="Edit"
+                    className="link-warning"
+                  >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
                   {/* delete button */}
-                  <Button variant="link" type="button" className="link-danger">
+                  <Button 
+                    variant="link" 
+                    type="button" 
+                    aria-label="Delete"
+                    className="link-danger"
+                  >
                     <i className="bi bi-trash-fill"></i>
                   </Button>
                 </ButtonGroup>

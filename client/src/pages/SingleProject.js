@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Project from '../components/Project';
+import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
@@ -13,12 +14,12 @@ const SingleProject = () => {
         <Project />
       </Row>
 
-      {/* comment form */}
+      {/* if user is logged in, render comment form */}
       <CommentForm />
 
       <hr className="border border-white"/>
-
-      {/* comment list */}
+      
+      {/* container for comments list */}
       <CommentList />
 
     </Container>
