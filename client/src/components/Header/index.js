@@ -38,7 +38,7 @@ const Header = () => {
                   Single Project Page for testing
                 </NavLink>
 
-                <NavLink to="/" className="ms-auto nav-link">
+                <NavLink to="/profile" className="ms-auto nav-link">
                   Profile
                 </NavLink>
                 <a href="/" onClick={logout}>
