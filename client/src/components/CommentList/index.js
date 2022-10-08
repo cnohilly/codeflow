@@ -1,12 +1,20 @@
 import React from 'react';
-// import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import Comment from '../Comment';
+import ReplyForm from '../ReplyForm';
+import Reply from '../Reply';
 
 const CommentList = () => {
 
   return (
-    <div>
-
-    </div>
+    <Row xs={1} className="g-3">
+        <Comment />
+        <ReplyForm />
+        <Reply />
+        <Comment />
+        <Comment />
+        <Comment />
+    </Row>
   );
 };
 
