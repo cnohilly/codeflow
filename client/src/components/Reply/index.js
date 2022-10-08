@@ -1,12 +1,17 @@
-import React from 'react';
-import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { React, useState } from 'react';
+import { Row, Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import ReplyForm from '../ReplyForm';
 
 const Reply = () => {
+  // displaying children replies
+  const [areChildrenHidden, setAreChildrenHidden] = useState(true);
+  // displaying reply form
+  const [displayReplyForm, setDisplayReplyForm] = useState(false);
 
   return (
     // reply card
     <Col>
-      <Card className="bg-dark bg-gradient text-white shadow">
+      <Card className="bg-dark bg-gradient text-white shadow mb-3">
         <Card.Body>
           <div className="d-flex">
             <div className="flex-shrink-0">
@@ -57,8 +62,10 @@ const Reply = () => {
                     type="button" 
                     aria-label="Reply" 
                     className="link-info"
+                    onClick={() => setDisplayReplyForm(!displayReplyForm)}
                   >
                     <i class="bi bi-chat-square-fill"></i>
+                    Reply
                   </Button>
                   {/* edit button */}
                   <Button 
@@ -68,6 +75,7 @@ const Reply = () => {
                     className="link-warning"
                   >
                     <i className="bi bi-pencil-square"></i>
+                    Edit
                   </Button>
                   {/* delete button */}
                   <Button 
@@ -77,6 +85,7 @@ const Reply = () => {
                     className="link-danger"
                   >
                     <i className="bi bi-trash-fill"></i>
+                    Delete
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
@@ -84,6 +93,41 @@ const Reply = () => {
           </div>
         </Card.Body>
       </Card>
+
+      {/* reply form */}
+      <ReplyForm 
+        displayReplyForm={displayReplyForm}
+        setDisplayReplyForm={setDisplayReplyForm}
+      />
+
+      {/* button to show replies */}
+      <Button 
+        variant="primary" 
+        type="button" 
+        aria-label="Show Replies"
+        className={`${!areChildrenHidden ? "d-none" : "" }`}
+        onClick={() => setAreChildrenHidden(!areChildrenHidden)}
+      >
+        Show Replies
+      </Button>
+      <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
+        {/* collapsing line button for hiding replies */}
+        <Button 
+          variant="primary" 
+          type="button" 
+          aria-label="Hide Replies" 
+          className="p-0 pe-1 me-3"
+          onClick={() => setAreChildrenHidden(!areChildrenHidden)}
+        />
+        <div>
+          {/* temporary heading for container 1 */}
+          <Row xs={1} className="g-3">
+            <h4 className="text-white">Reply 1</h4>
+            <h4 className="text-white">Reply 2</h4>
+            <h4 className="text-white">Reply 3</h4>
+          </Row>
+        </div>
+      </div>
     </Col>
   );
 };

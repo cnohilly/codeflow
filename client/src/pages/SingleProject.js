@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Project from '../components/Project';
-import Comment from '../components/Comment';
+// import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 

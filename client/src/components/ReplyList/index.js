@@ -9,7 +9,8 @@ const ReplyList = () => {
 
       {/* test reply */}
       <Reply />
-      
+      <Reply />
+
     </Row>
   );
 };

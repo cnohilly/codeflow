@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
-import { Row, Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import Reply from '../Reply';
+import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import ReplyList from '../ReplyList';
 import ReplyForm from '../ReplyForm';
-// import ReplyList from '../ReplyList';
 
 const Comment = () => {
-  const [areChildrenHidden, setAreChildrenHidden] = useState(false)
+  // displaying children replies
+  const [areChildrenHidden, setAreChildrenHidden] = useState(true);
+  // displaying reply form
+  const [displayReplyForm, setDisplayReplyForm] = useState(false);
 
   return (
     // comment card
@@ -59,8 +61,10 @@ const Comment = () => {
                     type="button" 
                     aria-label="Reply" 
                     className="link-info"
+                    onClick={() => setDisplayReplyForm(!displayReplyForm)}
                   >
                     <i class="bi bi-chat-square-fill"></i>
+                    Reply
                   </Button>
                   {/* edit button */}
                   <Button 
@@ -70,6 +74,7 @@ const Comment = () => {
                     className="link-warning"
                   >
                     <i className="bi bi-pencil-square"></i>
+                    Edit
                   </Button>
                   {/* delete button */}
                   <Button 
@@ -79,6 +84,7 @@ const Comment = () => {
                     className="link-danger"
                   >
                     <i className="bi bi-trash-fill"></i>
+                    Delete
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>
@@ -87,65 +93,38 @@ const Comment = () => {
         </Card.Body>
       </Card>
       
+      {/* reply form */}
+      <ReplyForm 
+        displayReplyForm={displayReplyForm}
+        setDisplayReplyForm={setDisplayReplyForm}
+      />
+      
       {/* button to show replies */}
       <Button 
         variant="primary" 
         type="button" 
         aria-label="Show Replies"
         className={`${!areChildrenHidden ? "d-none" : "" }`}
-        onClick={() => setAreChildrenHidden(false)}
+        onClick={() => setAreChildrenHidden(!areChildrenHidden)}
       >
         Show Replies
       </Button>
 
       {/* container for nested child comments */}
-      {/* testing layout for lists */}
       <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
         {/* collapsing line button for hiding replies */}
         <Button 
           variant="primary" 
           type="button" 
           aria-label="Hide Replies" 
-          className="p-0 pe-1"
-          onClick={() => setAreChildrenHidden(true)}
+          className="p-0 pe-1 me-3"
+          onClick={() => setAreChildrenHidden(!areChildrenHidden)}
         />
         <div>
           {/* temporary heading for container 1 */}
-          <Row xs={1} className="g-3 ms-2">
-
-            <Reply />
-
-            <div className="d-flex">
-              <Button aria-label="Hide Replies" className="p-0 pe-1"/>
-              <div>
-                {/* temporary heading for container 2 */}
-                <Row xs={1} className="g-3 ms-2">
-
-                  <Reply />
-
-                  <div className="d-flex">
-                    <Button aria-label="Hide Replies" className="p-0 pe-1"/>
-                    <div>
-                      {/* Container for nested replies 3 */}
-                      <Row xs={1} className="g-3 ms-2">
-
-                        <Reply />
-                        <ReplyForm />
-                        
-                      </Row>
-                    </div>
-                  </div>
-                  
-                </Row>
-              </div>
-            </div>
-
-            <Reply />
-            
-          </Row>
+          <ReplyList />
         </div>
       </div>
-
     </Col>
   );
 };
