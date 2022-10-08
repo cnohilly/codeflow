@@ -41,7 +41,7 @@ const Header = () => {
                 <NavLink to="/profile" className="ms-auto nav-link">
                   Profile
                 </NavLink>
-                <a href="/" onClick={logout}>
+                <a href="/" onClick={logout} className="ms-auto nav-link">
                   Logout
                 </a>
               </Nav>
