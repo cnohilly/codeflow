@@ -26,7 +26,13 @@ const CommentForm = () => {
           </Form.Group>
           <div className="d-flex justify-content-end mt-3">
             {/* comment button */}
-            <Button variant="primary" type="submit" size="sm" className="rounded-pill">
+            <Button 
+              variant="primary" 
+              type="button" 
+              size="sm" 
+              className="rounded-pill"
+              onClick={() => console.log("Commented!")}
+            >
               Comment
             </Button>
           </div>

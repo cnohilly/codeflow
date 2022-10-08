@@ -1,44 +1,55 @@
 import React from 'react';
-import { Col, Card, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { Card, Form, Button, FloatingLabel } from 'react-bootstrap';
 
-const ReplyForm = () => {
+const ReplyForm = (props) => {
+  const { displayReplyForm, setDisplayReplyForm } = props
   
   return (
     // reply form card
-    <Col>
-      <Card className="bg-dark bg-gradient shadow">
-        <Card.Body>
-          <Form>
-            <Form.Group controlId="replyForm">
-              {/* label */}
-              <FloatingLabel 
-                controlId="reply-textarea" 
-                label="Add a reply"
-                className="text-muted"
-              >
-                {/* reply textarea */}
-                <Form.Control
-                  as="textarea"
-                  placeholder="Add a reply"
-                  style={{ height: '100px' }}
-                  className="bg-dark text-white"
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <div className="d-flex justify-content-end mt-3">
-              {/* reply button */}
-              <Button variant="primary" type="submit" size="sm" className="rounded-pill px-4 me-2">
-                Reply
-              </Button>
-              {/* cancel button */}
-              <Button variant="danger" type="button" size="sm" className="rounded-pill px-3">
-                Cancel
-              </Button>
-            </div>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Col>
+    <Card id="replyForm" className={`bg-dark bg-gradient shadow mb-3 ${!displayReplyForm ? "d-none" : ""}`}>
+      <Card.Body>
+        <Form>
+          <Form.Group controlId="replyTextarea">
+            {/* label */}
+            <FloatingLabel 
+              controlId="reply-textarea" 
+              label="Add a reply"
+              className="text-muted"
+            >
+              {/* reply textarea */}
+              <Form.Control
+                as="textarea"
+                placeholder="Add a reply"
+                style={{ height: '100px' }}
+                className="bg-dark text-white"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <div className="d-flex justify-content-end mt-3">
+            {/* reply button */}
+            <Button 
+              variant="primary" 
+              type="button" 
+              size="sm" 
+              className="rounded-pill px-4 me-2"
+              onClick={() => console.log("Replied!")}
+            >
+              Reply
+            </Button>
+            {/* cancel button */}
+            <Button 
+              variant="danger" 
+              type="button" 
+              size="sm" 
+              className="rounded-pill px-3"
+              onClick={() => setDisplayReplyForm(!displayReplyForm)}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 
