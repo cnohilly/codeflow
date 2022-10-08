@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 import { Navbar, Nav, Container } from "react-bootstrap";
 import Auth from "../../utils/auth";
 
@@ -15,7 +16,7 @@ const Header = () => {
       <Navbar bg="black" variant="dark" expand="md">
         <Container fluid className="px-3">
           {/* brand image and name */}
-          <Link to="/">
+          <NavLink to="/" className='ms-auto nav-link'>
             <Navbar.Brand>
               <img
                 src="/logo192.png"
@@ -26,7 +27,7 @@ const Header = () => {
               />{" "}
               Codename-Poseidon
             </Navbar.Brand>
-          </Link>
+          </NavLink>
           {/* menu button */}
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -34,15 +35,15 @@ const Header = () => {
             <nav className="text-center ms-auto">
               {Auth.loggedIn() ? (
                 <>
-                  <Link to="/">Profile</Link>
+                  <NavLink to="/" className='ms-auto nav-link'>Profile</NavLink>
                   <a href="/" onClick={logout}>
                     Logout
                   </a>
                 </>
               ) : (
                 <>
-                  <Link to="/login">Login</Link>
-                  <Link to="/signup">Signup</Link>
+                  <NavLink to="/login" className='ms-auto nav-link'>Login</NavLink>
+                  <NavLink to="/signup" className='ms-auto nav-link'>Signup</NavLink>
                 </>
               )}
             </nav>
