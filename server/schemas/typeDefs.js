@@ -72,7 +72,7 @@ const typeDefs = gql`
         deletePost(_id: ID!): Post
         addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
         deleteReply(_id: ID!): Reply
-        updateReplyLike(_id: ID!, like: Boolean!): Reply
+        updateReplyLike(_id: ID!): Reply
     }
 `;
 

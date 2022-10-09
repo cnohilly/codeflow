@@ -5,7 +5,6 @@ const { signToken } = require('../utils/auth');
 const ReplyQueries = {
     replies: async (parent, { userId }) => {
         const params = userId ? { createdBy: userId } : {};
-        console.log(params);
         return Reply.find(params)
             .sort({ createdAt: -1 })
             .populate(['createdBy',
@@ -66,16 +65,14 @@ const ReplyMutations = {
 
         throw new AuthenticationError("You need to be logged in!");
     },
-    updateReplyLike: async (parent, { _id, like }, context) => {
+    updateReplyLike: async (parent, { _id }, context) => {
         if (context.user) {
-            const data = like
-                ? { $addToSet: { likes: context.user._id } }
-                : { $pull: { likes: context.user._id } };
-            const reply = await Reply.findByIdAndUpdate(
-                _id,
-                data,
-                { new: true }
-            ).populate(['createdBy', 'likes', 'replies']);
+            let reply = await Reply.findById(_id);
+
+            const updateParams = reply.likes.includes(context.user._id) ? { $pull: { likes: context.user._id } } : { $addToSet: { likes: context.user._id } };
+
+            reply = Reply.findByIdAndUpdate(_id, updateParams, { new: true })
+                .populate(['createdBy', 'likes', 'replies']);
 
             if (!reply) {
                 throw new AuthenticationError("You do not have permission to do that!");
