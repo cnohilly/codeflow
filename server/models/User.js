@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const { Post } = require("./Post");
-const dateFormat = require("../utils/helpers");
+const { dateFormat } = require("../utils/helpers");
 
 const userSchema = new Schema({
   username: {
