@@ -1,9 +1,6 @@
 import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import Project from "../components/Project";
-import ProjectForm from "../components/ProjectForm";
-import Comment from "../components/Comment";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
 import ProfileNav from "../components/ProfileNav";
@@ -51,7 +48,7 @@ const ProfileMain = (props) => {
       <Row>
         <Col xs={9}>
           <Row>
-            <UserInfo username={user.username} />
+            <UserInfo username={user.username} joinDate={user.createdAt} />
           </Row>
         </Col>
 

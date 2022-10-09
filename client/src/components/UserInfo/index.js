@@ -1,16 +1,15 @@
 import React from "react";
-import { Col, Card, Row, Button, ButtonGroup } from "react-bootstrap";
+import { Col, Card, Row } from "react-bootstrap";
 
-const UserInfo = ({ username }) => {
+const UserInfo = ({ username, joinDate }) => {
   return (
     <Col>
       {/* User Info card */}
       <Card className="bg-dark bg-gradient text-white shadow">
         <Card.Header className="bg-black bg-gradient text-white">
           <Card.Title>{username}</Card.Title>
-          {/* project user info */}
           <Card.Subtitle className="text-white-50">
-            Member Since (insert date)
+            Member Since {joinDate}
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
