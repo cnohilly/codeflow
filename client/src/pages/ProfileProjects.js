@@ -5,7 +5,7 @@ import ProjectForm from "../components/ProjectForm";
 import Project from "../components/Project";
 
 import { useQuery, useMutation } from "@apollo/client";
-// import { QUERY_USERS, QUERY_ME } from "../utils/queries";
+// import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const ProfileProjects = (props) => {

@@ -7,9 +7,26 @@ export const QUERY_USERS = gql`
             _id
             username
             email
+            friends {
+                _id
+                username
+            }
         }
     }
+`;
 
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      email
+      friends {
+        _id
+        username
+      }
+    }
+  }
 `;
 
 export const QUERY_ME = gql`
@@ -18,6 +35,10 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      friends {
+        _id
+        username
+      }
     }
   }
 `;
