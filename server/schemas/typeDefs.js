@@ -20,21 +20,21 @@ const typeDefs = gql`
     repoLink: String
     deployedLink: String
     lastEditedAt: String
-    replyCount: Int
-    replies: [Reply]
+    commentCount: Int
+    comments: [Comment]
   }
 
-  type Reply {
+  type Comment {
     _id: ID
-    replyBody: String
+    commentBody: String
     createdAt: String
     createdBy: User
     projectId: Project
-    parentReplyId: Reply
+    parentCommentId: Comment
     isDeleted: Boolean
     lastEditedAt: String
-    replyCount: Int
-    replies: [Reply]
+    commentCount: Int
+    comments: [Comment]
     likes: [User]
     likeCount: Int
   }
@@ -69,8 +69,8 @@ const typeDefs = gql`
         user(input: UserSearchInput!): User
         projects(userId: ID): [Project]
         project(_id: ID!): Project
-        replies(userId: ID): [Reply]
-        reply(_id: ID!): Reply
+        comments(userId: ID): [Comment]
+        comment(_id: ID!): Comment
     }
 
     type Mutation {
@@ -81,10 +81,10 @@ const typeDefs = gql`
         addProject(projectBody: String!, repoLink: String, deployedLink: String): Project
         editProject(_id: ID!, input: EditProjectInput!): Project
         deleteProject(_id: ID!): Project
-        addReply(projectId: ID!, parentReplyId: ID, replyBody: String!): Reply
-        editReply(_id: ID!, replyBody: String!): Reply
-        deleteReply(_id: ID!): Reply
-        updateReplyLike(_id: ID!): Reply
+        addComment(projectId: ID!, parentCommentId: ID, commentBody: String!): Comment
+        editComment(_id: ID!, commentBody: String!): Comment
+        deleteComment(_id: ID!): Comment
+        updateCommentLike(_id: ID!): Comment
     }
 `;
 

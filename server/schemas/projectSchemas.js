@@ -1,4 +1,4 @@
-const { User, Project, Reply } = require('../models');
+const { User, Project, Comment } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -9,16 +9,16 @@ const ProjectQueries = {
             .sort({ createdAt: -1 })
             .populate(['createdBy',
                 {
-                    path: 'replies',
-                    populate: ['createdBy', 'replies']
+                    path: 'comments',
+                    populate: ['createdBy', 'comments']
                 }]);
     },
     project: async (parent, { _id }) => {
         return Project.findOne({ _id })
             .populate(['createdBy',
                 {
-                    path: 'replies',
-                    populate: ['createdBy', 'replies', 'parentReplyId']
+                    path: 'comments',
+                    populate: ['createdBy', 'comments', 'parentCommentId']
                 }]);
     }
 }
@@ -68,7 +68,7 @@ const ProjectMutations = {
                 throw new AuthenticationError("You do not have permission to do that!");
             }
 
-            await Reply.deleteMany({ projectId: project._id });
+            await Comment.deleteMany({ projectId: project._id });
 
             return project;
         }

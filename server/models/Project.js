@@ -37,10 +37,10 @@ const projectSchema = new Schema(
             default: null,
             get: dateFormat
         },
-        replies: [
+        comments: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Reply'
+                ref: 'Comment'
             }
         ]
     },
@@ -51,8 +51,8 @@ const projectSchema = new Schema(
     }
 );
 
-projectSchema.virtual('replyCount').get(function () {
-    return (this.replies ? this.replies.length : 0);
+projectSchema.virtual('commentCount').get(function () {
+    return (this.comments ? this.comments.length : 0);
 });
 
 projectSchema.pre('findOneAndUpdate', function (next) {

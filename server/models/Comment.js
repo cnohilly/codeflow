@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/helpers');
 
-const replySchema = new Schema(
+const commentSchema = new Schema(
     {
-        replyBody: {
+        commentBody: {
             type: String,
             required: true,
             maxlength: 300
@@ -34,14 +34,14 @@ const replySchema = new Schema(
             ref: 'Project',
             required: true
         },
-        parentReplyId: {
+        parentCommentId: {
             type: Schema.Types.ObjectId,
-            ref: 'Reply'
+            ref: 'Comment'
         },
         replies: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Reply'
+                ref: 'Comment'
             }
         ],
         likes: [
@@ -58,20 +58,20 @@ const replySchema = new Schema(
     }
 );
 
-replySchema.virtual('replyCount').get(function () {
+commentSchema.virtual('commentCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
 
-replySchema.virtual('likeCount').get(function () {
+commentSchema.virtual('likeCount').get(function () {
     return (this.likes ? this.likes.length : 0);
 });
 
-replySchema.pre('findOneAndUpdate', function (next) {
+commentSchema.pre('findOneAndUpdate', function (next) {
     this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
     console.log(this._update);
     next();
 });
 
-const Reply = model('Reply', replySchema);
+const Comment = model('Comment', commentSchema);
 
-module.exports = Reply;
+module.exports = Comment;

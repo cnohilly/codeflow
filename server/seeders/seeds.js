@@ -1,12 +1,12 @@
 const { faker } = require('@faker-js/faker');
 
 const db = require('../config/connection');
-const { User, Project, Reply } = require('../models');
+const { User, Project, Comment } = require('../models');
 
 db.once('open', async () => {
     await User.deleteMany({});
     await Project.deleteMany({});
-    await Reply.deleteMany({});
+    await Comment.deleteMany({});
 
     const userData = [];
 
@@ -76,7 +76,7 @@ db.once('open', async () => {
     console.log("---------------------");
 
 
-    // generating replies on projects
+    // generating comments on projects
     let createdReplies = [];
     for (let i = 0; i < 100; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
@@ -84,20 +84,20 @@ db.once('open', async () => {
 
         const deleted = (Math.floor(Math.random() * 100) + 1) < 5 ? true : false;
 
-        const replyData = {
-            replyBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
+        const commentData = {
+            commentBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
             projectId: createdProjects[randomProjectIndex]._id,
             isDeleted: deleted
         };
 
-        const createdReply = await Reply.create({ ...replyData });
+        const createdComment = await Comment.create({ ...commentData });
 
-        createdReplies.push(createdReply);
+        createdReplies.push(createdComment);
 
         await Project.updateOne(
             { _id: createdProjects[randomProjectIndex]._id },
-            { $push: { replies: createdReply._id } }
+            { $push: { comments: createdComment._id } }
         );
     }
 
@@ -105,28 +105,28 @@ db.once('open', async () => {
     console.log("Replies have been seeded.");
     console.log("---------------------");
 
-    // generating nested replies
+    // generating nested comments
     for (let i = 0; i < 200; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
-        const randomReplyIndex = Math.floor(Math.random() * createdReplies.length);
+        const randomCommentIndex = Math.floor(Math.random() * createdReplies.length);
 
         const deleted = (Math.floor(Math.random() * 100) + 1) < 5 ? true : false;
 
-        const replyData = {
-            replyBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
+        const commentData = {
+            commentBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
-            projectId: createdReplies[randomReplyIndex].projectId,
-            parentReplyId: createdReplies[randomReplyIndex]._id,
+            projectId: createdReplies[randomCommentIndex].projectId,
+            parentCommentId: createdReplies[randomCommentIndex]._id,
             isDeleted: deleted
         };
 
-        const createdReply = await Reply.create({ ...replyData });
+        const createdComment = await Comment.create({ ...commentData });
 
-        createdReplies.push(createdReply);
+        createdReplies.push(createdComment);
 
-        await Reply.updateOne(
-            { _id: createdReplies[randomReplyIndex]._id },
-            { $push: { replies: createdReply._id } }
+        await Comment.updateOne(
+            { _id: createdReplies[randomCommentIndex]._id },
+            { $push: { comments: createdComment._id } }
         );
     }
 
@@ -134,19 +134,19 @@ db.once('open', async () => {
     console.log("Nested Replies have been seeded.");
     console.log("---------------------");
 
-    // generating likes on replies
+    // generating likes on comments
     for (let i = 0; i < createdReplies.length * 3; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
-        const randomReplyIndex = Math.floor(Math.random() * createdReplies.length);
+        const randomCommentIndex = Math.floor(Math.random() * createdReplies.length);
 
-        await Reply.updateOne(
-            { _id: createdReplies[randomReplyIndex]._id },
+        await Comment.updateOne(
+            { _id: createdReplies[randomCommentIndex]._id },
             { $addToSet: { likes: createdUsers.insertedIds[randomUserIndex]._id } }
         )
     }
 
 
-    console.log("Reply likes have been seeded.");
+    console.log("Comment likes have been seeded.");
     console.log("---------------------");
 
 

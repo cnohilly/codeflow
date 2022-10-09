@@ -1,15 +1,15 @@
-const { User, Project, Reply } = require('../models');
+const { User, Project, Comment } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { UserQueries, UserMutations } = require('./userSchemas');
 const { ProjectQueries, ProjectMutations } = require('./projectSchemas');
-const { ReplyQueries, ReplyMutations } = require('./replySchemas');
+const { CommentQueries, CommentMutations } = require('./commentSchemas');
 
 const resolvers = {
     Query: {
         ...UserQueries,
         ...ProjectQueries,
-        ...ReplyQueries,
+        ...CommentQueries,
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
@@ -36,7 +36,7 @@ const resolvers = {
     Mutation: {
         ...UserMutations,
         ...ProjectMutations,
-        ...ReplyMutations,
+        ...CommentMutations,
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
