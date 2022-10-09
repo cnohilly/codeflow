@@ -34,6 +34,7 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      profileImage
       friends {
         _id
         username

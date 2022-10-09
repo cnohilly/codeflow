@@ -1,11 +1,18 @@
 import React from "react";
 import { Col, Card, Row, Button, ButtonGroup } from "react-bootstrap";
 
-const UserInfo = () => {
+const UserInfo = ({ username }) => {
   return (
     <Col>
       {/* User Info card */}
       <Card className="bg-dark bg-gradient text-white shadow">
+        <Card.Header className="bg-black bg-gradient text-white">
+          <Card.Title>{username}</Card.Title>
+          {/* project user info */}
+          <Card.Subtitle className="text-white-50">
+            Member Since (insert date)
+          </Card.Subtitle>
+        </Card.Header>
         <Card.Body>
           <div className="d-flex">
             <Row>
@@ -18,19 +25,12 @@ const UserInfo = () => {
                     style={{ width: "150px" }}
                   />
                 </div>
-
-                <h1>Username</h1>
               </Col>
             </Row>
 
             <Row>
               <div className="flex-grow-1">
                 <div className="ms-3">
-                  {/* comment user info */}
-                  <Card.Subtitle className="my-2">
-                    Member Since (insert date here)
-                  </Card.Subtitle>
-                  <br />
                   {/* comment text */}
                   <Card.Body>
                     <h3>User Bio:</h3>

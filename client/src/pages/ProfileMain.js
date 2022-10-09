@@ -51,7 +51,7 @@ const ProfileMain = (props) => {
       <Row>
         <Col xs={9}>
           <Row>
-            <UserInfo />
+            <UserInfo username={user.username} />
           </Row>
         </Col>
 
