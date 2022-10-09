@@ -51,15 +51,6 @@ replySchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
 
-// const preDelete = async () => {
-//     console.log('Deleting');
-//     // const doc = await this.model.findOne(this.getFilter());
-//     await Reply.deleteMany({ parentReplyId: this._id });
-// }
-
-// replySchema.pre('deleteOne', { document: false, query: true }, preDelete);
-// replySchema.pre('deleteMany', { document: false, query: true }, preDelete);
-
 const Reply = model('Reply', replySchema);
 
 module.exports = Reply;

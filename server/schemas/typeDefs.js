@@ -38,7 +38,6 @@ const typeDefs = gql`
         token: ID!
         user: User   
     }
-
     
     input EditUserInput {
         username: String,
@@ -56,8 +55,10 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(input: UserSearchInput!): User
-        posts: [Post]
+        posts(userId: ID): [Post]
         post(_id: ID!): Post
+        replies(userId: ID): [Reply]
+        reply(_id: ID!): Reply
     }
 
     type Mutation {
