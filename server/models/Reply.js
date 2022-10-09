@@ -38,6 +38,12 @@ const replySchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Reply'
             }
+        ],
+        likes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
         ]
     },
     {
@@ -49,6 +55,10 @@ const replySchema = new Schema(
 
 replySchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
+});
+
+replySchema.virtual('likeCount').get(function () {
+    return (this.likes ? this.likes.length : 0);
 });
 
 const Reply = model('Reply', replySchema);

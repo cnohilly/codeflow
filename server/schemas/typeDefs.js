@@ -32,6 +32,8 @@ const typeDefs = gql`
         isDeleted: Boolean
         replyCount: Int
         replies: [Reply]
+        likes: [User]
+        likeCount: Int
     }
 
     type Auth {
@@ -64,12 +66,13 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addPost(postBody: String!): Post
-        addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
         editUser(input: EditUserInput, _id: ID!): Auth
         deleteUser(_id: ID!): User
+        addPost(postBody: String!): Post
         deletePost(_id: ID!): Post
+        addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
         deleteReply(_id: ID!): Reply
+        updateReplyLike(_id: ID!, like: Boolean!): Reply
     }
 `;
 

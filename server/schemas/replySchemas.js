@@ -65,7 +65,27 @@ const ReplyMutations = {
         }
 
         throw new AuthenticationError("You need to be logged in!");
+    },
+    updateReplyLike: async (parent, { _id, like }, context) => {
+        if (context.user) {
+            const data = like
+                ? { $addToSet: { likes: context.user._id } }
+                : { $pull: { likes: context.user._id } };
+            const reply = await Reply.findByIdAndUpdate(
+                _id,
+                data,
+                { new: true }
+            ).populate(['createdBy', 'likes', 'replies']);
+
+            if (!reply) {
+                throw new AuthenticationError("You do not have permission to do that!");
+            }
+
+            return reply;
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
     }
 }
 
-module.exports = { ReplyQueries, ReplyQueries };
+module.exports = { ReplyQueries, ReplyMutations };
