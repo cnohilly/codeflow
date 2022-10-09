@@ -17,7 +17,7 @@ const commentSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: dateFormat
+            get: (timestamp) => dateFormat(timestamp)
         },
         isDeleted: {
             type: Boolean,
@@ -27,7 +27,7 @@ const commentSchema = new Schema(
         lastEditedAt: {
             type: Date,
             default: null,
-            get: dateFormat
+            get: (timestamp) => dateFormat(timestamp)
         },
         projectId: {
             type: Schema.Types.ObjectId,

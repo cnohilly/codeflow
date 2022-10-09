@@ -23,8 +23,6 @@ db.once('open', async () => {
 
     const createdUsers = await User.collection.insertMany(userData);
 
-    console.log(Object.keys(createdUsers.insertedIds).length);
-
     console.log("Users have been seeded.");
     console.log("---------------------");
 
@@ -111,13 +109,15 @@ db.once('open', async () => {
         const randomCommentIndex = Math.floor(Math.random() * createdReplies.length);
 
         const deleted = (Math.floor(Math.random() * 100) + 1) < 5 ? true : false;
+        const lastEditedAt = (Math.floor(Math.random() * 100) + 1) < 5 ? Date.now() : null;
 
         const commentData = {
             commentBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
             projectId: createdReplies[randomCommentIndex].projectId,
             parentCommentId: createdReplies[randomCommentIndex]._id,
-            isDeleted: deleted
+            isDeleted: deleted,
+            lastEditedAt
         };
 
         const createdComment = await Comment.create({ ...commentData });
@@ -148,7 +148,6 @@ db.once('open', async () => {
 
     console.log("Comment likes have been seeded.");
     console.log("---------------------");
-
 
     console.log("All seeds have been completed.");
     console.log("---------------------");

@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
 import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import ReplyList from '../ReplyList';
 import ReplyForm from '../ReplyForm';
 import CommentList from '../CommentList'
 import { useQuery } from '@apollo/client';
@@ -23,116 +22,132 @@ const Comment = (props) => {
   if (loading) {
     return <div>Loading comment data</div>
   }
-  console.log(comment);
-  if (!comment.createdBy) {
-    return;
-  }
 
   return (
     // comment card
     <Col>
-      <Card className="bg-dark bg-gradient text-white shadow mb-3">
-        <Card.Body>
-          <div className="d-flex">
-            <div className="flex-shrink-0">
-              {/* profile image */}
-              <img
-                src={comment.createdBy.profileImage || "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"}
-                alt={`Avatar for ${comment.createdBy.username}`}
-                style={{ width: "36px" }}
-              />
-            </div>
-
-            <div className="flex-grow-1">
-              <div className="ms-3">
-                {/* comment user info */}
-                <Card.Subtitle
-                  className="my-2"
-                >
-                  {comment.createdBy.username} on {comment.createdAt}
-                </Card.Subtitle>
-                {/* comment text */}
-                <Card.Text>
-                  {comment.commentBody}
-                </Card.Text>
+      {!comment.isDeleted
+        ?
+        <Card className="bg-dark bg-gradient text-white shadow mb-3">
+          <Card.Body>
+            <div className="d-flex">
+              <div className="flex-shrink-0">
+                {/* profile image */}
+                <img
+                  src={comment.createdBy.profileImage || "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"}
+                  alt={`Avatar for ${comment.createdBy.username}`}
+                  style={{ width: "36px", borderRadius: "50%" }}
+                />
               </div>
 
-              <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
-                {/* like button */}
-                <div className="d-flex align-items-center me-2">
-                  <Button
-                    variant="link"
-                    type="button"
-                    aria-label="Like"
-                    className="link-primary pe-2"
+              <div className="flex-grow-1">
+                <div className="ms-3">
+                  {/* comment user info */}
+                  <Card.Subtitle
+                    className="my-2 d-flex justify-content-between"
                   >
-                    <i className="bi bi-heart-fill"></i>
-                  </Button>
-                  {/* number of likes */}
-                  <div>
-                    {comment.likeCount} Likes
-                  </div>
+                    <div>
+                      {comment.createdBy.username}
+                    </div>
+                    <div>
+                      {!comment.lastEditedAt
+                        ? `posted on ${comment.createdAt}`
+                        : `edited on ${comment.lastEditedAt}`}
+                    </div>
+                  </Card.Subtitle>
+                  {/* comment text */}
+                  <Card.Text>
+                    {comment.commentBody}
+                  </Card.Text>
                 </div>
-                <ButtonGroup aria-label="Button group">
-                  {/* reply button */}
-                  <Button
-                    variant="link"
-                    type="button"
-                    aria-label="Reply"
-                    className="link-info"
-                    onClick={() => setDisplayReplyForm(!displayReplyForm)}
-                  >
-                    <i className="bi bi-chat-square-fill"></i>
-                    Reply
-                  </Button>
-                  {/* edit button */}
-                  <Button
-                    variant="link"
-                    type="button"
-                    aria-label="Edit"
-                    className="link-warning"
-                  >
-                    <i className="bi bi-pencil-square"></i>
-                    Edit
-                  </Button>
-                  {/* delete button */}
-                  <Button
-                    variant="link"
-                    type="button"
-                    aria-label="Delete"
-                    className="link-danger"
-                  >
-                    <i className="bi bi-trash-fill"></i>
-                    Delete
-                  </Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
 
+                <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
+                  {/* like button */}
+                  <div className="d-flex align-items-center me-2">
+                    <Button
+                      variant="link"
+                      type="button"
+                      aria-label="Like"
+                      className="link-primary pe-2"
+                    >
+                      <i className="bi bi-heart-fill"></i>
+                    </Button>
+                    {/* number of likes */}
+                    <div>
+                      {comment.likeCount} {comment.likeCount > 1 || comment.likeCount === 0 ? 'Likes' : 'Like'}
+                    </div>
+                  </div>
+                  <ButtonGroup aria-label="Button group">
+                    {/* reply button */}
+                    <Button
+                      variant="link"
+                      type="button"
+                      aria-label="Reply"
+                      className="link-info"
+                      onClick={() => setDisplayReplyForm(!displayReplyForm)}
+                    >
+                      <i className="bi bi-chat-square-fill"></i>
+                      Reply
+                    </Button>
+                    {/* edit button */}
+                    <Button
+                      variant="link"
+                      type="button"
+                      aria-label="Edit"
+                      className="link-warning"
+                    >
+                      <i className="bi bi-pencil-square"></i>
+                      Edit
+                    </Button>
+                    {/* delete button */}
+                    <Button
+                      variant="link"
+                      type="button"
+                      aria-label="Delete"
+                      className="link-danger"
+                    >
+                      <i className="bi bi-trash-fill"></i>
+                      Delete
+                    </Button>
+                  </ButtonGroup>
+                </ButtonToolbar>
+              </div>
+            </div>
+          </Card.Body>
+        </Card>
+        :
+        <Card className="bg-dark bg-gradient text-white shadow mb-3">
+          <Card.Body>
+            <Card.Text>
+              Comment deleted by user.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      }
       {/* reply form */}
       <ReplyForm
         displayReplyForm={displayReplyForm}
         setDisplayReplyForm={setDisplayReplyForm}
       />
 
+      {/*  button and section to have reply   */}
       {comment.commentCount > 0 &&
         <>
           {areChildrenHidden
+            ?
             // {/* button to show replies */}
-            ? <Button
+            <Button
               variant="primary"
               type="button"
               aria-label="Show Replies"
               className={`${!areChildrenHidden ? "d-none" : ""}`}
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
-              Show Replies
+              {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}
             </Button>
+            :
             // {/* container for nested child comments */}
-            : <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
+            <div className={`d-flex`}>
               {/* collapsing line button for hiding replies */}
               <Button
                 variant="primary"

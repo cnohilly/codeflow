@@ -44,7 +44,7 @@ const Project = (props) => {
               href={`single-project/${project._id}`}
               className="text-decoration-none text-muted"
             >
-              {project.commentCount} comments
+              {project.commentCount} {project.commentCount > 1 || project.commentCount === 0 ? 'comments' : 'comment'}
             </Card.Link>
 
             {/* will need to fix placement later  */}
