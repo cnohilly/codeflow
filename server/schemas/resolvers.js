@@ -1,55 +1,42 @@
 const { User, Post, Reply } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { UserQueries, UserMutations } = require('./userSchemas');
+const { PostQueries, PostMutations } = require('./postSchemas');
+const { ReplyQueries, ReplyMutations } = require('./replySchemas');
 
 const resolvers = {
     Query: {
-        users: async () => {
-            return User.find()
-                .select('-__v -password')
-                .populate('posts');
-        },
-        user: async (parent, { username }) => {
-            return User.findOne({ username })
-                .select('-__v -password')
-                .populate('posts');
-        },
-        posts: async (parent, { userId }) => {
-            if (userId) {
-                return User.findById(userId)
-                    .select('posts')
-                    .sort({ createdAt: -1 })
-                    .populate(['createdBy',
+        ...UserQueries,
+        ...PostQueries,
+        ...ReplyQueries,
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                    .populate([
                         {
-                            path: 'replies',
-                            populate: ['createdBy', 'replies']
-                        }]);
+                            path: 'friends',
+                            populate: 'friends'
+                        },
+                        {
+                            path: 'posts',
+                            populate: 'createdBy'
+                        }
+                    ]);
+
+                return userData;
+
             }
-            return Post.find()
-                .sort({ createdAt: -1 })
-                .populate('createdBy')
-                .populate({
-                    path: 'replies',
-                    populate: ['createdBy', 'replies']
-                });
+
+            throw new AuthenticationError('Not logged in');
         },
-        post: async (parent, { _id }) => {
-            return Post.findOne({ _id })
-                .populate(['createdBy',
-                    {
-                        path: 'replies',
-                        populate: ['createdBy', 'replies']
-                    }]);
-        }
     },
 
     Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
-            const token = signToken(user);
-
-            return { token, user };
-        },
+        ...UserMutations,
+        ...PostMutations,
+        ...ReplyMutations,
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
@@ -66,63 +53,6 @@ const resolvers = {
             const token = signToken(user);
 
             return { token, user };
-        },
-        addPost: async (parent, args, context) => {
-            if (context.user) {
-                let post = await Post.create({ ...args, createdBy: context.user._id });
-
-                await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { posts: post._id } },
-                    { new: true }
-                );
-
-                post = await post.populate('createdBy');
-
-                return post;
-            }
-
-            throw new AuthenticationError("You need to be logged in!");
-        },
-        addReply: async (parent, args, context) => {
-            if (context.user) {
-                let reply = await Reply.create({ ...args, createdBy: context.user._id });
-                console.log(args.parentReplyId);
-                if (args.parentReplyId) {
-                    await Reply.findByIdAndUpdate(
-                        { _id: args.parentReplyId },
-                        { $push: { replies: reply._id } },
-                        { new: true }
-                    );
-                } else {
-
-                    await Post.findByIdAndUpdate(
-                        { _id: args.postId },
-                        { $push: { replies: reply._id } },
-                        { new: true }
-                    )
-                }
-                reply = await reply.populate('createdBy');
-
-                return reply;
-            }
-
-            throw new AuthenticationError("You need to be logged in!");
-        },
-        deletePost: async (parent, { _id }, context) => {
-            if (context.user) {
-                let post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
-                    .select('-replies -replyCount')
-                    .populate('createdBy');
-
-                if (!post) {
-                    throw new AuthenticationError("You do not have permission to do that!");
-                }
-
-                return post;
-            }
-
-            throw new AuthenticationError("You need to be logged in!");
         }
     }
 }

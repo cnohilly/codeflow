@@ -19,6 +19,11 @@ const replySchema = new Schema(
             default: Date.now,
             get: date => dateFormat(date)
         },
+        isDeleted: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         postId: {
             type: Schema.Types.ObjectId,
             ref: 'Post',
@@ -45,13 +50,6 @@ const replySchema = new Schema(
 replySchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
-
-const preDelete = async () => {
-    await Reply.deleteMany({ parentReplyId: this._id });
-}
-
-replySchema.pre('deleteOne', { document: false, query: true }, preDelete);
-replySchema.pre('deleteMany', { document: false, query: true }, preDelete);
 
 const Reply = model('Reply', replySchema);
 
