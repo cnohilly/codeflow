@@ -2,12 +2,31 @@ import { React, useState } from 'react';
 import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import ReplyList from '../ReplyList';
 import ReplyForm from '../ReplyForm';
+import CommentList from '../CommentList'
+import { useQuery } from '@apollo/client';
+import { QUERY_COMMENT } from '../../utils/queries';
 
-const Comment = () => {
+const Comment = (props) => {
+
+  let { comment } = props;
+  const { loading, data } = useQuery(QUERY_COMMENT, {
+    variables: { id: comment._id }
+  });
+
+  comment = data?.comment || {};
+
   // displaying children replies
   const [areChildrenHidden, setAreChildrenHidden] = useState(true);
   // displaying reply form
   const [displayReplyForm, setDisplayReplyForm] = useState(false);
+
+  if (loading) {
+    return <div>Loading comment data</div>
+  }
+  console.log(comment);
+  if (!comment.createdBy) {
+    return;
+  }
 
   return (
     // comment card
@@ -18,8 +37,8 @@ const Comment = () => {
             <div className="flex-shrink-0">
               {/* profile image */}
               <img
-                src="https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"
-                alt="..."
+                src={comment.createdBy.profileImage || "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"}
+                alt={`Avatar for ${comment.createdBy.username}`}
                 style={{ width: "36px" }}
               />
             </div>
@@ -30,11 +49,11 @@ const Comment = () => {
                 <Card.Subtitle
                   className="my-2"
                 >
-                  UserComment on 10/06/22
+                  {comment.createdBy.username} on {comment.createdAt}
                 </Card.Subtitle>
                 {/* comment text */}
                 <Card.Text>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos a alias aliquam veritatis cupiditate dolore qui sit inventore possimus, natus odio molestiae illum quis officiis sed laborum labore saepe impedit.
+                  {comment.commentBody}
                 </Card.Text>
               </div>
 
@@ -51,7 +70,7 @@ const Comment = () => {
                   </Button>
                   {/* number of likes */}
                   <div>
-                    # of Likes
+                    {comment.likeCount} Likes
                   </div>
                 </div>
                 <ButtonGroup aria-label="Button group">
@@ -99,32 +118,37 @@ const Comment = () => {
         setDisplayReplyForm={setDisplayReplyForm}
       />
 
-      {/* button to show replies */}
-      <Button
-        variant="primary"
-        type="button"
-        aria-label="Show Replies"
-        className={`${!areChildrenHidden ? "d-none" : ""}`}
-        onClick={() => setAreChildrenHidden(!areChildrenHidden)}
-      >
-        Show Replies
-      </Button>
-
-      {/* container for nested child comments */}
-      <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
-        {/* collapsing line button for hiding replies */}
-        <Button
-          variant="primary"
-          type="button"
-          aria-label="Hide Replies"
-          className="p-0 pe-1 me-3"
-          onClick={() => setAreChildrenHidden(!areChildrenHidden)}
-        />
-        <div>
-          {/* temporary heading for container 1 */}
-          <ReplyList />
-        </div>
-      </div>
+      {comment.commentCount > 0 &&
+        <>
+          {areChildrenHidden
+            // {/* button to show replies */}
+            ? <Button
+              variant="primary"
+              type="button"
+              aria-label="Show Replies"
+              className={`${!areChildrenHidden ? "d-none" : ""}`}
+              onClick={() => setAreChildrenHidden(!areChildrenHidden)}
+            >
+              Show Replies
+            </Button>
+            // {/* container for nested child comments */}
+            : <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
+              {/* collapsing line button for hiding replies */}
+              <Button
+                variant="primary"
+                type="button"
+                aria-label="Hide Replies"
+                className="p-0 pe-1 me-3"
+                onClick={() => setAreChildrenHidden(!areChildrenHidden)}
+              />
+              <div>
+                {/* temporary heading for container 1 */}
+                <CommentList comments={comment.comments} />
+              </div>
+            </div>
+          }
+        </>
+      }
     </Col>
   );
 };

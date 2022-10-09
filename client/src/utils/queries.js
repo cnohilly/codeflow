@@ -74,18 +74,43 @@ query project($id: ID!) {
     createdBy {
       _id
       username
+      profileImage
     }
     createdAt
     commentCount
     comments {
       _id
+      commentCount
+    }
+  }
+}
+`;
+
+export const QUERY_COMMENT = gql`
+query Comment($id: ID!) {
+  comment(_id: $id) {
+      _id
       commentBody
+      createdAt
+      createdBy {
+        username
+        profileImage
+        _id
+      }
+      projectId {
+        _id
+      }
+      parentCommentId {
+        _id
+      }
+      isDeleted
+      lastEditedAt
       commentCount
       comments {
         _id
-        commentBody
+        commentCount
       }
+      likeCount
     }
-  }
 }
 `;

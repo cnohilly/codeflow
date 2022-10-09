@@ -33,7 +33,7 @@ const SingleProject = () => {
       <hr className="border border-white" />
 
       {/* container for comments list */}
-      <CommentList />
+      <CommentList comments={project.comments} />
 
     </Container>
   );
