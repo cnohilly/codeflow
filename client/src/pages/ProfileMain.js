@@ -17,7 +17,11 @@ const ProfileMain = (props) => {
   // to be used later for adding friends
   //   const [addFriend] = useMutation(ADD_FRIEND);
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
+    variables: {
+      input: {
+        username: userParam,
+      },
+    },
   });
 
   const user = data?.me || data?.user || {};
@@ -30,6 +34,8 @@ const ProfileMain = (props) => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  console.log(user);
 
   if (!user?.username) {
     return (

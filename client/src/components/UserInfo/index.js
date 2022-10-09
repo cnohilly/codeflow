@@ -32,7 +32,7 @@ const UserInfo = () => {
                   </Card.Subtitle>
                   <br />
                   {/* comment text */}
-                  <Card.Text>
+                  <Card.Body>
                     <h3>User Bio:</h3>
                     <p>
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -40,7 +40,7 @@ const UserInfo = () => {
                       inventore possimus, natus odio molestiae illum quis
                       officiis sed laborum labore saepe impedit.
                     </p>
-                  </Card.Text>
+                  </Card.Body>
                 </div>
               </div>
             </Row>

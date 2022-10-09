@@ -31,15 +31,15 @@ const Project = () => {
           <hr />
           {/* project description */}
           <Card.Text>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-            Accusantium, et pariatur. Deserunt amet voluptatum necessitatibus 
-            officiis placeat deleniti nobis ipsa velit inventore? 
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Accusantium, et pariatur. Deserunt amet voluptatum necessitatibus
+            officiis placeat deleniti nobis ipsa velit inventore?
             Veritatis id, ex impedit fugiat reprehenderit aspernatur facilis.
           </Card.Text>
           <div className="d-flex align-items-center justify-content-between">
             {/* project number of comments */}
-            <Card.Link 
-              href="#" 
+            <Card.Link
+              href="#"
               className="text-decoration-none text-muted"
             >
               # comments
@@ -49,19 +49,19 @@ const Project = () => {
 
             <div>
               {/* link to deployed project */}
-              <Button 
-                href="#" 
-                variant="primary" 
+              <Button
+                href="#"
+                variant="primary"
                 className="me-2"
               >
                 Go to project
               </Button>
               {/* link to project github */}
-              <Button 
+              <Button
                 href="#"
                 variant="primary"
               >
-                <i class="bi bi-github"></i>
+                <i className="bi bi-github"></i>
               </Button>
             </div>
           </div>
