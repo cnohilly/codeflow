@@ -31,6 +31,7 @@ const typeDefs = gql`
         postId: Post
         parentReplyId: Reply
         isDeleted: Boolean
+        lastEditedAt: String
         replyCount: Int
         replies: [Reply]
         likes: [User]
@@ -79,6 +80,7 @@ const typeDefs = gql`
         editPost(_id: ID!, input: EditPostInput!): Post
         deletePost(_id: ID!): Post
         addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
+        editReply(_id: ID!, replyBody: String!): Reply
         deleteReply(_id: ID!): Reply
         updateReplyLike(_id: ID!): Reply
     }

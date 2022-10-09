@@ -43,9 +43,8 @@ const PostMutations = {
     },
     editPost: async (parent, {_id, input}, context) => {
         if (context.user) {
-            const now = Date.now();
 
-            let post = await Post.findOneAndUpdate(
+            const post = await Post.findOneAndUpdate(
                 {_id, createdBy: context.user._id},
                 {...input},
                 {new: true}
