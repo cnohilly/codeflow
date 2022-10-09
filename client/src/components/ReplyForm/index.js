@@ -6,7 +6,7 @@ const ReplyForm = (props) => {
   
   return (
     // reply form card
-    <Card id="replyForm" className={`bg-dark bg-gradient shadow mb-3 ${!displayReplyForm ? "d-none" : ""}`}>
+    <Card id="replyForm" className="bg-dark bg-gradient shadow mb-3">
       <Card.Body>
         <Form>
           <Form.Group controlId="replyTextarea">
@@ -19,6 +19,7 @@ const ReplyForm = (props) => {
               {/* reply textarea */}
               <Form.Control
                 as="textarea"
+                autoFocus
                 placeholder="Add a reply"
                 style={{ height: '100px' }}
                 className="bg-dark text-white"
@@ -31,7 +32,7 @@ const ReplyForm = (props) => {
               variant="primary" 
               type="button" 
               size="sm" 
-              className="rounded-pill px-4 me-2"
+              className="rounded-pill px-3 me-2"
               onClick={() => console.log("Replied!")}
             >
               Reply
