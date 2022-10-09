@@ -18,6 +18,7 @@ const typeDefs = gql`
         createdBy: User
         repoLink: String
         deployedLink: String
+        lastEditedAt: String
         replyCount: Int
         replies: [Reply]
     }
@@ -41,6 +42,11 @@ const typeDefs = gql`
         user: User   
     }
     
+    input UserSearchInput {
+        _id: ID
+        username: String,
+    }
+    
     input EditUserInput {
         username: String,
         email: String,
@@ -48,9 +54,10 @@ const typeDefs = gql`
         profileImage: String
     }
 
-    input UserSearchInput {
-        _id: ID
-        username: String,
+    input EditPostInput {
+        postBody: String
+        repoLink: String
+        deployedLink: String
     }
     
     type Query {
@@ -69,6 +76,7 @@ const typeDefs = gql`
         editUser(input: EditUserInput, _id: ID!): Auth
         deleteUser(_id: ID!): User
         addPost(postBody: String!, repoLink: String, deployedLink: String): Post
+        editPost(_id: ID!, input: EditPostInput!): Post
         deletePost(_id: ID!): Post
         addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
         deleteReply(_id: ID!): Reply

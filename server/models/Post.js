@@ -12,7 +12,7 @@ const postSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: date => dateFormat(date)
+            get: dateFormat
         },
         createdBy: {
             type: Schema.Types.ObjectId,
@@ -25,6 +25,12 @@ const postSchema = new Schema(
         },
         deployedLink: {
             type: String
+        },
+        lastEditedAt: {
+            type: Date,
+            default: null,
+            get: dateFormat,
+            // set: Date.now
         },
         replies: [
             {
@@ -43,6 +49,12 @@ const postSchema = new Schema(
 postSchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
+
+postSchema.pre('findOneAndUpdate', function(next){
+    this._update = {...this.getUpdate(), lastEditedAt: Date.now()};
+    next();
+});
+
 
 const Post = model('Post', postSchema);
 

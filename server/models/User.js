@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const { Post } = require('./Post');
 
 const userSchema = new Schema(
     {
@@ -52,10 +51,6 @@ userSchema.pre('save', async function (next) {
     }
 
     next();
-});
-
-userSchema.pre('deleteOne', { document: false, query: true }, async function () {
-    await Post.deleteMany({ createdBy: this._id });
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
