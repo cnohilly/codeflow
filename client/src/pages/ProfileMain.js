@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
 import ProfileNav from "../components/ProfileNav";
+import Profile404 from "../components/Profile404";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -36,10 +37,11 @@ const ProfileMain = (props) => {
 
   if (!user?.username) {
     return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
+      <Row className="justify-content-md-center">
+        <Col xs={6}>
+          <Profile404 />
+        </Col>
+      </Row>
     );
   }
 
