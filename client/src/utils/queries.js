@@ -24,7 +24,7 @@ export const QUERY_USER = gql`
         }
         repoLink
         deployedLink
-        replyCount
+        commentCount
       }
     }
   }
@@ -60,7 +60,7 @@ query projects {
     repoLink
     deployedLink
     lastEditedAt
-    replyCount
+    commentCount
   }
 }
 `;
@@ -76,14 +76,14 @@ query project($id: ID!) {
       username
     }
     createdAt
-    replyCount
-    replies {
+    commentCount
+    comments {
       _id
-      replyBody
-      replyCount
-      replies {
+      commentBody
+      commentCount
+      comments {
         _id
-        replyBody
+        commentBody
       }
     }
   }

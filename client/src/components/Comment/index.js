@@ -17,17 +17,17 @@ const Comment = () => {
           <div className="d-flex">
             <div className="flex-shrink-0">
               {/* profile image */}
-              <img 
-                src="https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png" 
+              <img
+                src="https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"
                 alt="..."
                 style={{ width: "36px" }}
               />
             </div>
-            
+
             <div className="flex-grow-1">
               <div className="ms-3">
                 {/* comment user info */}
-                <Card.Subtitle 
+                <Card.Subtitle
                   className="my-2"
                 >
                   UserComment on 10/06/22
@@ -41,10 +41,10 @@ const Comment = () => {
               <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
                 {/* like button */}
                 <div className="d-flex align-items-center me-2">
-                  <Button 
-                    variant="link" 
-                    type="button" 
-                    aria-label="Like" 
+                  <Button
+                    variant="link"
+                    type="button"
+                    aria-label="Like"
                     className="link-primary pe-2"
                   >
                     <i className="bi bi-heart-fill"></i>
@@ -56,20 +56,20 @@ const Comment = () => {
                 </div>
                 <ButtonGroup aria-label="Button group">
                   {/* reply button */}
-                  <Button 
-                    variant="link" 
-                    type="button" 
-                    aria-label="Reply" 
+                  <Button
+                    variant="link"
+                    type="button"
+                    aria-label="Reply"
                     className="link-info"
                     onClick={() => setDisplayReplyForm(!displayReplyForm)}
                   >
-                    <i class="bi bi-chat-square-fill"></i>
+                    <i className="bi bi-chat-square-fill"></i>
                     Reply
                   </Button>
                   {/* edit button */}
-                  <Button 
-                    variant="link" 
-                    type="button" 
+                  <Button
+                    variant="link"
+                    type="button"
                     aria-label="Edit"
                     className="link-warning"
                   >
@@ -77,9 +77,9 @@ const Comment = () => {
                     Edit
                   </Button>
                   {/* delete button */}
-                  <Button 
-                    variant="link" 
-                    type="button" 
+                  <Button
+                    variant="link"
+                    type="button"
                     aria-label="Delete"
                     className="link-danger"
                   >
@@ -92,19 +92,19 @@ const Comment = () => {
           </div>
         </Card.Body>
       </Card>
-      
+
       {/* reply form */}
-      <ReplyForm 
+      <ReplyForm
         displayReplyForm={displayReplyForm}
         setDisplayReplyForm={setDisplayReplyForm}
       />
-      
+
       {/* button to show replies */}
-      <Button 
-        variant="primary" 
-        type="button" 
+      <Button
+        variant="primary"
+        type="button"
         aria-label="Show Replies"
-        className={`${!areChildrenHidden ? "d-none" : "" }`}
+        className={`${!areChildrenHidden ? "d-none" : ""}`}
         onClick={() => setAreChildrenHidden(!areChildrenHidden)}
       >
         Show Replies
@@ -113,10 +113,10 @@ const Comment = () => {
       {/* container for nested child comments */}
       <div className={`d-flex ${areChildrenHidden ? "d-none" : ""}`}>
         {/* collapsing line button for hiding replies */}
-        <Button 
-          variant="primary" 
-          type="button" 
-          aria-label="Hide Replies" 
+        <Button
+          variant="primary"
+          type="button"
+          aria-label="Hide Replies"
           className="p-0 pe-1 me-3"
           onClick={() => setAreChildrenHidden(!areChildrenHidden)}
         />

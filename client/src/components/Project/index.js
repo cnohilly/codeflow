@@ -7,7 +7,6 @@ const Project = (props) => {
   const {
     project
   } = props;
-  console.log(project);
 
   return (
     <Col>
@@ -45,7 +44,7 @@ const Project = (props) => {
               href={`single-project/${project._id}`}
               className="text-decoration-none text-muted"
             >
-              {project.replyCount} comments
+              {project.commentCount} comments
             </Card.Link>
 
             {/* will need to fix placement later  */}
