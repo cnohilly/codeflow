@@ -140,7 +140,7 @@ db.once('open', async () => {
 
         await Reply.updateOne(
             { _id: createdReplies[randomReplyIndex]._id },
-            { $push: { likes: createdUsers.insertedIds[randomUserIndex]._id } }
+            { $addToSet: { likes: createdUsers.insertedIds[randomUserIndex]._id } }
         )
     }
 
