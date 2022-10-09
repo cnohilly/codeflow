@@ -1,15 +1,47 @@
 import React from "react";
+import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import ProfileNav from "../components/ProfileNav";
 import ProjectForm from "../components/ProjectForm";
-import Project from "../components/Project";
-
+import ProjectList from "../components/ProjectList";
+import ProfileNav from "../components/ProfileNav";
 import { useQuery, useMutation } from "@apollo/client";
-// import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const ProfileProjects = (props) => {
-  // insert auth stuff here to verify that user is logged in
+  const { username: userParam } = useParams();
+
+  // to be used later for adding friends
+  //   const [addFriend] = useMutation(ADD_FRIEND);
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    variables: {
+      input: {
+        username: userParam,
+      },
+    },
+  });
+
+  const user = data?.me || data?.user || {};
+
+  // navigate to personal profile page if username is yours
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Navigate to="/profile/user-projects:username" />;
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(user);
+
+  if (!user?.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
 
   return (
     <Container id="profile-projects" className="py-3">
@@ -19,7 +51,7 @@ const ProfileProjects = (props) => {
             <ProjectForm />
           </Row>
           <Row>
-            <Project />
+            <ProjectList props={user.projects} />
           </Row>
         </Col>
 

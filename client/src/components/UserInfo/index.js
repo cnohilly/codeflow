@@ -32,7 +32,7 @@ const UserInfo = ({ username, joinDate }) => {
                 <div className="ms-3">
                   {/* comment text */}
                   <Card.Body>
-                    <h3>User Bio:</h3>
+                    <h3>About Me:</h3>
                     <p>
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                       Eos a alias aliquam veritatis cupiditate dolore qui sit
