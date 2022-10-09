@@ -48,6 +48,23 @@ const ReplyMutations = {
 
         throw new AuthenticationError("You need to be logged in!");
     },
+    editReply: async (parent, {_id, replyBody}, context) => {
+        if (context.user) {
+            const reply = await Reply.findOneAndUpdate(
+                {_id, createdBy: context.user._id},
+                {replyBody},
+                {new: true}
+            ).populate('createdBy');
+
+            if (!reply) {
+                throw new AuthenticationError("You do not have permission to do that!");
+            }
+
+            return reply;
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
+    },
     deleteReply: async (parent, { _id }, context) => {
         if (context.user) {
             const reply = await Reply.findOneAndUpdate(

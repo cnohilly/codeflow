@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { dateFormat } = require('../utils/helpers');
+const dateFormat = require('../utils/helpers');
 
 const replySchema = new Schema(
     {
@@ -17,12 +17,17 @@ const replySchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: date => dateFormat(date)
+            get: dateFormat
         },
         isDeleted: {
             type: Boolean,
             required: true,
             default: false
+        },
+        lastEditedAt: {
+            type: Date,
+            default: null,
+            get: dateFormat
         },
         postId: {
             type: Schema.Types.ObjectId,
@@ -59,6 +64,12 @@ replySchema.virtual('replyCount').get(function () {
 
 replySchema.virtual('likeCount').get(function () {
     return (this.likes ? this.likes.length : 0);
+});
+
+replySchema.pre('findOneAndUpdate', function(next){
+    this._update = {...this.getUpdate(), lastEditedAt: Date.now()};
+    console.log(this._update);
+    next();
 });
 
 const Reply = model('Reply', replySchema);

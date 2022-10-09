@@ -41,6 +41,24 @@ const PostMutations = {
 
         throw new AuthenticationError("You need to be logged in!");
     },
+    editPost: async (parent, {_id, input}, context) => {
+        if (context.user) {
+
+            const post = await Post.findOneAndUpdate(
+                {_id, createdBy: context.user._id},
+                {...input},
+                {new: true}
+            ).populate(['createdBy']);
+
+            if (!post) {
+                throw new AuthenticationError("You do not have permsission to do that!");
+            }
+
+            return post;
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
+    },
     deletePost: async (parent, { _id }, context) => {
         if (context.user) {
             const post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
