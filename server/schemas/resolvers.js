@@ -1,14 +1,14 @@
-const { User, Post, Reply } = require('../models');
+const { User, Project, Reply } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { UserQueries, UserMutations } = require('./userSchemas');
-const { PostQueries, PostMutations } = require('./postSchemas');
+const { ProjectQueries, ProjectMutations } = require('./projectSchemas');
 const { ReplyQueries, ReplyMutations } = require('./replySchemas');
 
 const resolvers = {
     Query: {
         ...UserQueries,
-        ...PostQueries,
+        ...ProjectQueries,
         ...ReplyQueries,
         me: async (parent, args, context) => {
             if (context.user) {
@@ -20,7 +20,7 @@ const resolvers = {
                             populate: 'friends'
                         },
                         {
-                            path: 'posts',
+                            path: 'projects',
                             populate: 'createdBy'
                         }
                     ]);
@@ -35,7 +35,7 @@ const resolvers = {
 
     Mutation: {
         ...UserMutations,
-        ...PostMutations,
+        ...ProjectMutations,
         ...ReplyMutations,
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });

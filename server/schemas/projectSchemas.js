@@ -1,11 +1,11 @@
-const { User, Post, Reply } = require('../models');
+const { User, Project, Reply } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
-const PostQueries = {
-    posts: async (parent, { userId }) => {
+const ProjectQueries = {
+    projects: async (parent, { userId }) => {
         const params = userId ? { createdBy: userId } : {};
-        return Post.find(params)
+        return Project.find(params)
             .sort({ createdAt: -1 })
             .populate(['createdBy',
                 {
@@ -13,8 +13,8 @@ const PostQueries = {
                     populate: ['createdBy', 'replies']
                 }]);
     },
-    post: async (parent, { _id }) => {
-        return Post.findOne({ _id })
+    project: async (parent, { _id }) => {
+        return Project.findOne({ _id })
             .populate(['createdBy',
                 {
                     path: 'replies',
@@ -23,58 +23,58 @@ const PostQueries = {
     }
 }
 
-const PostMutations = {
-    addPost: async (parent, args, context) => {
+const ProjectMutations = {
+    addProject: async (parent, args, context) => {
         if (context.user) {
-            let post = await Post.create({ ...args, createdBy: context.user._id });
+            let project = await Project.create({ ...args, createdBy: context.user._id });
 
             await User.findByIdAndUpdate(
                 { _id: context.user._id },
-                { $push: { posts: post._id } },
+                { $push: { projects: project._id } },
                 { new: true }
             );
 
-            post = await post.populate('createdBy');
+            project = await project.populate('createdBy');
 
-            return post;
+            return project;
         }
 
         throw new AuthenticationError("You need to be logged in!");
     },
-    editPost: async (parent, {_id, input}, context) => {
+    editProject: async (parent, { _id, input }, context) => {
         if (context.user) {
 
-            const post = await Post.findOneAndUpdate(
-                {_id, createdBy: context.user._id},
-                {...input},
-                {new: true}
+            const project = await Project.findOneAndUpdate(
+                { _id, createdBy: context.user._id },
+                { ...input },
+                { new: true }
             ).populate(['createdBy']);
 
-            if (!post) {
+            if (!project) {
                 throw new AuthenticationError("You do not have permsission to do that!");
             }
 
-            return post;
+            return project;
         }
 
         throw new AuthenticationError("You need to be logged in!");
     },
-    deletePost: async (parent, { _id }, context) => {
+    deleteProject: async (parent, { _id }, context) => {
         if (context.user) {
-            const post = await Post.findOneAndDelete({ _id, createdBy: context.user._id })
+            const project = await Project.findOneAndDelete({ _id, createdBy: context.user._id })
                 .populate('createdBy');
 
-            if (!post) {
+            if (!project) {
                 throw new AuthenticationError("You do not have permission to do that!");
             }
 
-            await Reply.deleteMany({ postId: post._id });
+            await Reply.deleteMany({ projectId: project._id });
 
-            return post;
+            return project;
         }
 
         throw new AuthenticationError("You need to be logged in!");
     }
 }
 
-module.exports = { PostQueries, PostMutations };
+module.exports = { ProjectQueries, ProjectMutations };

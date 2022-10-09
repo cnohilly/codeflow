@@ -1,11 +1,17 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/helpers');
 
-const postSchema = new Schema(
+const projectSchema = new Schema(
     {
-        postBody: {
+        projectTitle: {
             type: String,
-            required: 'Post must include text.',
+            required: 'Project must have a title',
+            minlength: 1,
+            maxlength: 50
+        },
+        projectBody: {
+            type: String,
+            required: 'Project must include text.',
             minlength: 1,
             maxlength: 300
         },
@@ -45,16 +51,16 @@ const postSchema = new Schema(
     }
 );
 
-postSchema.virtual('replyCount').get(function () {
+projectSchema.virtual('replyCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
 
-postSchema.pre('findOneAndUpdate', function(next){
-    this._update = {...this.getUpdate(), lastEditedAt: Date.now()};
+projectSchema.pre('findOneAndUpdate', function (next) {
+    this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
     next();
 });
 
 
-const Post = model('Post', postSchema);
+const Project = model('Project', projectSchema);
 
-module.exports = Post;
+module.exports = Project;

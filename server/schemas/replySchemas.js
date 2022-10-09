@@ -1,4 +1,4 @@
-const { Post, Reply } = require('../models');
+const { Project, Reply } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -35,8 +35,8 @@ const ReplyMutations = {
                 );
             } else {
 
-                await Post.findByIdAndUpdate(
-                    { _id: args.postId },
+                await Project.findByIdAndUpdate(
+                    { _id: args.projectId },
                     { $push: { replies: reply._id } },
                     { new: true }
                 )
@@ -48,12 +48,12 @@ const ReplyMutations = {
 
         throw new AuthenticationError("You need to be logged in!");
     },
-    editReply: async (parent, {_id, replyBody}, context) => {
+    editReply: async (parent, { _id, replyBody }, context) => {
         if (context.user) {
             const reply = await Reply.findOneAndUpdate(
-                {_id, createdBy: context.user._id},
-                {replyBody},
-                {new: true}
+                { _id, createdBy: context.user._id },
+                { replyBody },
+                { new: true }
             ).populate('createdBy');
 
             if (!reply) {

@@ -41,10 +41,10 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
-  posts: [
+  projects: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "Project",
     },
   ],
 });

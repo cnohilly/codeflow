@@ -8,12 +8,13 @@ const typeDefs = gql`
     createdAt: String
     profileImage: String
     friends: [User]
-    posts: [Post]
+    projects: [Project]
   }
 
-  type Post {
+  type Project {
     _id: ID
-    postBody: String
+    projectTitle: String
+    projectBody: String
     createdAt: String
     createdBy: User
     repoLink: String
@@ -28,7 +29,7 @@ const typeDefs = gql`
     replyBody: String
     createdAt: String
     createdBy: User
-    postId: Post
+    projectId: Project
     parentReplyId: Reply
     isDeleted: Boolean
     lastEditedAt: String
@@ -55,8 +56,9 @@ const typeDefs = gql`
         profileImage: String
     }
 
-    input EditPostInput {
-        postBody: String
+    input EditProjectInput {
+        projectTitle: String
+        projectBody: String
         repoLink: String
         deployedLink: String
     }
@@ -65,8 +67,8 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(input: UserSearchInput!): User
-        posts(userId: ID): [Post]
-        post(_id: ID!): Post
+        projects(userId: ID): [Project]
+        project(_id: ID!): Project
         replies(userId: ID): [Reply]
         reply(_id: ID!): Reply
     }
@@ -76,10 +78,10 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         editUser(input: EditUserInput, _id: ID!): Auth
         deleteUser(_id: ID!): User
-        addPost(postBody: String!, repoLink: String, deployedLink: String): Post
-        editPost(_id: ID!, input: EditPostInput!): Post
-        deletePost(_id: ID!): Post
-        addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
+        addProject(projectBody: String!, repoLink: String, deployedLink: String): Project
+        editProject(_id: ID!, input: EditProjectInput!): Project
+        deleteProject(_id: ID!): Project
+        addReply(projectId: ID!, parentReplyId: ID, replyBody: String!): Reply
         editReply(_id: ID!, replyBody: String!): Reply
         deleteReply(_id: ID!): Reply
         updateReplyLike(_id: ID!): Reply

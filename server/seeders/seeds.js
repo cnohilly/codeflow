@@ -1,11 +1,11 @@
 const { faker } = require('@faker-js/faker');
 
 const db = require('../config/connection');
-const { User, Post, Reply } = require('../models');
+const { User, Project, Reply } = require('../models');
 
 db.once('open', async () => {
     await User.deleteMany({});
-    await Post.deleteMany({});
+    await Project.deleteMany({});
     await Reply.deleteMany({});
 
     const userData = [];
@@ -48,45 +48,46 @@ db.once('open', async () => {
     console.log("Friends have been seeded.");
     console.log("---------------------");
 
-    // generating posts
-    let createdPosts = [];
+    // generating projects
+    let createdProjects = [];
     for (let i = 0; i < 50; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
 
-        const postData = {
-            postBody: faker.lorem.words(Math.round(Math.random() * 20) + 1),
+        const projectData = {
+            projectTitle: faker.lorem.words(Math.round(Math.random() * 4) + 1),
+            projectBody: faker.lorem.words(Math.round(Math.random() * 20) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
             repoLink: faker.internet.domainName(),
             deployedLink: faker.internet.domainName()
         };
 
-        const createdPost = await Post.create({ ...postData });
+        const createdProject = await Project.create({ ...projectData });
 
-        createdPosts.push(createdPost);
+        createdProjects.push(createdProject);
 
         await User.updateOne(
             { _id: createdUsers.insertedIds[randomUserIndex]._id },
-            { $push: { posts: createdPost._id } }
+            { $push: { projects: createdProject._id } }
         );
     }
 
 
-    console.log("Posts have been seeded.");
+    console.log("Projects have been seeded.");
     console.log("---------------------");
 
 
-    // generating replies on posts
+    // generating replies on projects
     let createdReplies = [];
     for (let i = 0; i < 100; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
-        const randomPostIndex = Math.floor(Math.random() * createdPosts.length);
+        const randomProjectIndex = Math.floor(Math.random() * createdProjects.length);
 
         const deleted = (Math.floor(Math.random() * 100) + 1) < 5 ? true : false;
 
         const replyData = {
             replyBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
-            postId: createdPosts[randomPostIndex]._id,
+            projectId: createdProjects[randomProjectIndex]._id,
             isDeleted: deleted
         };
 
@@ -94,8 +95,8 @@ db.once('open', async () => {
 
         createdReplies.push(createdReply);
 
-        await Post.updateOne(
-            { _id: createdPosts[randomPostIndex]._id },
+        await Project.updateOne(
+            { _id: createdProjects[randomProjectIndex]._id },
             { $push: { replies: createdReply._id } }
         );
     }
@@ -114,7 +115,7 @@ db.once('open', async () => {
         const replyData = {
             replyBody: faker.lorem.words(Math.round(Math.random() * 15) + 1),
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
-            postId: createdReplies[randomReplyIndex].postId,
+            projectId: createdReplies[randomReplyIndex].projectId,
             parentReplyId: createdReplies[randomReplyIndex]._id,
             isDeleted: deleted
         };

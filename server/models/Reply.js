@@ -29,9 +29,9 @@ const replySchema = new Schema(
             default: null,
             get: dateFormat
         },
-        postId: {
+        projectId: {
             type: Schema.Types.ObjectId,
-            ref: 'Post',
+            ref: 'Project',
             required: true
         },
         parentReplyId: {
@@ -66,8 +66,8 @@ replySchema.virtual('likeCount').get(function () {
     return (this.likes ? this.likes.length : 0);
 });
 
-replySchema.pre('findOneAndUpdate', function(next){
-    this._update = {...this.getUpdate(), lastEditedAt: Date.now()};
+replySchema.pre('findOneAndUpdate', function (next) {
+    this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
     console.log(this._update);
     next();
 });

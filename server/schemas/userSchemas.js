@@ -6,12 +6,12 @@ const UserQueries = {
     users: async () => {
         return User.find()
             .select('-__v -password')
-            .populate(['posts', 'friends']);
+            .populate(['projects', 'friends']);
     },
     user: async (parent, { input }) => {
         return User.findOne({ ...input })
             .select('-__v -password')
-            .populate(['posts', 'friends']);
+            .populate(['projects', 'friends']);
     },
 };
 
@@ -30,7 +30,7 @@ const UserMutations = {
                     { ...input },
                     { new: true }
                 ).select('-__v -password')
-                    .populate('posts');
+                    .populate('projects');
 
                 const token = signToken(user);
 
