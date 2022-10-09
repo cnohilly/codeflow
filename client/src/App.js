@@ -46,7 +46,7 @@ function App() {
         <Header />
         <main className="App custom-height bg-secondary">
           <Routes>
-            <Route path="/single-project" element={<SingleProject />} />
+            <Route path="/single-project/:id" element={<SingleProject />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

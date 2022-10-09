@@ -13,9 +13,10 @@ export const QUERY_USER = gql`
         username
         email
       }
-      posts {
+      projects {
         _id
-        postBody
+        projectTitle
+        projectBody
         createdAt
         createdBy {
           _id
@@ -43,4 +44,48 @@ export const QUERY_ME = gql`
       }
     }
   }
+`;
+
+export const QUERY_PROJECTS = gql`
+query projects {
+  projects {
+    _id
+    projectTitle
+    projectBody
+    createdBy {
+      _id
+      username
+    }
+    createdAt
+    repoLink
+    deployedLink
+    lastEditedAt
+    replyCount
+  }
+}
+`;
+
+export const QUERY_PROJECT = gql`
+query project($id: ID!) {
+  project(_id: $id) {
+    _id
+    projectTitle
+    projectBody
+    createdBy {
+      _id
+      username
+    }
+    createdAt
+    replyCount
+    replies {
+      _id
+      replyBody
+      replyCount
+      replies {
+        _id
+        replyBody
+      }
+    }
+  }
+}
 `;

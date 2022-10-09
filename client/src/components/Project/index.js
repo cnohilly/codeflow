@@ -2,7 +2,13 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import { Col, Card, Badge, Button } from 'react-bootstrap';
 
-const Project = () => {
+const Project = (props) => {
+
+  const {
+    project
+  } = props;
+  console.log(project);
+
   return (
     <Col>
       {/* project card */}
@@ -10,11 +16,11 @@ const Project = () => {
         <Card.Header className="bg-black bg-gradient text-white">
           {/* project title */}
           <Card.Title>
-            Card Title
+            {project.projectTitle}
           </Card.Title>
           {/* project user info */}
           <Card.Subtitle className="text-white-50">
-            Posted by randomuser on 10/06/22
+            Posted by {project.createdBy.username} on {project.createdAt}
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
@@ -31,18 +37,15 @@ const Project = () => {
           <hr />
           {/* project description */}
           <Card.Text>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Accusantium, et pariatur. Deserunt amet voluptatum necessitatibus
-            officiis placeat deleniti nobis ipsa velit inventore?
-            Veritatis id, ex impedit fugiat reprehenderit aspernatur facilis.
+            {project.projectBody}
           </Card.Text>
           <div className="d-flex align-items-center justify-content-between">
             {/* project number of comments */}
             <Card.Link
-              href="#"
+              href={`single-project/${project._id}`}
               className="text-decoration-none text-muted"
             >
-              # comments
+              {project.replyCount} comments
             </Card.Link>
 
             {/* will need to fix placement later  */}
@@ -50,7 +53,7 @@ const Project = () => {
             <div>
               {/* link to deployed project */}
               <Button
-                href="#"
+                href={project.deployedLink}
                 variant="primary"
                 className="me-2"
               >
@@ -58,7 +61,7 @@ const Project = () => {
               </Button>
               {/* link to project github */}
               <Button
-                href="#"
+                href={project.repoLink}
                 variant="primary"
               >
                 <i className="bi bi-github"></i>
