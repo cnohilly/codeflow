@@ -8,72 +8,84 @@ const typeDefs = gql`
     createdAt: String
     profileImage: String
     friends: [User]
-    posts: [Post]
+    projects: [Project]
   }
 
-  type Post {
+  type Project {
     _id: ID
-    postBody: String
+    projectTitle: String
+    projectBody: String
     createdAt: String
     createdBy: User
     repoLink: String
     deployedLink: String
-    replyCount: Int
-    replies: [Reply]
+    lastEditedAt: String
+    commentCount: Int
+    comments: [Comment]
   }
 
-  type Reply {
+  type Comment {
     _id: ID
-    replyBody: String
+    commentBody: String
     createdAt: String
     createdBy: User
-    postId: Post
-    parentReplyId: Reply
+    projectId: Project
+    parentCommentId: Comment
     isDeleted: Boolean
-    replyCount: Int
-    replies: [Reply]
+    lastEditedAt: String
+    commentCount: Int
+    comments: [Comment]
     likes: [User]
     likeCount: Int
   }
 
-  type Auth {
-    token: ID!
-    user: User
-  }
+    type Auth {
+        token: ID!
+        user: User   
+    }
+    
+    input UserSearchInput {
+        _id: ID
+        username: String,
+    }
+    
+    input EditUserInput {
+        username: String
+        email: String
+        password: String
+        profileImage: String
+    }
 
-  input EditUserInput {
-    username: String
-    email: String
-    password: String
-    profileImage: String
-  }
+    input EditProjectInput {
+        projectTitle: String
+        projectBody: String
+        repoLink: String
+        deployedLink: String
+    }
+    
+    type Query {
+        me: User
+        users: [User]
+        user(input: UserSearchInput!): User
+        projects(userId: ID): [Project]
+        project(_id: ID!): Project
+        comments(userId: ID): [Comment]
+        comment(_id: ID!): Comment
+    }
 
-  input UserSearchInput {
-    _id: ID
-    username: String
-  }
-
-  type Query {
-    me: User
-    users: [User]
-    user(input: UserSearchInput!): User
-    posts(userId: ID): [Post]
-    post(_id: ID!): Post
-    replies(userId: ID): [Reply]
-    reply(_id: ID!): Reply
-  }
-
-  type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    editUser(input: EditUserInput, _id: ID!): Auth
-    deleteUser(_id: ID!): User
-    addPost(postBody: String!): Post
-    deletePost(_id: ID!): Post
-    addReply(postId: ID!, parentReplyId: ID, replyBody: String!): Reply
-    deleteReply(_id: ID!): Reply
-    updateReplyLike(_id: ID!, like: Boolean!): Reply
-  }
+    type Mutation {
+        login(email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
+        editUser(input: EditUserInput, _id: ID!): Auth
+        deleteUser(_id: ID!): User
+        addProject(projectBody: String!, repoLink: String, deployedLink: String): Project
+        editProject(_id: ID!, input: EditProjectInput!): Project
+        deleteProject(_id: ID!): Project
+        addComment(projectId: ID!, parentCommentId: ID, commentBody: String!): Comment
+        editComment(_id: ID!, commentBody: String!): Comment
+        deleteComment(_id: ID!): Comment
+        updateCommentLike(_id: ID!): Comment
+    }
 `;
 
 module.exports = typeDefs;

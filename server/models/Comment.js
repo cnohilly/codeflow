@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
-const { dateFormat } = require('../utils/helpers');
+const dateFormat = require('../utils/helpers');
 
-const replySchema = new Schema(
+const commentSchema = new Schema(
     {
-        replyBody: {
+        commentBody: {
             type: String,
             required: true,
             maxlength: 300
@@ -17,26 +17,31 @@ const replySchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: date => dateFormat(date)
+            get: dateFormat
         },
         isDeleted: {
             type: Boolean,
             required: true,
             default: false
         },
-        postId: {
+        lastEditedAt: {
+            type: Date,
+            default: null,
+            get: dateFormat
+        },
+        projectId: {
             type: Schema.Types.ObjectId,
-            ref: 'Post',
+            ref: 'Project',
             required: true
         },
-        parentReplyId: {
+        parentCommentId: {
             type: Schema.Types.ObjectId,
-            ref: 'Reply'
+            ref: 'Comment'
         },
-        replies: [
+        comments: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Reply'
+                ref: 'Comment'
             }
         ],
         likes: [
@@ -53,14 +58,20 @@ const replySchema = new Schema(
     }
 );
 
-replySchema.virtual('replyCount').get(function () {
+commentSchema.virtual('commentCount').get(function () {
     return (this.replies ? this.replies.length : 0);
 });
 
-replySchema.virtual('likeCount').get(function () {
+commentSchema.virtual('likeCount').get(function () {
     return (this.likes ? this.likes.length : 0);
 });
 
-const Reply = model('Reply', replySchema);
+commentSchema.pre('findOneAndUpdate', function (next) {
+    this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
+    console.log(this._update);
+    next();
+});
 
-module.exports = Reply;
+const Comment = model('Comment', commentSchema);
+
+module.exports = Comment;

@@ -2,8 +2,13 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
+import { QUERY_PROJECTS } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 const Home = () => {
+
+  const { loading, data } = useQuery(QUERY_PROJECTS);
+  const projects = data?.projects || [];
 
   return (
     // section for Homepage
@@ -15,7 +20,7 @@ const Home = () => {
           <h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h2>
         </div>
       </section>
-      
+
 
       {/* container for project card list */}
       <Container id="home-project-list" className="py-4 ">
@@ -24,8 +29,11 @@ const Home = () => {
         <ProjectForm />
 
         {/* Project List */}
-        <ProjectList />
-      
+        {loading
+          ? <p>Loading Projects</p>
+          : <ProjectList projects={projects} />
+        }
+
       </Container>
     </div>
   );

@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const { Post } = require("./Post");
-const { dateFormat } = require("../utils/helpers");
+const dateFormat = require("../utils/helpers");
 
 const userSchema = new Schema({
   username: {
@@ -42,10 +41,10 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
-  posts: [
+  projects: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "Project",
     },
   ],
 });
@@ -58,14 +57,6 @@ userSchema.pre("save", async function (next) {
 
   next();
 });
-
-userSchema.pre(
-  "deleteOne",
-  { document: false, query: true },
-  async function () {
-    await Post.deleteMany({ createdBy: this._id });
-  }
-);
 
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);

@@ -13,9 +13,10 @@ export const QUERY_USER = gql`
         username
         email
       }
-      posts {
+      projects {
         _id
-        postBody
+        projectTitle
+        projectBody
         createdAt
         createdBy {
           _id
@@ -23,7 +24,7 @@ export const QUERY_USER = gql`
         }
         repoLink
         deployedLink
-        replyCount
+        commentCount
       }
     }
   }
@@ -40,6 +41,60 @@ export const QUERY_ME = gql`
       friends {
         _id
         username
+      }
+      projects {
+        _id
+        projectTitle
+        projectBody
+        createdAt
+        createdBy {
+          _id
+          username
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_PROJECTS = gql`
+  query projects {
+    projects {
+      _id
+      projectTitle
+      projectBody
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+      repoLink
+      deployedLink
+      lastEditedAt
+      commentCount
+    }
+  }
+`;
+
+export const QUERY_PROJECT = gql`
+  query project($id: ID!) {
+    project(_id: $id) {
+      _id
+      projectTitle
+      projectBody
+      createdBy {
+        _id
+        username
+      }
+      createdAt
+      commentCount
+      comments {
+        _id
+        commentBody
+        commentCount
+        comments {
+          _id
+          commentBody
+        }
       }
     }
   }
