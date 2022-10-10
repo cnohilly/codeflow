@@ -12,16 +12,21 @@ const Project = (props) => {
     <Col>
       {/* project card */}
       <Card className="shadow">
-        <Card.Header className="bg-black bg-gradient text-white">
-          {/* project title */}
-          <Card.Title>
-            {project.projectTitle}
-          </Card.Title>
-          {/* project user info */}
-          <Card.Subtitle className="text-white-50">
-            Posted by {project.createdBy.username} on {project.createdAt}
-          </Card.Subtitle>
-        </Card.Header>
+        <Card.Link
+          href={`single-project/${project._id}`}
+          className="text-decoration-none"
+        >
+          <Card.Header className="bg-black bg-gradient text-white">
+            {/* project title */}
+            <Card.Title>
+              {project.projectTitle}
+            </Card.Title>
+            {/* project user info */}
+            <Card.Subtitle className="text-white-50">
+              Posted by {project.createdBy.username} on {project.createdAt}
+            </Card.Subtitle>
+          </Card.Header>
+        </Card.Link>
         <Card.Body>
           {/* project tags */}
           <div>

@@ -20,8 +20,16 @@ const Comment = (props) => {
   const [displayReplyForm, setDisplayReplyForm] = useState(false);
 
   if (loading) {
-    return <div>Loading comment data</div>
-  }
+    return (
+      <Card className="bg-dark bg-gradient text-white shadow mb-3">
+        <Card.Body>
+          <Card.Text>
+            Loading comment...
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    )
+  };
 
   return (
     // comment card
