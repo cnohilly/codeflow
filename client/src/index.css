@@ -38,13 +38,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app-container {
+  min-height: 100vh;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.custom-height {
-  min-height: calc(100vh - 56px - 321px);
 }
 
 .scroll-margin {

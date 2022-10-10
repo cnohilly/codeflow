@@ -43,25 +43,27 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
-        <main className="App custom-height bg-secondary">
-          <Routes>
-            <Route path="/single-project/:id" element={<SingleProject />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<ProfileMain />} />
-            <Route
-              path="/profile/user-projects"
-              element={<ProfileProjects />}
-            />
-            <Route
-              path="/profile/user-comments"
-              element={<ProfileComments />}
-            />
-          </Routes>
-        </main>
-        <Footer />
+        <div className="app-container d-flex flex-column bg-secondary">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/single-project/:id" element={<SingleProject />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<ProfileMain />} />
+              <Route
+                path="/profile/user-projects"
+                element={<ProfileProjects />}
+              />
+              <Route
+                path="/profile/user-comments"
+                element={<ProfileComments />}
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </Router>
     </ApolloProvider>
   );
