@@ -68,7 +68,7 @@ const Footer = () => {
 
   return (
     // section for Footer component
-    <footer className="pt-5 pb-4 bg-black text-center text-md-start text-white">
+    <footer className="mt-auto pt-5 pb-4 bg-black text-center text-md-start text-white">
       <Container>
         <Row xs={1} md={4}>
           <Col>
