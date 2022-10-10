@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
+import SearchBar from '../components/SearchBar';
 import { QUERY_PROJECTS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
@@ -24,6 +25,9 @@ const Home = () => {
 
       {/* container for project card list */}
       <Container id="home-project-list" className="py-4 ">
+
+        {/* Search Bar */}
+        <SearchBar />
 
         {/* Project Form */}
         <ProjectForm />

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Card, Button } from 'react-bootstrap';
 import ReplyForm from '../ReplyForm';
 import EditForm from '../EditForm';

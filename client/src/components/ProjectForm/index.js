@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Card, Form, Button } from 'react-bootstrap';
 
 const ProjectForm = () => {

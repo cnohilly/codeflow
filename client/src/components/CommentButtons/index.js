@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { UPDATE_LIKE_COMMENT, DELETE_COMMENT } from '../../utils/mutations';
@@ -32,7 +32,7 @@ const CommentButtons = (props) => {
   }
 
   return (
-    <ButtonToolbar aria-label="Toolbar with button groups">
+    <ButtonToolbar aria-label="Comment toolbar with button groups">
       {/* like button */}
       <div className="d-flex align-items-center me-2">
         <Button
