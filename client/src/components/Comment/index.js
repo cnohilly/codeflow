@@ -54,10 +54,10 @@ const Comment = (props) => {
                   <Card.Subtitle
                     className="my-2 d-flex justify-content-between"
                   >
-                    <div>
+                    <div className="me-5">
                       {comment.createdBy.username}
                     </div>
-                    <div>
+                    <div >
                       {!comment.lastEditedAt
                         ? `posted on ${comment.createdAt}`
                         : `edited on ${comment.lastEditedAt}`}

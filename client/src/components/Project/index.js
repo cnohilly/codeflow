@@ -11,7 +11,7 @@ const Project = (props) => {
   return (
     <Col>
       {/* project card */}
-      <Card className="shadow">
+      <Card className="shadow border-dark">
         <Card.Link
           href={`single-project/${project._id}`}
           className="text-decoration-none"
