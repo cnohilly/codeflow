@@ -69,9 +69,9 @@ export const UPDATE_LIKE_COMMENT = gql`
 `;
 
 export const ADD_PROJECT = gql`
-mutation addProject($userId: ID!, $projectTitle: String!, $projectBody: String!) {
-    addProject(createdBy._id: $userId, projectTitle: $projectTitle, projectBody: $projectBody) {
-        _id
+  mutation addProject($projectTitle: String!, $projectBody: String!) {
+    addProject(projectTitle: $projectTitle, projectBody: $projectBody) {
+      _id
       projectTitle
       projectBody
       createdBy {
@@ -85,5 +85,5 @@ mutation addProject($userId: ID!, $projectTitle: String!, $projectBody: String!)
       lastEditedAt
       commentCount
     }
-}
+  }
 `;
