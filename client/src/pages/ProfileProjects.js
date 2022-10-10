@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import ProjectForm from "../components/ProjectForm";
 import ProjectList from "../components/ProjectList";
 import ProfileNav from "../components/ProfileNav";
+import ProfileError from "../components/ProfileError";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -36,10 +37,11 @@ const ProfileProjects = (props) => {
 
   if (!user?.username) {
     return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
+      <Row className="justify-content-md-center">
+        <Col xs={6}>
+          <ProfileError />
+        </Col>
+      </Row>
     );
   }
 
