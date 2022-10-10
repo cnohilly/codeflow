@@ -51,6 +51,11 @@ code {
   scroll-margin-top: 4rem;
 }
 
+/* Project Form */
+select {
+  max-width: fit-content;
+}
+
 /* FORM */
 .form-label,
 .form-input,

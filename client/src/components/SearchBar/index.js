@@ -12,7 +12,7 @@ const SearchBar = () => {
             {/* select menu */}
             <Form.Select 
               aria-label="Select"
-              className="text-bg-dark"
+              className="text-bg-dark w-100"
             >
               <option value="title">Title</option>
               <option value="tag">Tag</option>
@@ -21,12 +21,13 @@ const SearchBar = () => {
             <Form.Control
               type="text"
               placeholder="Search projects by title or tag"
-              className="bg-dark text-white w-75"
+              className="bg-dark text-white"
             />
             <Button 
               variant="primary" 
               id="button-addon2"
               type="submit"
+              className=""
             >
               <i class="bi bi-search"></i>
             </Button>
