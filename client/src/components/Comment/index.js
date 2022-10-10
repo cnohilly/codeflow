@@ -5,6 +5,7 @@ import EditForm from '../EditForm';
 import CommentList from '../CommentList'
 import { useQuery } from '@apollo/client';
 import { QUERY_COMMENT } from '../../utils/queries';
+import Auth from '../../utils/auth';
 
 const Comment = (props) => {
 
@@ -91,37 +92,45 @@ const Comment = (props) => {
                         </div>
                         <ButtonGroup aria-label="Button group">
                           {/* reply button */}
-                          <Button
-                            variant="link"
-                            type="button"
-                            aria-label="Reply"
-                            className="link-info"
-                            onClick={() => setDisplayReplyForm(!displayReplyForm)}
-                          >
-                            <i className="bi bi-chat-square-fill"></i>
-                            Reply
-                          </Button>
-                          {/* edit button */}
-                          <Button
-                            variant="link"
-                            type="button"
-                            aria-label="Edit"
-                            className="link-warning"
-                            onClick={() => setDisplayEditForm(!displayEditForm)}
-                          >
-                            <i className="bi bi-pencil-square"></i>
-                            Edit
-                          </Button>
-                          {/* delete button */}
-                          <Button
-                            variant="link"
-                            type="button"
-                            aria-label="Delete"
-                            className="link-danger"
-                          >
-                            <i className="bi bi-trash-fill"></i>
-                            Delete
-                          </Button>
+                          {Auth.loggedIn() &&
+                            <>
+                              <Button
+                                variant="link"
+                                type="button"
+                                aria-label="Reply"
+                                className="link-info"
+                                onClick={() => setDisplayReplyForm(!displayReplyForm)}
+                              >
+                                <i className="bi bi-chat-square-fill"></i>
+                                Reply
+                              </Button>
+                              {/* edit button */}
+                              {comment.createdBy.username === Auth.getProfile().data.username &&
+                                <>
+                                  <Button
+                                    variant="link"
+                                    type="button"
+                                    aria-label="Edit"
+                                    className="link-warning"
+                                    onClick={() => setDisplayEditForm(!displayEditForm)}
+                                  >
+                                    <i className="bi bi-pencil-square"></i>
+                                    Edit
+                                  </Button>
+                                  {/* delete button */}
+                                  <Button
+                                    variant="link"
+                                    type="button"
+                                    aria-label="Delete"
+                                    className="link-danger"
+                                  >
+                                    <i className="bi bi-trash-fill"></i>
+                                    Delete
+                                  </Button>
+                                </>
+                              }
+                            </>
+                          }
                         </ButtonGroup>
                       </ButtonToolbar>
                     </>
