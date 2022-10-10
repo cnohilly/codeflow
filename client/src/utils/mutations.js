@@ -26,44 +26,64 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_COMMENT = gql`
-mutation Mutation($projectId: ID!, $commentBody: String!) {
-  addComment(projectId: $projectId, commentBody: $commentBody) {
-    _id
-    commentBody
-    createdAt
-    createdBy {
+  mutation Mutation($projectId: ID!, $commentBody: String!) {
+    addComment(projectId: $projectId, commentBody: $commentBody) {
       _id
-      username
-      profileImage
+      commentBody
+      createdAt
+      createdBy {
+        _id
+        username
+        profileImage
+      }
+      projectId {
+        _id
+      }
+      parentCommentId {
+        _id
+      }
+      isDeleted
+      lastEditedAt
+      commentCount
+      likeCount
     }
-    projectId {
-      _id
-    }
-    parentCommentId {
-      _id
-    }
-    isDeleted
-    lastEditedAt
-    commentCount
-    likeCount
   }
-}
 `;
 
 export const DELETE_COMMENT = gql`
-mutation DeleteComment($id: ID!) {
-  deleteComment(_id: $id) {
-    _id
-    isDeleted
+  mutation DeleteComment($id: ID!) {
+    deleteComment(_id: $id) {
+      _id
+      isDeleted
+    }
   }
-}
 `;
 
 export const UPDATE_LIKE_COMMENT = gql`
-mutation updateCommentLike($id: ID!) {
-  updateCommentLike(_id: $id) {
-    _id
-    likeCount
+  mutation updateCommentLike($id: ID!) {
+    updateCommentLike(_id: $id) {
+      _id
+      likeCount
+    }
   }
+`;
+
+export const ADD_PROJECT = gql`
+mutation addProject($userId: ID!, $projectTitle: String!, $projectBody: String!) {
+    addProject(createdBy._id: $userId, projectTitle: $projectTitle, projectBody: $projectBody) {
+        _id
+      projectTitle
+      projectBody
+      createdBy {
+        _id
+        username
+        profileImage
+      }
+      createdAt
+      repoLink
+      deployedLink
+      lastEditedAt
+      commentCount
+    }
 }
 `;
