@@ -27,9 +27,8 @@ const SearchBar = () => {
               variant="primary" 
               id="button-addon2"
               type="submit"
-              className=""
             >
-              <i class="bi bi-search"></i>
+              <i className="bi bi-search"></i>
             </Button>
           </InputGroup>
         </Form>
