@@ -164,11 +164,11 @@ const Comment = (props) => {
                 className="p-0 pe-1 me-3"
                 onClick={() => setAreChildrenHidden(!areChildrenHidden)}
               />
-              <div>
+              <div className="flex-grow-1">
                 {/* temporary heading for container 1 */}
                 <CommentList comments={comment.comments} />
               </div>
-            </div>
+            </div >
           }
         </>
       }
