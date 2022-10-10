@@ -24,3 +24,28 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+mutation Mutation($projectId: ID!, $commentBody: String!) {
+  addComment(projectId: $projectId, commentBody: $commentBody) {
+    _id
+    commentBody
+    createdAt
+    createdBy {
+      _id
+      username
+      profileImage
+    }
+    projectId {
+      _id
+    }
+    parentCommentId {
+      _id
+    }
+    isDeleted
+    lastEditedAt
+    commentCount
+    likeCount
+  }
+}
+`;

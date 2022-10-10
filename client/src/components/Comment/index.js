@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_COMMENT } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
+
 const Comment = (props) => {
 
   let { comment } = props;
@@ -91,9 +92,10 @@ const Comment = (props) => {
                           </div>
                         </div>
                         <ButtonGroup aria-label="Button group">
-                          {/* reply button */}
+                          {/* will only render buttons if user is logged in*/}
                           {Auth.loggedIn() &&
                             <>
+                              {/* reply button */}
                               <Button
                                 variant="link"
                                 type="button"
@@ -104,9 +106,10 @@ const Comment = (props) => {
                                 <i className="bi bi-chat-square-fill"></i>
                                 Reply
                               </Button>
-                              {/* edit button */}
+                              {/* will only render edit and delete buttons if user owns posts */}
                               {comment.createdBy.username === Auth.getProfile().data.username &&
                                 <>
+                                  {/* edit button */}
                                   <Button
                                     variant="link"
                                     type="button"
