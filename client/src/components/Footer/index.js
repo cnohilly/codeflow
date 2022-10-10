@@ -82,12 +82,13 @@ const Footer = () => {
             <h5 className="text-uppercase">Company</h5>
             <ul className="list-unstyled d-flex flex-column">
               {companyLinks.map(companyLink => (
-                <li className="mb-2">
+                <li 
+                  key={companyLink.name}
+                  className="mb-2"
+                >
                   <a 
-                    key={companyLink.name}
                     href="/"
                     className="nav-link"
-                    onclick="return false;"
                   >
                     {companyLink.text}
                   </a>
@@ -98,11 +99,13 @@ const Footer = () => {
           {/* follow us */}
           <Col>
             <h5 className="text-uppercase">Follow Us</h5>
-            <ul class="list-inline">
+            <ul className="list-inline">
               {socialMediaLinks.map(socialMediaLink => (
-                <li class="list-inline-item me-3">
+                <li 
+                  key={socialMediaLink.name}
+                  className="list-inline-item me-3"
+                >
                   <a 
-                    key={socialMediaLink.name}
                     href={`${socialMediaLink.text}`} 
                     className="btn link-light fs-2 p-0"
                   >
@@ -117,9 +120,11 @@ const Footer = () => {
             <h5 className="text-uppercase">Contact</h5>
             <ul className="list-unstyled d-flex flex-column">
               {contactLinks.map(contactLink => (
-                <li className="mb-2 mx-auto mx-md-0">
+                <li 
+                  key={contactLink.name}
+                  className="mb-2 mx-auto mx-md-0"
+                >
                   <a 
-                    key={contactLink.name}
                     href="/" 
                     className="nav-link d-flex"
                   >
