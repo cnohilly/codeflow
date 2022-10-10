@@ -62,7 +62,7 @@ const Comment = (props) => {
       {/* comment card */}
       {!comment.isDeleted
         ?
-        <Card className="bg-dark bg-gradient text-white shadow mt-3">
+        <Card className="bg-dark bg-gradient text-white shadow ">
           <Card.Body>
             <div className="d-flex">
               <div className="flex-shrink-0">
@@ -96,14 +96,14 @@ const Comment = (props) => {
                         {comment.commentBody}
                       </Card.Text>
                       {/* comment text */}
-                      <ButtonToolbar aria-label="Toolbar with button groups" className="mt-1 ms-1">
+                      <ButtonToolbar aria-label="Toolbar with button groups">
                         {/* like button */}
                         <div className="d-flex align-items-center me-2">
                           <Button
                             variant="link"
                             type="button"
                             aria-label="Like"
-                            className="link-primary pe-2"
+                            className="link-primary ps-0 pe-2"
                             onClick={handleLike}
                           >
                             <i className="bi bi-suit-heart-fill"></i>
@@ -126,7 +126,6 @@ const Comment = (props) => {
                                 onClick={() => setDisplayReplyForm(!displayReplyForm)}
                               >
                                 <i className="bi bi-chat-square-fill"></i>
-                                Reply
                               </Button>
                               {/* will only render edit and delete buttons if user owns posts */}
                               {comment.createdBy.username === Auth.getProfile().data.username &&
@@ -140,7 +139,6 @@ const Comment = (props) => {
                                     onClick={() => setDisplayEditForm(!displayEditForm)}
                                   >
                                     <i className="bi bi-pencil-square"></i>
-                                    Edit
                                   </Button>
                                   {/* delete button */}
                                   <Button
@@ -151,7 +149,6 @@ const Comment = (props) => {
                                     onClick={handleDelete}
                                   >
                                     <i className="bi bi-trash-fill"></i>
-                                    Delete
                                   </Button>
                                 </>
                               }
@@ -202,7 +199,7 @@ const Comment = (props) => {
               variant="primary"
               type="button"
               aria-label="Show Replies"
-              className="px-2"
+              className="px-2 mt-3"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}
@@ -215,10 +212,10 @@ const Comment = (props) => {
                 variant="primary"
                 type="button"
                 aria-label="Hide Replies"
-                className="p-0 pe-1 me-3"
+                className="p-0 pe-1 me-3 mt-2"
                 onClick={() => setAreChildrenHidden(!areChildrenHidden)}
               />
-              <div className="flex-grow-1">
+              <div className="flex-grow-1 mt-3">
                 {/* comment list */}
                 <CommentList comments={comment.comments} />
               </div>

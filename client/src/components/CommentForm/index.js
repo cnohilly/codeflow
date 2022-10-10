@@ -68,7 +68,7 @@ const CommentForm = (props) => {
               variant="primary"
               type="submit"
               size="sm"
-              className="rounded-pill"
+              className="rounded-pill px-3"
             >
               Comment
             </Button>
