@@ -27,7 +27,7 @@ const SingleProject = () => {
       </Row>
 
       {/* if user is logged in, render comment form */}
-      <CommentForm />
+      <CommentForm projectId={projectId} />
 
       <hr className="border border-white" />
 

@@ -24,3 +24,46 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+mutation Mutation($projectId: ID!, $commentBody: String!) {
+  addComment(projectId: $projectId, commentBody: $commentBody) {
+    _id
+    commentBody
+    createdAt
+    createdBy {
+      _id
+      username
+      profileImage
+    }
+    projectId {
+      _id
+    }
+    parentCommentId {
+      _id
+    }
+    isDeleted
+    lastEditedAt
+    commentCount
+    likeCount
+  }
+}
+`;
+
+export const DELETE_COMMENT = gql`
+mutation DeleteComment($id: ID!) {
+  deleteComment(_id: $id) {
+    _id
+    isDeleted
+  }
+}
+`;
+
+export const UPDATE_LIKE_COMMENT = gql`
+mutation updateCommentLike($id: ID!) {
+  updateCommentLike(_id: $id) {
+    _id
+    likeCount
+  }
+}
+`;
