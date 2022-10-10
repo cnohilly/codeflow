@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Project from '../components/Project';
-// import Comment from '../components/Comment';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 import { useQuery } from '@apollo/client';
@@ -33,7 +32,7 @@ const SingleProject = () => {
       <hr className="border border-white" />
 
       {/* container for comments list */}
-      <CommentList />
+      <CommentList comments={project.comments} />
 
     </Container>
   );

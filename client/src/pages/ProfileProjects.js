@@ -51,7 +51,7 @@ const ProfileProjects = (props) => {
             <ProjectForm />
           </Row>
           <Row>
-            <ProjectList props={user.projects} />
+            <ProjectList projects={user.projects} />
           </Row>
         </Col>
 

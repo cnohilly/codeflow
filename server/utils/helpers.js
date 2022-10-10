@@ -22,6 +22,7 @@ module.exports = (
   timestamp,
   { monthLength = "short", dateSuffix = true } = {}
 ) => {
+  if (!timestamp) return null;
   // create month object
   const months = {
     0: monthLength === "short" ? "Jan" : "January",

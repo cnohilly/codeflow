@@ -17,7 +17,7 @@ const commentSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: dateFormat
+            get: (timestamp) => dateFormat(timestamp)
         },
         isDeleted: {
             type: Boolean,
@@ -27,7 +27,7 @@ const commentSchema = new Schema(
         lastEditedAt: {
             type: Date,
             default: null,
-            get: dateFormat
+            get: (timestamp) => dateFormat(timestamp)
         },
         projectId: {
             type: Schema.Types.ObjectId,
@@ -59,7 +59,7 @@ const commentSchema = new Schema(
 );
 
 commentSchema.virtual('commentCount').get(function () {
-    return (this.replies ? this.replies.length : 0);
+    return (this.comments ? this.comments.length : 0);
 });
 
 commentSchema.virtual('likeCount').get(function () {

@@ -5,8 +5,6 @@ import Project from "../Project";
 const ProjectList = (props) => {
   const { projects } = props;
 
-  // console.log(projects);
-
   return (
     <Row xs={1} className="g-4">
       {projects.map((project) => {

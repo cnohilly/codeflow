@@ -65,6 +65,7 @@ export const QUERY_PROJECTS = gql`
       createdBy {
         _id
         username
+        profileImage
       }
       createdAt
       repoLink
@@ -76,26 +77,51 @@ export const QUERY_PROJECTS = gql`
 `;
 
 export const QUERY_PROJECT = gql`
-  query project($id: ID!) {
-    project(_id: $id) {
+query project($id: ID!) {
+  project(_id: $id) {
+    _id
+    projectTitle
+    projectBody
+    createdBy {
       _id
-      projectTitle
-      projectBody
-      createdBy {
-        _id
-        username
-      }
+      username
+      profileImage
+    }
+    createdAt
+    commentCount
+    comments {
+      _id
+      commentCount
+    }
+  }
+}
+`;
+
+export const QUERY_COMMENT = gql`
+query Comment($id: ID!) {
+  comment(_id: $id) {
+      _id
+      commentBody
       createdAt
+      createdBy {
+        username
+        profileImage
+        _id
+      }
+      projectId {
+        _id
+      }
+      parentCommentId {
+        _id
+      }
+      isDeleted
+      lastEditedAt
       commentCount
       comments {
         _id
-        commentBody
         commentCount
-        comments {
-          _id
-          commentBody
-        }
       }
+      likeCount
     }
-  }
+}
 `;
