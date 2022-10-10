@@ -39,7 +39,7 @@ const Comment = (props) => {
       {/* comment card */}
       {!comment.isDeleted
         ?
-        <Card className="bg-dark bg-gradient text-white shadow mb-3">
+        <Card className="bg-dark bg-gradient text-white shadow mt-3">
           <Card.Body>
             <div className="d-flex">
               <div className="flex-shrink-0">
@@ -55,18 +55,18 @@ const Comment = (props) => {
                 <div className="ms-3">
                   {/* comment user info */}
                   <Card.Subtitle
-                    className="my-2 d-flex justify-content-between"
+                    className="my-2 d-flex flex-column flex-md-row justify-content-between"
                   >
                     <div className="me-5">
                       {comment.createdBy.username}
                     </div>
                     <div >
                       {!comment.lastEditedAt
-                        ? `posted on ${comment.createdAt}`
-                        : `edited on ${comment.lastEditedAt}`}
+                        ? `Posted on ${comment.createdAt}`
+                        : `Edited on ${comment.lastEditedAt}`}
                     </div>
                   </Card.Subtitle>
-                  {!displayEditForm ? (
+                  {!displayEditForm ? 
                     <>
                       {/* comment text */}
                       <Card.Text>
@@ -99,7 +99,6 @@ const Comment = (props) => {
                             onClick={() => setDisplayReplyForm(!displayReplyForm)}
                           >
                             <i className="bi bi-chat-square-fill"></i>
-                            Reply
                           </Button>
                           {/* edit button */}
                           <Button
@@ -110,7 +109,6 @@ const Comment = (props) => {
                             onClick={() => setDisplayEditForm(!displayEditForm)}
                           >
                             <i className="bi bi-pencil-square"></i>
-                            Edit
                           </Button>
                           {/* delete button */}
                           <Button
@@ -120,19 +118,18 @@ const Comment = (props) => {
                             className="link-danger"
                           >
                             <i className="bi bi-trash-fill"></i>
-                            Delete
                           </Button>
                         </ButtonGroup>
                       </ButtonToolbar>
                     </>
-                  ) : (
+                    : 
                     // edit form
                     <EditForm
                       commentBody={comment.commentBody}
                       displayEditForm={displayEditForm}
                       setDisplayEditForm={setDisplayEditForm}
                     />
-                  )}
+                  }
                 </div>
               </div>
             </div>
@@ -149,14 +146,13 @@ const Comment = (props) => {
       }
 
       {/* reply form */}
-      {displayReplyForm ? (
+      {displayReplyForm ? 
         <ReplyForm
           displayReplyForm={displayReplyForm}
           setDisplayReplyForm={setDisplayReplyForm}
         />
-      ) : (
-        ''
-      )}
+        : ''
+      }
 
       {/*  button and section to have reply   */}
       {comment.commentCount > 0 &&
@@ -168,13 +164,13 @@ const Comment = (props) => {
               variant="primary"
               type="button"
               aria-label="Show Replies"
-              className={`${!areChildrenHidden ? "d-none" : ""}`}
+              className="px-2"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}
             </Button>
             :
-            // {/* container for nested child comments */}
+            // container for nested child comments
             <div className={`d-flex`}>
               {/* collapsing line button for hiding replies */}
               <Button
@@ -185,7 +181,7 @@ const Comment = (props) => {
                 onClick={() => setAreChildrenHidden(!areChildrenHidden)}
               />
               <div className="flex-grow-1">
-                {/* temporary heading for container 1 */}
+                {/* comment list */}
                 <CommentList comments={comment.comments} />
               </div>
             </div >

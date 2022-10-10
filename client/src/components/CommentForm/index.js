@@ -30,7 +30,7 @@ const CommentForm = () => {
               variant="primary" 
               type="button" 
               size="sm" 
-              className="rounded-pill"
+              className="rounded-pill px-3"
               onClick={() => console.log("Commented!")}
             >
               Comment

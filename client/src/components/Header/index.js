@@ -16,15 +16,17 @@ const Header = () => {
         <Container fluid className="px-3">
           {/* brand image and name */}
           <NavLink to="/" className="nav-link">
-            <Navbar.Brand>
+            <Navbar.Brand className="d-flex">
               <img
                 src="/logo192.png"
                 width="30"
                 height="30"
-                className="d-inline-block align-top"
+                className="d-inline-block align-top me-1"
                 alt="React Bootstrap logo"
-              />{" "}
-              Codename-Poseidon
+              />
+              <div className="d-none d-sm-block">
+                Codename-Poseidon
+              </div>
             </Navbar.Brand>
           </NavLink>
           {/* menu button */}
@@ -33,11 +35,6 @@ const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             {Auth.loggedIn() ? (
               <Nav className="ms-auto">
-                {/* testing page */}
-                <NavLink to="/single-project" className="ms-auto nav-link">
-                  Single Project Page for testing
-                </NavLink>
-
                 <NavLink to="/profile" className="ms-auto nav-link">
                   Profile
                 </NavLink>
@@ -47,11 +44,6 @@ const Header = () => {
               </Nav>
             ) : (
               <Nav className="ms-auto">
-                {/* testing page */}
-                <NavLink to="/single-project" className="ms-auto nav-link">
-                  Single Project Page for testing
-                </NavLink>
-
                 <NavLink to="/login" className="ms-auto nav-link">
                   Login
                 </NavLink>

@@ -2,7 +2,11 @@ import React from 'react';
 import { Form, Button, FloatingLabel } from 'react-bootstrap';
 
 const EditForm = (props) => {
-  const { displayEditForm, setDisplayEditForm } = props
+  const { 
+    displayEditForm, 
+    setDisplayEditForm, 
+    commentBody
+  } = props
   
   return (
     // edit form
@@ -20,6 +24,7 @@ const EditForm = (props) => {
             autoFocus
             placeholder="Edit comment"
             className="bg-dark text-white"
+            defaultValue={commentBody}
           />
         </FloatingLabel>
       </Form.Group>

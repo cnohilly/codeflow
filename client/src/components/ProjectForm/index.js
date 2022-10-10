@@ -11,7 +11,7 @@ const ProjectForm = () => {
       <Card className="bg-dark bg-gradient text-white shadow mb-4">
         <Card.Body>
           {/* Toggle project form */}
-          {!displayProjectForm ? (
+          {!displayProjectForm ? 
             <Button 
             variant="primary" 
             type="button" 
@@ -21,7 +21,7 @@ const ProjectForm = () => {
               <i className="bi bi-plus-lg me-1"></i>
               Create Project
             </Button>
-          ) : (
+           : 
             <Form>
               {/* project title input */}
               <Form.Group className="mb-3" controlId="formProjectTitle">
@@ -77,7 +77,7 @@ const ProjectForm = () => {
                 </Button>
               </div>
             </Form>
-          )}
+          }
         </Card.Body>
       </Card>
     </Col>
