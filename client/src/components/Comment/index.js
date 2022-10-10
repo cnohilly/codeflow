@@ -3,8 +3,9 @@ import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import ReplyForm from '../ReplyForm';
 import EditForm from '../EditForm';
 import CommentList from '../CommentList'
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_COMMENT } from '../../utils/queries';
+import { UPDATE_LIKE_COMMENT, DELETE_COMMENT } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 
@@ -23,6 +24,26 @@ const Comment = (props) => {
   const [displayReplyForm, setDisplayReplyForm] = useState(false);
   // displaying edit form
   const [displayEditForm, setDisplayEditForm] = useState(false);
+
+  const [updateLikeComment] = useMutation(UPDATE_LIKE_COMMENT)
+  const [deleteComment] = useMutation(DELETE_COMMENT);
+
+  const handleLike = event => {
+    if (Auth.loggedIn()) {
+      updateLikeComment({
+        variables: { id: comment._id }
+      });
+    }
+  }
+
+  const handleDelete = event => {
+    console.log(comment._id);
+    deleteComment({
+      variables: { id: comment._id }
+    });
+  }
+
+
 
   if (loading) {
     return (
@@ -83,6 +104,7 @@ const Comment = (props) => {
                             type="button"
                             aria-label="Like"
                             className="link-primary pe-2"
+                            onClick={handleLike}
                           >
                             <i className="bi bi-suit-heart-fill"></i>
                           </Button>
@@ -126,6 +148,7 @@ const Comment = (props) => {
                                     type="button"
                                     aria-label="Delete"
                                     className="link-danger"
+                                    onClick={handleDelete}
                                   >
                                     <i className="bi bi-trash-fill"></i>
                                     Delete

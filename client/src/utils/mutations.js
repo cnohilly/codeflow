@@ -49,3 +49,21 @@ mutation Mutation($projectId: ID!, $commentBody: String!) {
   }
 }
 `;
+
+export const DELETE_COMMENT = gql`
+mutation DeleteComment($id: ID!) {
+  deleteComment(_id: $id) {
+    _id
+    isDeleted
+  }
+}
+`;
+
+export const UPDATE_LIKE_COMMENT = gql`
+mutation updateCommentLike($id: ID!) {
+  updateCommentLike(_id: $id) {
+    _id
+    likeCount
+  }
+}
+`;
