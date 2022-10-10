@@ -8,7 +8,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
+import { ADD_FRIEND } from "../utils/mutations";
+
 const ProfileMain = (props) => {
+  const [addFriend] = useMutation(ADD_FRIEND);
+
   const { username: userParam } = useParams();
 
   // to be used later for adding friends
@@ -43,6 +47,16 @@ const ProfileMain = (props) => {
     );
   }
 
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { id: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Container id="profile-info" className="py-3">
       <Row>
@@ -56,6 +70,9 @@ const ProfileMain = (props) => {
           <Row>
             <ProfileNav />
             <FriendList />
+            <button className="btn ml-auto" onClick={handleClick}>
+              Add Friend
+            </button>
           </Row>
         </Col>
       </Row>

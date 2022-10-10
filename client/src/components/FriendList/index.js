@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Button, ButtonGroup } from "react-bootstrap";
 
+
 const FriendList = ({ friendCount, username, friends }) => {
+
   if (!friends || !friends.length) {
     return (
       <Col className="py-3">

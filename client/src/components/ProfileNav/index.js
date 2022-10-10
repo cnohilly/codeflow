@@ -3,7 +3,11 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
+
+
+
 const ProfileNav = () => {
+
   return (
     <Container>
       <Card className="bg-dark bg-gradient text-white shadow">
