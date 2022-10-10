@@ -98,17 +98,19 @@ const Footer = () => {
           {/* follow us */}
           <Col>
             <h5 className="text-uppercase">Follow Us</h5>
-            <div className="mb-3">
+            <ul class="list-inline">
               {socialMediaLinks.map(socialMediaLink => (
-                <a 
-                  key={socialMediaLink.name}
-                  href={`${socialMediaLink.text}`} 
-                  className="btn link-light fs-2 me-3 py-0 px-0"
-                >
-                  <i className={`${socialMediaLink.symbol}`}></i>
-                </a>
+                <li class="list-inline-item me-3">
+                  <a 
+                    key={socialMediaLink.name}
+                    href={`${socialMediaLink.text}`} 
+                    className="btn link-light fs-2 p-0"
+                  >
+                    <i className={`${socialMediaLink.symbol}`}></i>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </Col>
           {/* contact */}
           <Col>
