@@ -6,7 +6,7 @@ const ReplyForm = (props) => {
   
   return (
     // reply form card
-    <Card id="replyForm" className="bg-dark bg-gradient shadow mb-3">
+    <Card id="replyForm" className="bg-dark bg-gradient shadow mt-3">
       <Card.Body>
         <Form>
           <Form.Group controlId="replyTextarea">

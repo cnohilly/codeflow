@@ -1,13 +1,11 @@
 import { React, useState } from 'react';
-import { Col, Card, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Col, Card, Button } from 'react-bootstrap';
 import ReplyForm from '../ReplyForm';
 import EditForm from '../EditForm';
 import CommentList from '../CommentList'
-import { useQuery, useMutation } from '@apollo/client';
+import CommentButtons from '../CommentButtons';
+import { useQuery } from '@apollo/client';
 import { QUERY_COMMENT } from '../../utils/queries';
-import { UPDATE_LIKE_COMMENT, DELETE_COMMENT } from '../../utils/mutations';
-import Auth from '../../utils/auth';
-
 
 const Comment = (props) => {
 
@@ -24,26 +22,6 @@ const Comment = (props) => {
   const [displayReplyForm, setDisplayReplyForm] = useState(false);
   // displaying edit form
   const [displayEditForm, setDisplayEditForm] = useState(false);
-
-  const [updateLikeComment] = useMutation(UPDATE_LIKE_COMMENT)
-  const [deleteComment] = useMutation(DELETE_COMMENT);
-
-  const handleLike = event => {
-    if (Auth.loggedIn()) {
-      updateLikeComment({
-        variables: { id: comment._id }
-      });
-    }
-  }
-
-  const handleDelete = event => {
-    console.log(comment._id);
-    deleteComment({
-      variables: { id: comment._id }
-    });
-  }
-
-
 
   if (loading) {
     return (
@@ -95,67 +73,15 @@ const Comment = (props) => {
                       <Card.Text>
                         {comment.commentBody}
                       </Card.Text>
-                      {/* comment text */}
-                      <ButtonToolbar aria-label="Toolbar with button groups">
-                        {/* like button */}
-                        <div className="d-flex align-items-center me-2">
-                          <Button
-                            variant="link"
-                            type="button"
-                            aria-label="Like"
-                            className="link-primary ps-0 pe-2"
-                            onClick={handleLike}
-                          >
-                            <i className="bi bi-suit-heart-fill"></i>
-                          </Button>
-                          {/* number of likes */}
-                          <div>
-                            {comment.likeCount} {comment.likeCount > 1 || comment.likeCount === 0 ? 'Likes' : 'Like'}
-                          </div>
-                        </div>
-                        <ButtonGroup aria-label="Button group">
-                          {/* will only render buttons if user is logged in*/}
-                          {Auth.loggedIn() &&
-                            <>
-                              {/* reply button */}
-                              <Button
-                                variant="link"
-                                type="button"
-                                aria-label="Reply"
-                                className="link-info"
-                                onClick={() => setDisplayReplyForm(!displayReplyForm)}
-                              >
-                                <i className="bi bi-chat-square-fill"></i>
-                              </Button>
-                              {/* will only render edit and delete buttons if user owns posts */}
-                              {comment.createdBy.username === Auth.getProfile().data.username &&
-                                <>
-                                  {/* edit button */}
-                                  <Button
-                                    variant="link"
-                                    type="button"
-                                    aria-label="Edit"
-                                    className="link-warning"
-                                    onClick={() => setDisplayEditForm(!displayEditForm)}
-                                  >
-                                    <i className="bi bi-pencil-square"></i>
-                                  </Button>
-                                  {/* delete button */}
-                                  <Button
-                                    variant="link"
-                                    type="button"
-                                    aria-label="Delete"
-                                    className="link-danger"
-                                    onClick={handleDelete}
-                                  >
-                                    <i className="bi bi-trash-fill"></i>
-                                  </Button>
-                                </>
-                              }
-                            </>
-                          }
-                        </ButtonGroup>
-                      </ButtonToolbar>
+
+                      {/* comment buttons group */}
+                      <CommentButtons 
+                        displayReplyForm={displayReplyForm} 
+                        setDisplayReplyForm={setDisplayReplyForm}
+                        displayEditForm={displayEditForm}
+                        setDisplayEditForm={setDisplayEditForm}
+                        comment={comment}
+                      />
                     </>
                     : 
                     // edit form
@@ -171,7 +97,7 @@ const Comment = (props) => {
           </Card.Body>
         </Card>
         :
-        <Card className="bg-dark bg-gradient text-white shadow mb-3">
+        <Card className="bg-dark bg-gradient text-white shadow">
           <Card.Body>
             <Card.Text>
               Comment deleted by user.
@@ -199,7 +125,7 @@ const Comment = (props) => {
               variant="primary"
               type="button"
               aria-label="Show Replies"
-              className="px-2 mt-3"
+              className="mt-3"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}
@@ -212,7 +138,7 @@ const Comment = (props) => {
                 variant="primary"
                 type="button"
                 aria-label="Hide Replies"
-                className="p-0 pe-1 me-3 mt-2"
+                className="p-0 pe-1 me-3 mt-1"
                 onClick={() => setAreChildrenHidden(!areChildrenHidden)}
               />
               <div className="flex-grow-1 mt-3">
