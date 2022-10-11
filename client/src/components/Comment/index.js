@@ -125,7 +125,7 @@ const Comment = (props) => {
               variant="primary"
               type="button"
               aria-label="Show Replies"
-              className="mt-3"
+              className="mt-3 fw-semibold"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}

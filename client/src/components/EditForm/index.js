@@ -34,7 +34,7 @@ const EditForm = (props) => {
           variant="primary" 
           type="button" 
           size="sm" 
-          className="rounded-pill px-3 me-2"
+          className="rounded-pill px-3 me-2 fw-semibold"
           onClick={() => console.log("Updated!")}
         >
           Update
@@ -44,7 +44,7 @@ const EditForm = (props) => {
           variant="danger" 
           type="button" 
           size="sm" 
-          className="rounded-pill px-3"
+          className="rounded-pill px-3 fw-semibold"
           onClick={() => setDisplayEditForm(!displayEditForm)}
         >
           Cancel

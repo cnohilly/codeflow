@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Card, Form, Button } from 'react-bootstrap';
+import { Col, Row, Card, Form, Button } from 'react-bootstrap';
 
 const ProjectForm = () => {
   // displaying project form
@@ -13,10 +13,10 @@ const ProjectForm = () => {
           {/* Toggle project form */}
           {!displayProjectForm ? 
             <Button 
-            variant="primary" 
-            type="button" 
-            className="rounded-pill fw-semibold"
-            onClick={() => setDisplayProjectForm(!displayProjectForm)}
+              variant="primary" 
+              type="button" 
+              className="rounded-pill fw-semibold"
+              onClick={() => setDisplayProjectForm(!displayProjectForm)}
             >
               <i className="bi bi-plus-lg me-1"></i>
               Create Project
@@ -54,6 +54,27 @@ const ProjectForm = () => {
                   className="bg-dark text-white"
                 />
               </Form.Group>
+
+              <Row xs={1} md={2}>
+                {/* project deployed link input */}
+                <Form.Group as={Col} controlId="formDeployedLink" className="mb-3">
+                  <Form.Label>Deployed Application Link</Form.Label>
+                  <Form.Control 
+                    type="text" 
+                    placeholder="Enter deployed application link"
+                    className="bg-dark text-white" 
+                  />
+                </Form.Group>
+                {/* project repo link input */}
+                <Form.Group as={Col} controlId="formRepoLink" className="mb-3">
+                  <Form.Label>GitHub Repository Link</Form.Label>
+                  <Form.Control 
+                    type="text" 
+                    placeholder="Enter GitHub repository link" 
+                    className="bg-dark text-white"
+                  />
+                </Form.Group>
+              </Row>
 
               <div className="d-flex justify-content-end mt-3">
                 {/* submit button */}
