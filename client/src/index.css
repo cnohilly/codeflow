@@ -1,3 +1,9 @@
+:root {
+  --dark-shade: #1e1e2f;
+  --dark-accent: #27293d;
+  --dark-header: #12121a;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -38,17 +44,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-container {
-  min-height: 100vh;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+.app-container {
+  min-height: 100vh;
+}
+
 .scroll-margin {
   scroll-margin-top: 4rem;
+}
+
+.dark-main-bg {
+  background: linear-gradient(#1b1b2b,#101018);
+}
+
+.dark-card-bg {
+  background-color: var(--dark-accent);
+}
+
+.header-bg-color {
+  background-color: var(--dark-header);
 }
 
 /* Project Form */

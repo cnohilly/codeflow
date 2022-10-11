@@ -1,0 +1,12 @@
+// Default variable overrides
+$primary: #078fdd;
+$secondary: #8b8f91;
+$success: #2dce89;
+$info: #11cdef;
+$warning: #ffd600;
+$danger: #d00000;
+$light: #d7dadc;
+$dark: #212529;
+
+// Required
+@import "../node_modules/bootstrap/scss/bootstrap";

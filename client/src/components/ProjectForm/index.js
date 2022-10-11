@@ -15,7 +15,7 @@ const ProjectForm = () => {
             <Button 
             variant="primary" 
             type="button" 
-            className="rounded-pill px-3"
+            className="rounded-pill fw-semibold"
             onClick={() => setDisplayProjectForm(!displayProjectForm)}
             >
               <i className="bi bi-plus-lg me-1"></i>
@@ -61,7 +61,7 @@ const ProjectForm = () => {
                   variant="primary"
                   type="submit" 
                   size="sm" 
-                  className="rounded-pill px-3 me-2"
+                  className="rounded-pill px-3 me-2 fw-semibold"
                 >
                   Submit
                 </Button>
@@ -70,7 +70,7 @@ const ProjectForm = () => {
                   variant="danger" 
                   type="button" 
                   size="sm" 
-                  className="rounded-pill px-3"
+                  className="rounded-pill px-3 fw-semibold"
                   onClick={() => setDisplayProjectForm(!displayProjectForm)}
                 >
                   Cancel

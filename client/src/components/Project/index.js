@@ -10,18 +10,18 @@ const Project = (props) => {
   return (
     <Col>
       {/* project card */}
-      <Card className="shadow border-dark">
+      <Card className="shadow dark-card-bg border-dark text-light">
         <Card.Link
           href={`../single-project/${project._id}`}
-          className="text-decoration-none"
+          className="text-decoration-none link-light"
         >
-          <Card.Header className="bg-black bg-gradient text-white">
+          <Card.Header className="header-bg-color border-success">
             {/* project title */}
             <Card.Title>
               {project.projectTitle}
             </Card.Title>
             {/* project user info */}
-            <Card.Subtitle className="text-white-50">
+            <Card.Subtitle className="text-secondary">
               Posted by {project.createdBy.username} on {project.createdAt}
             </Card.Subtitle>
           </Card.Header>
@@ -46,24 +46,26 @@ const Project = (props) => {
             {/* project number of comments */}
             <Card.Link
               href={`../single-project/${project._id}`}
-              className="text-decoration-none text-muted"
+              className="text-decoration-none link-secondary text-truncate"
             >
               {project.commentCount} {project.commentCount > 1 || project.commentCount === 0 ? 'comments' : 'comment'}
             </Card.Link>
-
-            {/* will need to fix placement later  */}
-
             <div>
               {/* link to deployed project */}
               <Button
                 href={project.deployedLink}
                 variant="primary"
-                className="me-2"
+                size="sm"
+                className="me-3 fw-semibold rounded-pill"
               >
                 Go to project
               </Button>
               {/* link to project github */}
-              <Button href={project.repoLink} variant="primary">
+              <Button 
+                href={project.repoLink} 
+                variant="primary" 
+                className="rounded-pill"
+              >
                 <i className="bi bi-github"></i>
               </Button>
             </div>
