@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, FloatingLabel } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
+import { QUERY_PROJECT } from '../../utils/queries';
 import { ADD_COMMENT } from '../../utils/mutations';
 
 const CommentForm = (props) => {
@@ -14,7 +15,22 @@ const CommentForm = (props) => {
   const [commentBody, setCommentBody] = useState('');
 
   // function to add comment
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
+  const [addComment, { error }] = useMutation(ADD_COMMENT,{
+    update(cache, {data: {addComment}}){
+      console.log(addComment);
+      try {
+        console.log(cache);
+        const {project} = cache.readQuery({query: QUERY_PROJECT});
+        console.log(project);
+        cache.writeQuery({
+          query: QUERY_PROJECT,
+          data: {project: {...project, comments: [...project.comments, addComment]} }
+        });
+      } catch(error){
+        console.warn(error);
+      }
+    }
+  });
 
   const handleChange = async event => {
     if (event.target.value.length <= CHARACTER_MAX) {
