@@ -15,18 +15,18 @@ const CommentForm = (props) => {
   const [commentBody, setCommentBody] = useState('');
 
   // function to add comment
-  const [addComment, { error }] = useMutation(ADD_COMMENT,{
-    update(cache, {data: {addComment}}){
-      console.log(addComment);
+  const [addComment, { error }] = useMutation(ADD_COMMENT, {
+    update(cache, { data: { addComment } }) {
       try {
-        console.log(cache);
-        const {project} = cache.readQuery({query: QUERY_PROJECT});
-        console.log(project);
+        const {project} = cache.readQuery({
+          query: QUERY_PROJECT,
+          variables: { id: projectId} 
+        });
         cache.writeQuery({
           query: QUERY_PROJECT,
-          data: {project: {...project, comments: [...project.comments, addComment]} }
+          data: { project: { ...project, comments: [...project.comments, addComment] } }
         });
-      } catch(error){
+      } catch (error) {
         console.warn(error);
       }
     }
