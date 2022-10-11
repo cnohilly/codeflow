@@ -3,6 +3,7 @@ import { Card, Form, Button, FloatingLabel } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { QUERY_PROJECT } from '../../utils/queries';
 import { ADD_COMMENT } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 const CommentForm = (props) => {
 
@@ -18,9 +19,9 @@ const CommentForm = (props) => {
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       try {
-        const {project} = cache.readQuery({
+        const { project } = cache.readQuery({
           query: QUERY_PROJECT,
-          variables: { id: projectId} 
+          variables: { id: projectId }
         });
         cache.writeQuery({
           query: QUERY_PROJECT,
@@ -65,8 +66,8 @@ const CommentForm = (props) => {
             {/* comment textarea */}
             <FloatingLabel
               controlId="comment-textarea"
-              label="Add a comment"
-              className="text-muted"
+              label={Auth.loggedIn() ? "Add a comment" : "Please log in to leave a comment."}
+              className={"text-muted"}
             >
               <Form.Control
                 as="textarea"
@@ -75,20 +76,23 @@ const CommentForm = (props) => {
                 className="bg-dark text-white"
                 onChange={handleChange}
                 value={commentBody}
+                disabled={!Auth.loggedIn()}
               />
             </FloatingLabel>
           </Form.Group>
-          <div className="d-flex justify-content-end mt-3">
-            {/* comment button */}
-            <Button
-              variant="primary"
-              type="submit"
-              size="sm"
-              className="rounded-pill px-3 fw-semibold"
-            >
-              Comment
-            </Button>
-          </div>
+          {Auth.loggedIn() &&
+            <div className="d-flex justify-content-end mt-3">
+              {/* comment button */}
+              <Button
+                variant="primary"
+                type="submit"
+                size="sm"
+                className="rounded-pill px-3 fw-semibold"
+              >
+                Comment
+              </Button>
+            </div>
+          }
         </Form>
       </Card.Body>
     </Card>
