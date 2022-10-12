@@ -18,8 +18,8 @@ const ProfileProjects = (props) => {
     variables: {
       input: {
         username: userParam,
-      },
-    },
+      }
+    }
   });
 
   const user = data?.me || data?.user || {};

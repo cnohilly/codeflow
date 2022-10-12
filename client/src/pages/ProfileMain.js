@@ -3,7 +3,6 @@ import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Tab, Tabs, Nav } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
-import ProfileNav from "../components/ProfileNav";
 import ProfileError from "../components/ProfileError";
 import ProjectForm from "../components/ProjectForm";
 import { useQuery, useMutation } from "@apollo/client";
@@ -16,12 +15,6 @@ const ProfileMain = (props) => {
   const { username: userParam } = useParams();
   console.log(userParam);
 
-  const [currentTab, setCurrentTab] = useState('about');
-
-  const changeTab = (tab) => {
-    setCurrentTab(tab);
-  }
-
   // to be used later for adding friends
   //   const [addFriend] = useMutation(ADD_FRIEND);
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -32,16 +25,7 @@ const ProfileMain = (props) => {
     },
   });
 
-
-
-  const renderTab = () => {
-    switch (currentTab) {
-      case 'projects': return <ProjectList projects={user.projects} />;
-      case 'comments': return <CommentList includeReplies={false} />;
-      default: return <UserInfo username={user.username} joinDate={user.createdAt} profilePic={user.profileImage} />;
-    }
-  }
-
+  console.log(data);
   const user = data?.me || data?.user || {};
 
   // navigate to personal profile page if username is yours
@@ -98,42 +82,6 @@ const ProfileMain = (props) => {
         </Row>
       </Tab.Container>
     </Container>)
-
-  //   return (
-  //     <Container id="profile-info" className="py-3">
-  //       <Nav.Link eventKey="projects">Proj</Nav.Link>
-  //       <Row>
-  //         <Col xs={9}>
-  //           <Row>
-  //             {/* {renderTab()} */}
-  //             <Tab.Container id="profile-tabs" defaultActiveKey="about" className="mb-3">
-
-  //             </Tab.Container>
-  //             <Tabs
-  //               defaultActiveKey="about"
-  //               id="profile-tabs"
-  //               className="mb-3"
-  //             >
-  //               <Tab eventKey="about">
-  //                 <UserInfo username={user.username} joinDate={user.createdAt} profilePic={user.profileImage} />
-  //               </Tab>
-  //               <Tab eventKey="projects">
-  //                 <ProjectForm />
-  //                 <ProjectList projects={user.projects} />
-  //               </Tab>
-  //             </Tabs>
-  //           </Row>
-  //         </Col>
-
-  //         <Col xs={3}>
-  //           <Row>
-  //             <ProfileNav />
-  //             <FriendList username={user.username} friends={user.friends} />
-  //           </Row>
-  //         </Col>
-  //       </Row>
-  //     </Container>
-  //   );
 };
 
 export default ProfileMain;
