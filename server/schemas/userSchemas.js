@@ -40,6 +40,22 @@ const UserMutations = {
 
         throw new AuthenticationError("You need to be logged in!");
     },
+    addFriend: async (parent, {_id}, context) => {
+        if (context.user) {
+            if (context.user._id !== _id) {
+                const user = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {$addToSet: {friends: _id}},
+                    { new: true }
+                ).select('-__v -password')
+                    .populate('projects');
+
+                return  user 
+            }
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
+    },
     deleteUser: async (parent, { _id }, context) => {
         if (context.user) {
             if (context.user._id === _id) {

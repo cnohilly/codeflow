@@ -19,6 +19,7 @@ import SingleProject from "./pages/SingleProject";
 import ProfileMain from "./pages/ProfileMain";
 import ProfileProjects from "./pages/ProfileProjects";
 import ProfileComments from "./pages/ProfileComments";
+import FriendTab from "./pages/FriendTab";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -58,6 +59,10 @@ function App() {
             <Route
               path="/profile/user-comments"
               element={<ProfileComments />}
+            />
+            <Route
+              path="/profile/friend-list"
+              element={<FriendTab />}
             />
           </Routes>
         </main>

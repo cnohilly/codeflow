@@ -27,7 +27,7 @@ export const ADD_USER = gql`
 
 export const ADD_FRIEND = gql`
   mutation addFriend($id: ID!) {
-    addFriend(friendId: $id) {
+    addFriend( _id: $id) {
       _id
       username
       friendCount

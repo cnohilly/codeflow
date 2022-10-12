@@ -125,3 +125,16 @@ query Comment($id: ID!) {
     }
 }
 `;
+
+export const QUERY_USERS = gql`
+    query Query {
+  users {
+    _id
+    username
+    profileImage
+    projects {
+      projectTitle
+    }
+  }
+}
+`;
