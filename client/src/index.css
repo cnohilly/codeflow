@@ -1,13 +1,123 @@
+:root {
+  --dark-shade: #1e1e2f;
+  --dark-accent: #27293d;
+  --dark-header: #12121a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* scrollbar style */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #32383d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--bs-success);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #30f7a1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.container {
+  transition: all ease-in-out 0.3s;
+}
+
+.scroll-margin {
+  scroll-margin-top: 4rem;
+}
+
+/* nav link active color */
+.navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
+  color: var(--bs-success);
+}
+
+footer a:hover, footer i:hover {
+  color: var(--bs-success) !important;
+  transition: all ease-in-out 0.2s;
+}
+
+.dark-main-bg {
+  background: linear-gradient(#1b1b2b,#101018);
+}
+
+.dark-card-bg {
+  background-color: var(--dark-accent);
+}
+
+.header-bg-color {
+  background-color: var(--dark-header);
+}
+
+.brand {
+  font-family: 'Bebas Neue', cursive;
+}
+
+/* hero */
+/* #hero h1, .brand {
+  background-image: linear-gradient( 112.9deg,  rgba(112,255,151,1) 6.2%, rgba(70,195,255,1) 99.7% );
+  background-image: linear-gradient( 89.9deg,  rgba(255,243,110,1) 16.9%, rgba(30,204,214,1) 55.1%, rgba(5,54,154,1) 90.7% );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
+/* Project Form */
+select {
+  max-width: fit-content;
+}
+
+/* FORM */
+.form-label,
+.form-input,
+.form-textarea {
+  display: block;
+}
+
+.form-label {
+  font-size: 1.2rem;
+  margin: 0.625rem 0 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  border: 2px solid;
+  border-radius: 50px;
 }
