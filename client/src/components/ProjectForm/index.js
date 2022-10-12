@@ -37,9 +37,37 @@ const ProjectForm = () => {
   });
 
   // update state based on form input changes
-  const handleChange = (event) => {
+  const handleChangeTitle = (event) => {
+    if (event.target.value.length <= 300) {
+      setTitle(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
+  };
+
+  const handleChangeBody = (event) => {
     if (event.target.value.length <= 300) {
       setBody(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
+  };
+
+  const handleChangeTags = (event) => {
+    if (event.target.value.length <= 300) {
+      setTags(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
+  };
+
+  const handleChangeRepo = (event) => {
+    if (event.target.value.length <= 300) {
+      setRepo(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
+  };
+
+  const handleChangeDeploy = (event) => {
+    if (event.target.value.length <= 300) {
+      setDeploy(event.target.value);
       setCharacterCount(event.target.value.length);
     }
   };
@@ -100,6 +128,7 @@ const ProjectForm = () => {
                   placeholder="Title"
                   value={projectTitle}
                   className="bg-dark text-white"
+                  onChange={handleChangeTitle}
                 />
               </Form.Group>
 
@@ -112,6 +141,7 @@ const ProjectForm = () => {
                   placeholder="Tags"
                   value={projectTags}
                   className="bg-dark text-white"
+                  onChange={handleChangeTags}
                 />
               </Form.Group>
 
@@ -124,7 +154,7 @@ const ProjectForm = () => {
                   value={projectBody}
                   rows={4}
                   className="bg-dark text-white"
-                  onChange={handleChange}
+                  onChange={handleChangeBody}
                 />
               </Form.Group>
 
@@ -141,6 +171,7 @@ const ProjectForm = () => {
                     placeholder="Enter deployed application link"
                     value={deployedLink}
                     className="bg-dark text-white"
+                    onChange={handleChangeDeploy}
                   />
                 </Form.Group>
                 {/* project repo link input */}
@@ -151,6 +182,7 @@ const ProjectForm = () => {
                     placeholder="Enter GitHub repository link"
                     value={repoLink}
                     className="bg-dark text-white"
+                    onChange={handleChangeRepo}
                   />
                 </Form.Group>
               </Row>
