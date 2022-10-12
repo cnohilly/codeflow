@@ -5,14 +5,14 @@ const SearchBar = () => {
 
   return (
     // search bar card
-    <Card className="bg-dark bg-gradient shadow mb-4 ">
+    <Card className="dark-card-bg shadow mb-4 ">
       <Card.Body>
         <Form>
           <InputGroup>
             {/* select menu */}
             <Form.Select 
               aria-label="Select"
-              className="text-bg-dark w-100"
+              className="bg-dark text-light w-100"
             >
               <option value="title">Title</option>
               <option value="tag">Tag</option>
@@ -21,7 +21,7 @@ const SearchBar = () => {
             <Form.Control
               type="text"
               placeholder="Search projects by title or tag"
-              className="bg-dark text-white"
+              className="bg-dark text-light"
             />
             <Button 
               variant="primary" 

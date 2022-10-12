@@ -24,7 +24,7 @@ const Header = () => {
                 className="d-inline-block align-top me-1"
                 alt="React Bootstrap logo"
               />
-              <div className="d-none d-sm-block">
+              <div className="d-none d-sm-block brand fs-4">
                 Codename-Poseidon
               </div>
             </Navbar.Brand>

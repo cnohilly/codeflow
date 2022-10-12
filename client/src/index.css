@@ -17,18 +17,18 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: darkgray;
+  background: #32383d;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #347aa8;
+  background: var(--bs-success);
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #5c8cab;
+  background: #30f7a1;
 }
 
 html {
@@ -67,6 +67,10 @@ code {
 
 .header-bg-color {
   background-color: var(--dark-header);
+}
+
+.brand {
+  font-family: 'Bebas Neue', cursive;
 }
 
 /* Project Form */

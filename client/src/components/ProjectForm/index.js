@@ -8,7 +8,7 @@ const ProjectForm = () => {
   return (
     // project form card
     <Col>
-      <Card className="bg-dark bg-gradient text-white shadow mb-4">
+      <Card className="dark-card-bg text-light shadow mb-4">
         <Card.Body>
           {/* Toggle project form */}
           {!displayProjectForm ? 
@@ -29,7 +29,7 @@ const ProjectForm = () => {
                 <Form.Control 
                   type="text" 
                   placeholder="Title" 
-                  className="bg-dark text-white"
+                  className="bg-dark text-light"
                 />
               </Form.Group>
 
@@ -40,7 +40,7 @@ const ProjectForm = () => {
                 <Form.Control 
                   type="text" 
                   placeholder="Tags" 
-                  className="bg-dark text-white"
+                  className="bg-dark text-light"
                 />
               </Form.Group>
 
@@ -51,7 +51,7 @@ const ProjectForm = () => {
                   as="textarea" 
                   placeholder="Description" 
                   rows={4} 
-                  className="bg-dark text-white"
+                  className="bg-dark text-light"
                 />
               </Form.Group>
 
@@ -62,7 +62,7 @@ const ProjectForm = () => {
                   <Form.Control 
                     type="text" 
                     placeholder="Enter deployed application link"
-                    className="bg-dark text-white" 
+                    className="bg-dark text-light" 
                   />
                 </Form.Group>
                 {/* project repo link input */}
@@ -71,7 +71,7 @@ const ProjectForm = () => {
                   <Form.Control 
                     type="text" 
                     placeholder="Enter GitHub repository link" 
-                    className="bg-dark text-white"
+                    className="bg-dark text-light"
                   />
                 </Form.Group>
               </Row>
