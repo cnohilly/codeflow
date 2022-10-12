@@ -18,8 +18,8 @@ const ProfileProjects = (props) => {
     variables: {
       input: {
         username: userParam,
-      },
-    },
+      }
+    }
   });
 
   const user = data?.me || data?.user || {};
@@ -32,8 +32,6 @@ const ProfileProjects = (props) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  console.log(user);
 
   if (!user?.username) {
     return (

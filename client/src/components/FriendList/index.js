@@ -14,7 +14,7 @@ const FriendList = ({ friendCount, username, friends }) => {
   }
 
   return (
-    <Col className="py-3">
+    <Col className="py-5">
       <Card className="bg-dark bg-gradient text-white shadow">
         <div className="text-center my-3">
           <h5>

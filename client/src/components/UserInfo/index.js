@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Card, Row, Form, Button } from "react-bootstrap";
+import Auth from '../../utils/auth';
 
 const UserInfo = ({ username, joinDate, profilePic }) => {
   return (

@@ -51,15 +51,24 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<ProfileMain />} />
-              <Route
-                path="/profile/user-projects"
-                element={<ProfileProjects />}
-              />
-              <Route
-                path="/profile/user-comments"
-                element={<ProfileComments />}
-              />
+              <Route path="/profile/" >
+                <Route
+                  path=""
+                  element={<ProfileMain />}
+                />
+                <Route
+                  path=":username"
+                  element={<ProfileMain />}
+                />
+                {/* <Route
+                  path="user-projects"
+                  element={<ProfileProjects />}
+                />
+                <Route
+                  path="user-comments"
+                  element={<ProfileComments />}
+                /> */}
+              </Route>
             </Routes>
           </main>
           <Footer />
