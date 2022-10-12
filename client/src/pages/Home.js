@@ -15,10 +15,12 @@ const Home = () => {
     // section for Homepage
     <div id="home" className="scroll-margin">
       {/* section for hero */}
-      <section id="hero" className="py-4 py-md-5 text-center bg-dark text-white">
+      <section id="hero" className="py-4 py-md-5 bg-dark d-flex flex-column justify-content-center align-items-center text-white">
         <div className="py-md-5">
-          <h1 className="display-1 fw-semibold">Centered hero</h1>
-          <h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h2>
+          <h1 className="display-1 fw-semibold brand text-center">
+            Code<span className="text-success">Flow</span>
+          </h1>
+          <h2>Design, Develop, Deploy</h2>
         </div>
       </section>
 

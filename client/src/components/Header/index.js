@@ -25,7 +25,8 @@ const Header = () => {
                 alt="React Bootstrap logo"
               />
               <div className="d-none d-sm-block brand fs-4">
-                Codename-Poseidon
+                {/* Codename-Poseidon */}
+                Code<span className="text-success">Flow</span>
               </div>
             </Navbar.Brand>
           </NavLink>
