@@ -26,8 +26,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation Mutation($projectId: ID!, $commentBody: String!) {
-    addComment(projectId: $projectId, commentBody: $commentBody) {
+  mutation Mutation($projectId: ID!, $parentCommentId: ID, $commentBody: String!) {
+    addComment(projectId: $projectId, parentCommentId: $parentCommentId, commentBody: $commentBody) {
       _id
       commentBody
       createdAt
@@ -48,6 +48,16 @@ export const ADD_COMMENT = gql`
       likeCount
     }
   }
+`;
+
+export const EDIT_COMMENT = gql`
+mutation Mutation($id: ID!, $commentBody: String!) {
+  editComment(_id: $id, commentBody: $commentBody) {
+    _id
+    commentBody
+    lastEditedAt
+  }
+}
 `;
 
 export const DELETE_COMMENT = gql`

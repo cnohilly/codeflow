@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Card, Button } from 'react-bootstrap';
-import ReplyForm from '../ReplyForm';
+import CommentForm from '../CommentForm';
 import EditForm from '../EditForm';
 import CommentList from '../CommentList'
 import CommentButtons from '../CommentButtons';
@@ -9,7 +9,10 @@ import { QUERY_COMMENT } from '../../utils/queries';
 
 const Comment = (props) => {
 
-  let { comment } = props;
+  let {
+    comment,
+    includeReplies
+  } = props;
   const { loading, data } = useQuery(QUERY_COMMENT, {
     variables: { id: comment._id }
   });
@@ -22,6 +25,18 @@ const Comment = (props) => {
   const [displayReplyForm, setDisplayReplyForm] = useState(false);
   // displaying edit form
   const [displayEditForm, setDisplayEditForm] = useState(false);
+
+  const toggleReplyForm = () => {
+    setDisplayReplyForm(!displayReplyForm);
+  }
+
+  const toggleEditForm = () => {
+    setDisplayEditForm(!displayEditForm);
+  }
+
+  const displayChildren = () => {
+    setAreChildrenHidden(false);
+  }
 
   if (loading) {
     return (
@@ -67,7 +82,7 @@ const Comment = (props) => {
                         : `Edited on ${comment.lastEditedAt}`}
                     </div>
                   </Card.Subtitle>
-                  {!displayEditForm ? 
+                  {!displayEditForm ?
                     <>
                       {/* comment text */}
                       <Card.Text>
@@ -75,20 +90,18 @@ const Comment = (props) => {
                       </Card.Text>
 
                       {/* comment buttons group */}
-                      <CommentButtons 
-                        displayReplyForm={displayReplyForm} 
-                        setDisplayReplyForm={setDisplayReplyForm}
-                        displayEditForm={displayEditForm}
-                        setDisplayEditForm={setDisplayEditForm}
+                      <CommentButtons
+                        toggleReplyForm={toggleReplyForm}
+                        toggleEditForm={toggleEditForm}
                         comment={comment}
                       />
                     </>
-                    : 
+                    :
                     // edit form
                     <EditForm
+                      id={comment._id}
                       commentBody={comment.commentBody}
-                      displayEditForm={displayEditForm}
-                      setDisplayEditForm={setDisplayEditForm}
+                      toggleEditForm={toggleEditForm}
                     />
                   }
                 </div>
@@ -107,16 +120,18 @@ const Comment = (props) => {
       }
 
       {/* reply form */}
-      {displayReplyForm ? 
-        <ReplyForm
-          displayReplyForm={displayReplyForm}
-          setDisplayReplyForm={setDisplayReplyForm}
+      {displayReplyForm ?
+        <CommentForm
+          projectId={comment.projectId._id}
+          parentCommentId={comment._id}
+          toggleReplyForm={toggleReplyForm}
+          displayChildren={displayChildren}
         />
         : ''
       }
 
       {/*  button and section to have reply   */}
-      {comment.commentCount > 0 &&
+      {(comment.commentCount > 0 && includeReplies) &&
         <>
           {areChildrenHidden
             ?
@@ -143,7 +158,7 @@ const Comment = (props) => {
               />
               <div className="flex-grow-1 mt-3">
                 {/* comment list */}
-                <CommentList comments={comment.comments} />
+                <CommentList comments={comment.comments} includeReplies={includeReplies} />
               </div>
             </div >
           }

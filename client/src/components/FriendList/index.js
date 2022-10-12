@@ -16,7 +16,7 @@ const FriendList = ({ friendCount, username, friends }) => {
   return (
     <Col className="py-3">
       <Card className="bg-dark bg-gradient text-white shadow">
-        <div>
+        <div className="text-center my-3">
           <h5>
             {username}'s {friendCount}{" "}
             {friendCount === 1 ? "friend" : "friends"}
