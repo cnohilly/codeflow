@@ -76,6 +76,13 @@ const ProjectForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    console.log({
+      projectTitle,
+      projectBody,
+      projectTags,
+      repoLink,
+      deployedLink,
+    })
     try {
       await addProject({
         variables: {

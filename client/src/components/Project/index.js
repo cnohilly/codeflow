@@ -43,9 +43,9 @@ const Project = (props) => {
         <Card.Body>
           {/* project tags */}
           <div>
-            {project.projectTags.map(tag => {
+            {project.projectTags.map((tag, index) => {
               const variant = randomVariant();
-              return <><Badge bg={variant.bg} text={variant.text}>{tag}</Badge>{" "}</>
+              return (<Badge key={tag + index} className="me-2" pill bg={variant.bg} text={variant.text}>{tag}</Badge>)
             })}
             {/* <Badge bg="primary">HTML</Badge> <Badge bg="danger">CSS</Badge>{" "}
             <Badge bg="warning" text="dark">

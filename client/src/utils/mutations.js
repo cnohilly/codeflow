@@ -88,8 +88,8 @@ export const UPDATE_LIKE_COMMENT = gql`
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectBody: String!) {
-    addProject(projectTitle: $projectTitle, projectBody: $projectBody) {
+  mutation addProject($projectTitle: String!, $projectTags: [String]!, $projectBody: String!, $repoLink: String, $deployedLink: String) {
+    addProject(projectTitle: $projectTitle, projectTags: $projectTags projectBody: $projectBody, repoLink: $repoLink, deployedLink: $deployedLink) {
       _id
       projectTitle
       projectBody
