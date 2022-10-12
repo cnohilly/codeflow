@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
@@ -7,10 +7,15 @@ import ProfileNav from "../components/ProfileNav";
 import ProfileError from "../components/ProfileError";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import CommentList from '../components/CommentList';
+import ProjectList from '../components/ProjectList';
 import Auth from "../utils/auth";
 
 const ProfileMain = (props) => {
-  const { username: userParam } = useParams();
+  const { username: userParam, tab: tabParam } = useParams();
+  console.log(tabParam);
+
+  const [currentTab, setCurrentTab] = useState('Account')
 
   // to be used later for adding friends
   //   const [addFriend] = useMutation(ADD_FRIEND);
@@ -21,6 +26,16 @@ const ProfileMain = (props) => {
       },
     },
   });
+
+
+
+  const renderTab = () => {
+    switch(tabParam) {
+      case 'projects': return <ProjectList projects={user.projects} />;
+      case 'comments': return <CommentList includeReplies={false} />;
+      default: return <UserInfo username={user.username} joinDate={user.createdAt} profilePic={user.profileImage} />;
+    }
+  }
 
   const user = data?.me || data?.user || {};
 
@@ -50,11 +65,12 @@ const ProfileMain = (props) => {
       <Row>
         <Col xs={9}>
           <Row>
-            <UserInfo
+            {/* <UserInfo
               username={user.username}
               joinDate={user.createdAt}
               profilePic={user.profileImage}
-            />
+            /> */}
+            {renderTab()}
           </Row>
         </Col>
 

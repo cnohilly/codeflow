@@ -33,8 +33,6 @@ const ProfileProjects = (props) => {
     return <div>Loading...</div>;
   }
 
-  console.log(user);
-
   if (!user?.username) {
     return (
       <Row className="justify-content-md-center">

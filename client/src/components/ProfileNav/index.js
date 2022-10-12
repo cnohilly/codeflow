@@ -11,10 +11,10 @@ const ProfileNav = () => {
           <NavLink to="/profile" className="nav-link">
             Account
           </NavLink>
-          <NavLink to="/profile/user-projects" className="nav-link">
+          <NavLink to="/profile/projects" className="nav-link">
             Your Projects
           </NavLink>
-          <NavLink to="/profile/user-comments" className="nav-link">
+          <NavLink to="/profile/comments" className="nav-link">
             Your Comments
           </NavLink>
         </Navbar>
