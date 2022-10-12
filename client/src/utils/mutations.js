@@ -25,9 +25,18 @@ export const ADD_USER = gql`
   }
 `;
 
+export const CHANGE_PROFILE_PIC = gql`
+  mutation updateProfilePic($id: ID!) {
+    updateProfilePic(_id: $id) {
+      _id
+      profileImage
+    }
+  }
+`;
+
 export const ADD_COMMENT = gql`
-  mutation Mutation($projectId: ID!, $commentBody: String!) {
-    addComment(projectId: $projectId, commentBody: $commentBody) {
+  mutation Mutation($projectId: ID!, $parentCommentId: ID, $commentBody: String!) {
+    addComment(projectId: $projectId, parentCommentId: $parentCommentId, commentBody: $commentBody) {
       _id
       commentBody
       createdAt
@@ -50,6 +59,16 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+export const EDIT_COMMENT = gql`
+mutation Mutation($id: ID!, $commentBody: String!) {
+  editComment(_id: $id, commentBody: $commentBody) {
+    _id
+    commentBody
+    lastEditedAt
+  }
+}
+`;
+
 export const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
     deleteComment(_id: $id) {
@@ -69,11 +88,12 @@ export const UPDATE_LIKE_COMMENT = gql`
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectBody: String!) {
-    addProject(projectTitle: $projectTitle, projectBody: $projectBody) {
+  mutation addProject($projectTitle: String!, $projectTags: [String]!, $projectBody: String!, $repoLink: String, $deployedLink: String) {
+    addProject(projectTitle: $projectTitle, projectTags: $projectTags projectBody: $projectBody, repoLink: $repoLink, deployedLink: $deployedLink) {
       _id
       projectTitle
       projectBody
+      projectTags
       createdBy {
         _id
         username

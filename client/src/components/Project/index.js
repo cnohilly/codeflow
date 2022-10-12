@@ -7,6 +7,20 @@ const Project = (props) => {
     project
   } = props;
 
+  const randomVariant = () => {
+    const variants = [
+      { bg: 'primary', text: 'dark' },
+      { bg: 'secondary', text: 'dark' },
+      { bg: 'success', text: 'dark' },
+      { bg: 'danger', text: 'light' },
+      { bg: 'warning', text: 'dark' },
+      { bg: 'info', text: 'dark' },
+      { bg: 'dark', text: 'light' },
+      { bg: 'light', text: 'dark' }
+    ]
+    return (variants[Math.floor(Math.random() * variants.length)]);
+  }
+
   return (
     <Col>
       {/* project card */}
@@ -29,15 +43,10 @@ const Project = (props) => {
         <Card.Body>
           {/* project tags */}
           <div>
-            <Badge bg="primary">HTML</Badge> <Badge bg="danger">CSS</Badge>{" "}
-            <Badge bg="warning" text="dark">
-              JavaScript
-            </Badge>{" "}
-            <Badge bg="success">React</Badge>{" "}
-            <Badge bg="info" text="dark">
-              MERN
-            </Badge>{" "}
-            <Badge bg="secondary">MongoDB</Badge> <Badge bg="dark">MySQL</Badge>{" "}
+            {project.projectTags.map((tag, index) => {
+              const variant = randomVariant();
+              return (<Badge key={tag + index} className="me-2" pill bg={variant.bg} text={variant.text}>{tag}</Badge>)
+            })}
           </div>
           <hr />
           {/* project description */}
@@ -52,27 +61,31 @@ const Project = (props) => {
             </Card.Link>
             <div>
               {/* link to deployed project */}
-              <Button
-                href={project.deployedLink}
-                variant="primary"
-                size="sm"
-                className="me-3 fw-semibold rounded-pill"
-              >
-                Go to project
-              </Button>
+              {project.deployedLink &&
+                <Button
+                  href={project.deployedLink}
+                  variant="primary"
+                  size="sm"
+                  className="me-3 fw-semibold rounded-pill"
+                >
+                  Go to project
+                </Button>
+              }
               {/* link to project github */}
-              <Button 
-                href={project.repoLink} 
-                variant="primary" 
-                className="rounded-pill"
-              >
-                <i className="bi bi-github"></i>
-              </Button>
+              {project.repoLink &&
+                <Button
+                  href={project.repoLink}
+                  variant="primary"
+                  className="rounded-pill"
+                >
+                  <i className="bi bi-github"></i>
+                </Button>
+              }
             </div>
           </div>
         </Card.Body>
       </Card>
-    </Col>
+    </Col >
   );
 };
 

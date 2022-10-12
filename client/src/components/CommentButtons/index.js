@@ -6,10 +6,8 @@ import Auth from '../../utils/auth';
 
 const CommentButtons = (props) => {
   const {
-    displayReplyForm,
-    setDisplayReplyForm,
-    displayEditForm,
-    setDisplayEditForm,
+    toggleReplyForm,
+    toggleEditForm,
     comment
   } = props;
 
@@ -59,7 +57,7 @@ const CommentButtons = (props) => {
               type="button"
               aria-label="Reply"
               className="link-info"
-              onClick={() => setDisplayReplyForm(!displayReplyForm)}
+              onClick={toggleReplyForm}
             >
               <i className="bi bi-chat-square-fill"></i>
             </Button>
@@ -72,7 +70,7 @@ const CommentButtons = (props) => {
                   type="button"
                   aria-label="Edit"
                   className="link-warning"
-                  onClick={() => setDisplayEditForm(!displayEditForm)}
+                  onClick={toggleEditForm}
                 >
                   <i className="bi bi-pencil-square"></i>
                 </Button>

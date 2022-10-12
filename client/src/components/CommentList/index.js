@@ -5,14 +5,15 @@ import Comment from '../Comment';
 const CommentList = (props) => {
 
   const {
-    comments
+    comments,
+    includeReplies = false
   } = props;
 
   return (
     <Row xs={1} className="g-3">
 
       {comments.map(comment => {
-        return <Comment key={comment._id} comment={comment} />
+        return <Comment key={comment._id} comment={comment} includeReplies={includeReplies} />
       })}
 
     </Row>

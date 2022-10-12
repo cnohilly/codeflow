@@ -17,6 +17,7 @@ export const QUERY_USER = gql`
         _id
         projectTitle
         projectBody
+        projectTags
         createdAt
         createdBy {
           _id
@@ -46,6 +47,7 @@ export const QUERY_ME = gql`
         _id
         projectTitle
         projectBody
+        projectTags
         createdAt
         createdBy {
           _id
@@ -62,6 +64,7 @@ export const QUERY_PROJECTS = gql`
       _id
       projectTitle
       projectBody
+      projectTags
       createdBy {
         _id
         username
@@ -77,29 +80,30 @@ export const QUERY_PROJECTS = gql`
 `;
 
 export const QUERY_PROJECT = gql`
-query project($id: ID!) {
-  project(_id: $id) {
-    _id
-    projectTitle
-    projectBody
-    createdBy {
+  query project($id: ID!) {
+    project(_id: $id) {
       _id
-      username
-      profileImage
-    }
-    createdAt
-    commentCount
-    comments {
-      _id
+      projectTitle
+      projectBody
+      projectTags
+      createdBy {
+        _id
+        username
+        profileImage
+      }
+      createdAt
       commentCount
+      comments {
+        _id
+        commentCount
+      }
     }
   }
-}
 `;
 
 export const QUERY_COMMENT = gql`
-query Comment($id: ID!) {
-  comment(_id: $id) {
+  query Comment($id: ID!) {
+    comment(_id: $id) {
       _id
       commentBody
       createdAt
@@ -123,5 +127,5 @@ query Comment($id: ID!) {
       }
       likeCount
     }
-}
+  }
 `;

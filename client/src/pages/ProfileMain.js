@@ -50,14 +50,18 @@ const ProfileMain = (props) => {
       <Row>
         <Col xs={9}>
           <Row>
-            <UserInfo username={user.username} joinDate={user.createdAt} />
+            <UserInfo
+              username={user.username}
+              joinDate={user.createdAt}
+              profilePic={user.profileImage}
+            />
           </Row>
         </Col>
 
         <Col xs={3}>
           <Row>
             <ProfileNav />
-            <FriendList />
+            <FriendList username={user.username} friends={user.friends} />
           </Row>
         </Col>
       </Row>
