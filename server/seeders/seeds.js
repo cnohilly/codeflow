@@ -53,12 +53,13 @@ db.once('open', async () => {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
         const tags = [];
         for (x = 0; x < 3; x++) {
-            tags.push(Math.floor(Math.random() * projectTags.length));
+            tags.push(projectTags[Math.floor(Math.random() * projectTags.length)]);
         }
 
         const projectData = {
             projectTitle: faker.lorem.words(Math.round(Math.random() * 4) + 1),
             projectBody: faker.lorem.words(Math.round(Math.random() * 20) + 1),
+            projectTags: tags,
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
             repoLink: faker.internet.domainName(),
             deployedLink: faker.internet.domainName()

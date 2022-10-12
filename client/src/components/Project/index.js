@@ -7,6 +7,20 @@ const Project = (props) => {
     project
   } = props;
 
+  const randomVariant = () => {
+    const variants = [
+      { bg: 'primary', text: 'dark' },
+      { bg: 'secondary', text: 'dark' },
+      { bg: 'success', text: 'dark' },
+      { bg: 'danger', text: 'light' },
+      { bg: 'warning', text: 'dark' },
+      { bg: 'info', text: 'dark' },
+      { bg: 'dark', text: 'light' },
+      { bg: 'light', text: 'dark' }
+    ]
+    return (variants[Math.floor(Math.random() * variants.length)]);
+  }
+
   return (
     <Col>
       {/* project card */}
@@ -29,7 +43,11 @@ const Project = (props) => {
         <Card.Body>
           {/* project tags */}
           <div>
-            <Badge bg="primary">HTML</Badge> <Badge bg="danger">CSS</Badge>{" "}
+            {project.projectTags.map(tag => {
+              const variant = randomVariant();
+              return <><Badge bg={variant.bg} text={variant.text}>{tag}</Badge>{" "}</>
+            })}
+            {/* <Badge bg="primary">HTML</Badge> <Badge bg="danger">CSS</Badge>{" "}
             <Badge bg="warning" text="dark">
               JavaScript
             </Badge>{" "}
@@ -37,7 +55,7 @@ const Project = (props) => {
             <Badge bg="info" text="dark">
               MERN
             </Badge>{" "}
-            <Badge bg="secondary">MongoDB</Badge> <Badge bg="dark">MySQL</Badge>{" "}
+            <Badge bg="secondary">MongoDB</Badge> <Badge bg="dark">MySQL</Badge>{" "} */}
           </div>
           <hr />
           {/* project description */}
@@ -61,9 +79,9 @@ const Project = (props) => {
                 Go to project
               </Button>
               {/* link to project github */}
-              <Button 
-                href={project.repoLink} 
-                variant="primary" 
+              <Button
+                href={project.repoLink}
+                variant="primary"
                 className="rounded-pill"
               >
                 <i className="bi bi-github"></i>
@@ -72,7 +90,7 @@ const Project = (props) => {
           </div>
         </Card.Body>
       </Card>
-    </Col>
+    </Col >
   );
 };
 
