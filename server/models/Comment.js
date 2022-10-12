@@ -67,7 +67,9 @@ commentSchema.virtual('likeCount').get(function () {
 });
 
 commentSchema.pre('findOneAndUpdate', function (next) {
-    this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
+    if (this._update.commentBody) {
+        this._update = { ...this.getUpdate(), lastEditedAt: Date.now() };
+    }
     next();
 });
 

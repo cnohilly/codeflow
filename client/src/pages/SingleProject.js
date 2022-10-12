@@ -29,10 +29,11 @@ const SingleProject = () => {
       {/* if user is logged in, render comment form */}
       <CommentForm projectId={projectId} />
 
+
       <hr className="border border-white" />
 
       {/* container for comments list */}
-      <CommentList comments={project.comments} />
+      <CommentList comments={project.comments} includeReplies={true} />
 
     </Container>
   );

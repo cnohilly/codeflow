@@ -61,7 +61,7 @@ const ProfileMain = (props) => {
         <Col xs={3}>
           <Row>
             <ProfileNav />
-            <FriendList />
+            <FriendList username={user.username} friends={user.friends} />
           </Row>
         </Col>
       </Row>
