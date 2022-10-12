@@ -6,15 +6,12 @@ import ProjectList from "../components/ProjectList";
 import ProfileNav from "../components/ProfileNav";
 //import ProfileError from "../components/ProfileError";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER, QUERY_ME, QUERY_USERS } from "../utils/queries";
+import { QUERY_USER, QUERY_ME, QUERY_USERS} from "../utils/queries";
 import Auth from "../utils/auth";
 import FriendSearch from "../components/FriendSearch";
 
 const FriendTab = (props) => {
   const { username: userParam } = useParams();
-
-  // to be used later for adding friends
-  //   const [addFriend] = useMutation(ADD_FRIEND);
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: {
       input: {
@@ -34,18 +31,6 @@ const FriendTab = (props) => {
     return <div>Loading...</div>;
   }
 
-  console.log(user);
-
-  if (!user?.username) {
-    return (
-      <Row className="justify-content-md-center">
-        <Col xs={6}>
-          {/* <ProfileError /> */}
-        </Col>
-      </Row>
-    );
-  }
-
   return (
     <Container id="profile-info" className="py-3">
       <Row>
@@ -58,10 +43,6 @@ const FriendTab = (props) => {
         <Col xs={3}>
           <Row>
             <ProfileNav />
-            
-            {/* <button className="btn ml-auto" onClick={handleClick}>
-              Add Friend
-            </button> */}
           </Row>
         </Col>
       </Row>
