@@ -47,15 +47,6 @@ const Project = (props) => {
               const variant = randomVariant();
               return (<Badge key={tag + index} className="me-2" pill bg={variant.bg} text={variant.text}>{tag}</Badge>)
             })}
-            {/* <Badge bg="primary">HTML</Badge> <Badge bg="danger">CSS</Badge>{" "}
-            <Badge bg="warning" text="dark">
-              JavaScript
-            </Badge>{" "}
-            <Badge bg="success">React</Badge>{" "}
-            <Badge bg="info" text="dark">
-              MERN
-            </Badge>{" "}
-            <Badge bg="secondary">MongoDB</Badge> <Badge bg="dark">MySQL</Badge>{" "} */}
           </div>
           <hr />
           {/* project description */}
@@ -70,22 +61,26 @@ const Project = (props) => {
             </Card.Link>
             <div>
               {/* link to deployed project */}
-              <Button
-                href={project.deployedLink}
-                variant="primary"
-                size="sm"
-                className="me-3 fw-semibold rounded-pill"
-              >
-                Go to project
-              </Button>
+              {project.deployedLink &&
+                <Button
+                  href={project.deployedLink}
+                  variant="primary"
+                  size="sm"
+                  className="me-3 fw-semibold rounded-pill"
+                >
+                  Go to project
+                </Button>
+              }
               {/* link to project github */}
-              <Button
-                href={project.repoLink}
-                variant="primary"
-                className="rounded-pill"
-              >
-                <i className="bi bi-github"></i>
-              </Button>
+              {project.repoLink &&
+                <Button
+                  href={project.repoLink}
+                  variant="primary"
+                  className="rounded-pill"
+                >
+                  <i className="bi bi-github"></i>
+                </Button>
+              }
             </div>
           </div>
         </Card.Body>
