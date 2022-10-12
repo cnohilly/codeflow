@@ -12,7 +12,7 @@ const SearchBar = () => {
             {/* select menu */}
             <Form.Select 
               aria-label="Select"
-              className="bg-dark text-light w-100"
+              className="bg-dark text-light w-100 fw-semibold"
             >
               <option value="title">Title</option>
               <option value="tag">Tag</option>

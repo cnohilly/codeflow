@@ -40,7 +40,7 @@ const Comment = (props) => {
 
   if (loading) {
     return (
-      <Card className="bg-dark bg-gradient text-white shadow mb-3">
+      <Card className="dark-card-bg text-light shadow mb-3">
         <Card.Body>
           <Card.Text>
             Loading comment...
@@ -55,7 +55,7 @@ const Comment = (props) => {
       {/* comment card */}
       {!comment.isDeleted
         ?
-        <Card className="bg-dark bg-gradient text-white shadow ">
+        <Card className="dark-card-bg text-light shadow">
           <Card.Body>
             <div className="d-flex">
               <div className="flex-shrink-0">
@@ -73,10 +73,10 @@ const Comment = (props) => {
                   <Card.Subtitle
                     className="my-2 d-flex flex-column flex-md-row justify-content-between"
                   >
-                    <div className="me-5">
+                    <div className="me-5 fw-bold">
                       {comment.createdBy.username}
                     </div>
-                    <div >
+                    <div className="text-secondary">
                       {!comment.lastEditedAt
                         ? `Posted on ${comment.createdAt}`
                         : `Edited on ${comment.lastEditedAt}`}
@@ -85,7 +85,7 @@ const Comment = (props) => {
                   {!displayEditForm ?
                     <>
                       {/* comment text */}
-                      <Card.Text>
+                      <Card.Text className="my-3">
                         {comment.commentBody}
                       </Card.Text>
 
@@ -110,7 +110,7 @@ const Comment = (props) => {
           </Card.Body>
         </Card>
         :
-        <Card className="bg-dark bg-gradient text-white shadow">
+        <Card className="dark-card-bg text-light shadow">
           <Card.Body>
             <Card.Text>
               Comment deleted by user.
@@ -137,7 +137,7 @@ const Comment = (props) => {
             ?
             // {/* button to show replies */}
             <Button
-              variant="primary"
+              variant="success"
               type="button"
               aria-label="Show Replies"
               className="mt-3 fw-semibold"
@@ -150,7 +150,7 @@ const Comment = (props) => {
             <div className={`d-flex`}>
               {/* collapsing line button for hiding replies */}
               <Button
-                variant="primary"
+                variant="success"
                 type="button"
                 aria-label="Hide Replies"
                 className="p-0 pe-1 me-3 mt-1"

@@ -44,12 +44,12 @@ const Login = (props) => {
     <Container>
       <section className="flex-row justify-center my-4">
         <div className="col-12 col-md-6 mx-auto">
-          <div className="card">
-            <h4 className="card-header">Login</h4>
+          <div className="card dark-card-bg text-light">
+            <h4 className="card-header header-bg-color text-light text-center">Login</h4>
             <div className="card-body">
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input"
+                  className="form-input bg-dark text-light border-secondary"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -58,7 +58,7 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input bg-dark text-light border-secondary"
                   placeholder="******"
                   name="password"
                   type="password"
@@ -66,12 +66,12 @@ const Login = (props) => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button className="btn d-block w-100" type="submit">
-                  Submit
+                <button className="btn btn-success d-block w-100 rounded-pill py-2 fs-5 fw-semibold" type="submit">
+                  Login
                 </button>
               </form>
 
-              {error && <div>Login failed</div>}
+              {error && <div className="mt-2 text-danger">Login failed</div>}
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@ const Header = () => {
                   Login
                 </NavLink>
                 <NavLink to="/signup" className="ms-auto nav-link">
-                  Signup
+                  Sign Up
                 </NavLink>
               </Nav>
             )}

@@ -5,19 +5,15 @@ const Footer = () => {
   // array of footer links for each column
   const companyLinks = [
     {
-      name: "about",
       text: "About"
     },
     {
-      name: "careers",
       text: "Careers"
     },
     {
-      name: "partners",
       text: "Partners"
     },
     {
-      name: "faq",
       text: "FAQs"
     },
   ];
@@ -83,12 +79,12 @@ const Footer = () => {
             <ul className="list-unstyled d-flex flex-column">
               {companyLinks.map(companyLink => (
                 <li 
-                  key={companyLink.name}
+                  key={companyLink.text.toLowerCase()}
                   className="mb-2"
                 >
                   <a 
                     href="/"
-                    className="nav-link"
+                    className="text-white text-decoration-none"
                   >
                     {companyLink.text}
                   </a>
@@ -107,7 +103,7 @@ const Footer = () => {
                 >
                   <a 
                     href={`${socialMediaLink.text}`} 
-                    className="btn link-light fs-2 p-0"
+                    className="btn nav-link fs-2 p-0"
                   >
                     <i className={`${socialMediaLink.symbol}`}></i>
                   </a>
@@ -126,13 +122,11 @@ const Footer = () => {
                 >
                   <a 
                     href="/" 
-                    className="nav-link d-flex"
+                    className="text-white text-decoration-none"
                   >
                     <i className={`${contactLink.symbol} pe-2`}
                     ></i>
-                    <div className="">
-                      {contactLink.text}
-                    </div>
+                    {contactLink.text}
                   </a>
                 </li>
               ))}

@@ -55,7 +55,7 @@ const Project = (props) => {
             {/* project number of comments */}
             <Card.Link
               href={`../single-project/${project._id}`}
-              className="text-decoration-none link-secondary text-truncate"
+              className="text-decoration-none link-secondary text-truncate fw-semibold"
             >
               {project.commentCount} {project.commentCount > 1 || project.commentCount === 0 ? 'comments' : 'comment'}
             </Card.Link>

@@ -42,12 +42,12 @@ const Signup = () => {
     <Container>
       <section className="flex-row justify-center my-4">
         <div className="col-12 col-md-6 mx-auto">
-          <div className="card">
-            <h4 className="card-header">Sign Up</h4>
+          <div className="card dark-card-bg text-light">
+            <h4 className="card-header header-bg-color text-light text-center">Sign Up</h4>
             <div className="card-body">
               <form onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input"
+                  className="form-input bg-dark text-light border-secondary"
                   placeholder="Your username"
                   name="username"
                   type="username"
@@ -56,7 +56,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input bg-dark text-light border-secondary"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -65,7 +65,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input bg-dark text-light border-secondary"
                   placeholder="******"
                   name="password"
                   type="password"
@@ -73,12 +73,12 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button className="btn d-block w-100" type="submit">
-                  Submit
+                <button className="btn btn-success d-block w-100 rounded-pill py-2 fs-5 fw-semibold" type="submit">
+                  Sign Up
                 </button>
               </form>
 
-              {error && <div>Signup failed</div>}
+              {error && <div className="mt-2 text-danger">Signup failed</div>}
             </div>
           </div>
         </div>

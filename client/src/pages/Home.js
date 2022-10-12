@@ -34,7 +34,7 @@ const Home = () => {
 
         {/* Project List */}
         {loading
-          ? <h2 className="text-white text-center">Loading Projects</h2>
+          ? <h2 className="text-white text-center">Loading Projects...</h2>
           : <ProjectList projects={projects} />
         }
 

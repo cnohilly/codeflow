@@ -20,7 +20,7 @@ const SingleProject = () => {
   }
 
   return (
-    <Container id="single-project" className="py-4 ">
+    <Container id="single-project" className="py-4">
       <Row xs={1} >
         {/* single project */}
         <Project project={project} />

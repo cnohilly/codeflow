@@ -74,7 +74,7 @@ const CommentForm = (props) => {
 
   return (
     // comment form card
-    <Card className="mt-3 bg-dark bg-gradient shadow">
+    <Card className="mt-3 dark-card-bg shadow">
       <Card.Body>
         <Form
           onSubmit={handleFormSubmit}
