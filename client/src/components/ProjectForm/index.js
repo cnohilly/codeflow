@@ -76,19 +76,25 @@ const ProjectForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    console.log({
-      projectTitle,
-      projectBody,
-      projectTags,
-      repoLink,
-      deployedLink,
-    })
+    // makes tags only strings of alphabetic characters and keeps tags to a length of 10
+    const tagsRegex = /[A-z]+/g;
+    const tags = [...projectTags.matchAll(tagsRegex)]
+      .join(' ')
+      .split(' ')
+      .map((tag, index) => {
+        if (tag.length > 10) return tag.substring(0, 9);
+        return tag;
+      });
+    if (tags.length > 10) {
+      tags.splice(10, tags.length - 10);
+    }
+
     try {
       await addProject({
         variables: {
           projectTitle,
           projectBody,
-          projectTags,
+          projectTags: tags,
           repoLink,
           deployedLink,
         },

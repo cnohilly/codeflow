@@ -26,7 +26,6 @@ const ProjectQueries = {
 const ProjectMutations = {
     addProject: async (parent, args, context) => {
         if (context.user) {
-            console.log(args);
             let project = await Project.create({ ...args, createdBy: context.user._id });
 
             await User.findByIdAndUpdate(
