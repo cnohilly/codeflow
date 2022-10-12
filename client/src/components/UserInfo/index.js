@@ -1,7 +1,7 @@
 import React from "react";
-import { Col, Card, Row } from "react-bootstrap";
+import { Col, Card, Row, Form, Button } from "react-bootstrap";
 
-const UserInfo = ({ username, joinDate }) => {
+const UserInfo = ({ username, joinDate, profilePic }) => {
   return (
     <Col>
       {/* User Info card */}
@@ -15,12 +15,12 @@ const UserInfo = ({ username, joinDate }) => {
         <Card.Body>
           <div className="d-flex">
             <Row>
-              <Col>
+              <Col xs={20}>
                 <div>
                   {/* profile image */}
                   <img
-                    src="https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"
-                    alt="..."
+                    src={profilePic}
+                    alt="profile-pic"
                     style={{ width: "150px" }}
                   />
                 </div>
@@ -39,6 +39,26 @@ const UserInfo = ({ username, joinDate }) => {
                       inventore possimus, natus odio molestiae illum quis
                       officiis sed laborum labore saepe impedit.
                     </p>
+
+                    <Form>
+                      <Form.Group className="mb-3" controlId="newProfilePic">
+                        <Form.Label>New Profile Pic</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          placeholder="Use Image Link"
+                          rows={1}
+                          className="bg-dark text-white"
+                        />
+                      </Form.Group>
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        size="sm"
+                        className="rounded-pill px-3 me-2 fw-semibold"
+                      >
+                        Submit
+                      </Button>
+                    </Form>
                   </Card.Body>
                 </div>
               </div>

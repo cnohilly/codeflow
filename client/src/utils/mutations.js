@@ -25,6 +25,15 @@ export const ADD_USER = gql`
   }
 `;
 
+export const CHANGE_PROFILE_PIC = gql`
+  mutation updateProfilePic($id: ID!) {
+    updateProfilePic(_id: $id) {
+      _id
+      profileImage
+    }
+  }
+`;
+
 export const ADD_COMMENT = gql`
   mutation Mutation($projectId: ID!, $commentBody: String!) {
     addComment(projectId: $projectId, commentBody: $commentBody) {
@@ -74,6 +83,7 @@ export const ADD_PROJECT = gql`
       _id
       projectTitle
       projectBody
+      projectTags
       createdBy {
         _id
         username

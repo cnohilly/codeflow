@@ -50,7 +50,11 @@ const ProfileMain = (props) => {
       <Row>
         <Col xs={9}>
           <Row>
-            <UserInfo username={user.username} joinDate={user.createdAt} />
+            <UserInfo
+              username={user.username}
+              joinDate={user.createdAt}
+              profilePic={user.profileImage}
+            />
           </Row>
         </Col>
 
