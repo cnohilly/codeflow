@@ -57,7 +57,7 @@ function App() {
                   element={<ProfileMain />}
                 />
                 <Route
-                  path=":tab"
+                  path=":username"
                   element={<ProfileMain />}
                 />
                 {/* <Route

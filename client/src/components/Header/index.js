@@ -35,7 +35,7 @@ const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             {Auth.loggedIn() ? (
               <Nav className="ms-auto">
-                <NavLink to="/profile/about" className="ms-auto nav-link">
+                <NavLink to="/profile" className="ms-auto nav-link">
                   Profile
                 </NavLink>
                 <a href="/" onClick={logout} className="ms-auto nav-link">
