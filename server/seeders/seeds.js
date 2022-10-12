@@ -48,8 +48,13 @@ db.once('open', async () => {
 
     // generating projects
     let createdProjects = [];
+    const projectTags = ['HTML', 'CSS', 'JavaScript', 'React', 'MERN', 'MongoDB', 'MySQL'];
     for (let i = 0; i < 50; i++) {
         const randomUserIndex = Math.floor(Math.random() * Object.keys(createdUsers.insertedIds).length);
+        const tags = [];
+        for (x = 0; x < 3; x++) {
+            tags.push(Math.floor(Math.random() * projectTags.length));
+        }
 
         const projectData = {
             projectTitle: faker.lorem.words(Math.round(Math.random() * 4) + 1),

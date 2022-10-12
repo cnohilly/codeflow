@@ -15,7 +15,7 @@ const typeDefs = gql`
     _id: ID
     projectTitle: String
     projectBody: String
-    projectTags: String
+    projectTags: [String]
     createdAt: String
     createdBy: User
     repoLink: String
@@ -81,7 +81,7 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     addProject(
       projectTitle: String!
-      projectTags: String!
+      projectTags: [String]!
       projectBody: String!
       repoLink: String
       deployedLink: String

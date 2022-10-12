@@ -15,12 +15,12 @@ const projectSchema = new Schema(
       minlength: 1,
       maxlength: 300,
     },
-    projectTags: {
+    projectTags: [{
       type: String,
       required: "Project must have tags.",
       minlength: 1,
       maxlength: 100,
-    },
+    }],
     createdAt: {
       type: Date,
       default: Date.now,
