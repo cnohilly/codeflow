@@ -4,8 +4,34 @@ import { Col, Row, Card, Form, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import { QUERY_PROJECTS, QUERY_ME } from "../../utils/queries";
+import Tagify from "@yaireo/tagify";
 
 const ProjectForm = () => {
+  // tagify function
+  var input = document.querySelector('input[name="tagify-tags"]'),
+    // init Tagify script on the above inputs
+    tagify = new Tagify(input, {
+      whitelist: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Node",
+        "Handlebars",
+        "Express",
+        "MongoDB",
+        "GraphQL",
+        "React",
+        "MERN",
+      ],
+      maxTags: 10,
+      dropdown: {
+        maxItems: 20, // <- mixumum allowed rendered suggestions
+        classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+        enabled: 0, // <- show suggestions on focus
+        closeOnSelect: false, // <- do not hide the suggestions dropdown once an item has been selected
+      },
+    });
+
   const [projectTitle, setTitle] = useState("");
   const [projectBody, setBody] = useState("");
   const [projectTags, setTags] = useState("");
@@ -79,8 +105,8 @@ const ProjectForm = () => {
     // makes tags only strings of alphabetic characters and keeps tags to a length of 10
     const tagsRegex = /[A-z]+/g;
     const tags = [...projectTags.matchAll(tagsRegex)]
-      .join(' ')
-      .split(' ')
+      .join(" ")
+      .split(" ")
       .map((tag, index) => {
         if (tag.length > 10) return tag.substring(0, 9);
         return tag;
@@ -150,10 +176,10 @@ const ProjectForm = () => {
               <Form.Group className="mb-3" controlId="formProjectTags">
                 <Form.Label>Tags</Form.Label>
                 <Form.Control
-                  type="text"
+                  name="tagify-tags"
+                  class="some_class_name"
                   placeholder="Tags"
                   value={projectTags}
-                  className="bg-dark text-white"
                   onChange={handleChangeTags}
                 />
               </Form.Group>
