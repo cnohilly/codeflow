@@ -19,16 +19,15 @@ const FriendSearch = () => {
     return <div>Loading...</div>;
   }
 
-  const handleClick = async () => {
-    console.log('working')
+  const handleClick = async (event) => {
     
-    // try {
-    //   await addFriend({
-    //     variables: { id:  }
-    //   });
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    try {
+      await addFriend({
+        variables: { _id: event.target.value  }
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -47,6 +46,7 @@ const FriendSearch = () => {
               <h5>{user.username}</h5>
               <button
                 className="btn w-100 display-block mb-2 btn-primary "
+                value={user._id}
                 onClick={handleClick}
               >
                 <i className="bi bi-suit-heart-fill text-white"></i> {buttonText}
