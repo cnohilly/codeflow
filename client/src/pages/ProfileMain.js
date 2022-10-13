@@ -88,7 +88,7 @@ const ProfileMain = (props) => {
               </Tab.Pane>
               <Tab.Pane eventKey="find-friends">
                 <Row xs={1} md={2} lg={3} className="g-3">
-                  <FriendSearch />
+                  <FriendSearch friends={user.friends}/>
                 </Row>
               </Tab.Pane>
             </Tab.Content>

@@ -1,35 +1,44 @@
 import React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { QUERY_USERS } from "../../utils/queries";
 import { ADD_FRIEND } from "../../utils/mutations";
 
-const FriendSearch = () => {
+const FriendSearch = (props) => {
   const { loading, data } = useQuery(QUERY_USERS);
-  const [addFriend] = useMutation(ADD_FRIEND);
 
+  const [addFriend] = useMutation(ADD_FRIEND);
+  console.log(props);
   if (loading) {
     return <div>Loading...</div>;
   }
 
   const handleClick = async (event) => {
-
-    console.log(event.target.value)
+    console.log(event.target.value);
     try {
       await addFriend({
-        variables: { id: event.target.value }
+        variables: { id: event.target.value },
       });
     } catch (e) {
       console.error(e);
     }
-    event.target.innerHTML = 'Friend Added';
+    event.target.innerHTML = "Friend Added";
   };
 
+
+
+const friendIds = props.friends.map((friend) => { return friend._id; });
+
+ const friends = data.users.filter((user) => {
+  return friendIds.indexOf(user._id) < 0;
+})
+     
+  
   return (
     <>
-      {data.users.map((user) => (
+      {friends.map((user) => (
         <Col key={user.username}>
           <Card className="text-white shadow">
             <Card.Body className="d-flex flex-column align-items-center">
