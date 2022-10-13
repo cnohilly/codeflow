@@ -21,7 +21,7 @@ const Header = () => {
                 src="/logo192.png"
                 width="30"
                 height="30"
-                className="d-inline-block align-top me-1"
+                className="d-inline-block align-top me-2"
                 alt="CodeFlow logo"
               />
               <div className="d-none d-sm-block brand fs-4">

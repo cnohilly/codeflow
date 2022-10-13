@@ -69,6 +69,9 @@ const Footer = () => {
         <Row xs={1} md={4}>
           <Col>
             <h5 className="text-uppercase text-white">About us</h5>
+            <p className='brand text-white fs-1 m-0'>
+                Code<span className="text-success">Flow</span>
+            </p>
             <p>
               Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, Braulio Loaiza, and Ian Zyvith
             </p>

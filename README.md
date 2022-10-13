@@ -50,8 +50,23 @@ The following images demonstrate the application's appearance and functionality.
 
 ## Technologies Used
 
+- GraphQL
+- JWT-Decode
 - React
-- 
+- React-Dom
+- React-Router-Dom
+- Sass
+- Apollo/Client
+- Yaireo/tagify
+- JsonWebToken
+- Mongoose
+- Express
+- Apollo-Server-Express
+- Nodemon
+- Bcrypt
+- Concurrently
+- Animate.css
+- GoogleFonts
 
 ## Credits
 
