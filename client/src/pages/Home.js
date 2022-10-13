@@ -18,7 +18,6 @@ const Home = () => {
   const searchOptions = ['Title', 'Tag'];
 
   const updateSearch = (type, val) => {
-    console.log(type, val);
     if (!loading) {
       if (!val) {
         setDisplayedProjects(projects);

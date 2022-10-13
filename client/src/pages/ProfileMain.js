@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Tab, Tabs, Nav, Button } from "react-bootstrap";
+import { Container, Row, Col, Tab, Nav, Button } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
 import FriendSearch from "../components/FriendSearch";
@@ -8,7 +8,6 @@ import ProfileError from "../components/ProfileError";
 import ProjectForm from "../components/ProjectForm";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
-import CommentList from "../components/CommentList";
 import ProjectList from "../components/ProjectList";
 import Auth from "../utils/auth";
 
@@ -18,7 +17,6 @@ const ProfileMain = (props) => {
   const [addFriend] = useMutation(ADD_FRIEND);
 
   const { username: userParam } = useParams();
-  console.log(userParam);
 
   // to be used later for adding friends
   //   const [addFriend] = useMutation(ADD_FRIEND);
@@ -30,7 +28,6 @@ const ProfileMain = (props) => {
     },
   });
 
-  console.log(data);
   const user = data?.me || data?.user || {};
 
   // navigate to personal profile page if username is yours
@@ -41,8 +38,6 @@ const ProfileMain = (props) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  console.log(user);
 
   if (!user?.username) {
     return (
@@ -59,7 +54,6 @@ const ProfileMain = (props) => {
       await addFriend({
         variables: { id: user._id },
       });
-      console.log('added');
     } catch (e) {
       console.error(e);
     }

@@ -18,7 +18,7 @@ const CommentForm = (props) => {
   const [commentBody, setCommentBody] = useState('');
 
   // function to add comment
-  const [addComment, { error }] = useMutation(ADD_COMMENT, {
+  const [addComment] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       try {
         if (parentCommentId) {
@@ -26,7 +26,6 @@ const CommentForm = (props) => {
             query: QUERY_COMMENT,
             variables: { id: parentCommentId }
           });
-          console.log(comment);
           cache.writeQuery({
             query: QUERY_COMMENT,
             data: { comment: { ...comment, comments: [...comment.comments, addComment], commentCount: comment.comments.length + 1 } }
