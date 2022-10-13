@@ -77,9 +77,11 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                       <Col xs={12} className="me-0">
                         <h3>About Me</h3>
                       </Col>
-                      <Col className="px-0">
-                        <BioButton toggleBioForm={toggleBioForm} />
-                      </Col>
+                      {(userId === Auth.getProfile().data._id) &&
+                        <Col className="px-0">
+                          <BioButton toggleBioForm={toggleBioForm} />
+                        </Col>
+                      }
                     </Row>
                     {!displayBioForm ? (
                       <>
@@ -96,26 +98,28 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                       />
                     )}
 
-                    <Form onSubmit={handleFormSubmit}>
-                      <Form.Group className="mb-3" controlId="newProfilePic">
-                        <Form.Label>New Profile Pic</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          placeholder="Use Image Link"
-                          value={pic}
-                          rows={1}
-                          className="bg-dark text-white"
-                          onChange={handleChangePic}
-                        />
-                      </Form.Group>
-                      <Button
-                        variant="success"
-                        type="submit"
-                        className="rounded-pill px-3 fw-bold"
-                      >
-                        Submit
-                      </Button>
-                    </Form>
+                    {(userId === Auth.getProfile().data._id) &&
+                      <Form onSubmit={handleFormSubmit}>
+                        <Form.Group className="mb-3" controlId="newProfilePic">
+                          <Form.Label>New Profile Pic</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            placeholder="Use Image Link"
+                            value={pic}
+                            rows={1}
+                            className="bg-dark text-white"
+                            onChange={handleChangePic}
+                          />
+                        </Form.Group>
+                        <Button
+                          variant="success"
+                          type="submit"
+                          className="rounded-pill px-3 fw-bold"
+                        >
+                          Submit
+                        </Button>
+                      </Form>
+                    }
                   </Card.Body>
                 </div>
               </div>

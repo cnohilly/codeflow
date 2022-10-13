@@ -25,9 +25,10 @@ const FriendList = ({ friendCount, username, friends }) => {
           </h5>
           <div className="btn-group-vertical w-100 display-block">
             {friends.map((friend) => (
-              <Link 
+              <Link
                 to={`/profile/${friend.username}`}
-                class="btn btn-outline-success"
+                className="btn btn-outline-success"
+                key={friend.username}
               >
                 {friend.username}
               </Link>
