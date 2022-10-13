@@ -5,11 +5,8 @@ import { EDIT_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 const BioForm = (props) => {
-  const CHARACTER_MAX = 500;
-
   const { toggleBioForm, BioBody } = props;
 
-  const [editBio, setBio] = useState(BioBody);
   const bioRef = useRef();
 
   const [editBioBody] = useMutation(EDIT_USER);
@@ -17,22 +14,21 @@ const BioForm = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    let bioText = bioRef.current.value;
+    if (bioText > 500) {
+      bioText = bioText.substring(0, 499);
+    }
+
     await editBioBody({
       variables: {
         id: Auth.getProfile().data._id,
         input: {
-          bio: bioRef.current.value,
+          bio: bioText
         },
       },
     });
 
     toggleBioForm();
-  };
-
-  const handleChange = async (event) => {
-    if (event.target.value.length <= CHARACTER_MAX) {
-      setBio(event.target.value);
-    }
   };
 
   return (
