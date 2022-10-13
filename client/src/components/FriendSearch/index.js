@@ -1,10 +1,10 @@
 import React from "react";
-import {useState} from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Button, ButtonGroup } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-import { QUERY_USERS} from "../../utils/queries";
+import { QUERY_USERS } from "../../utils/queries";
 import { ADD_FRIEND } from "../../utils/mutations";
 
 const FriendSearch = () => {
@@ -13,28 +13,30 @@ const FriendSearch = () => {
 
   const [buttonText, setButtonText] = useState('Add Friend');
 
- 
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   const handleClick = async (event) => {
-    
+
+    console.log(event.target.value)
     try {
       await addFriend({
-        variables: { _id: event.target.value  }
+        variables: { id: event.target.value }
       });
     } catch (e) {
       console.error(e);
     }
+    event.target.innerHTML = 'Friend Added';
   };
 
   return (
     <>
       {data.users.map((user) => (
         <Col className="py-3" key={user.username}>
-          
+
           <Card className="bg-black bg-gradient text-white shadow">
             <div className="d-flex flex-column align-items-center px-3">
               <img

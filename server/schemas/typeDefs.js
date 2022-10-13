@@ -9,6 +9,7 @@ const typeDefs = gql`
     createdAt: String
     profileImage: String
     friends: [User]
+    friendCount: Int
     projects: [Project]
   }
 

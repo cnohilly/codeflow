@@ -128,6 +128,7 @@ export const ADD_PROJECT = gql`
       lastEditedAt
       commentCount
     }
+  }
     `
 
 export const ADD_FRIEND = gql`

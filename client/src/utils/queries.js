@@ -131,7 +131,7 @@ export const QUERY_COMMENT = gql`
 `;
 
 export const QUERY_USERS = gql`
-    query Query {
+query Query {
   users {
     _id
     username

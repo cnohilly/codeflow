@@ -3,6 +3,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Tab, Tabs, Nav } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
+import FriendSearch from "../components/FriendSearch";
 import ProfileError from "../components/ProfileError";
 import ProjectForm from "../components/ProjectForm";
 import { useQuery, useMutation } from "@apollo/client";
@@ -64,7 +65,6 @@ const ProfileMain = (props) => {
   };
 
   return (
-<<<<<<< HEAD
     <Container className="py-4">
       <Tab.Container
         id="profile-tabs"
@@ -86,6 +86,11 @@ const ProfileMain = (props) => {
                 <ProjectForm />
                 <ProjectList projects={user.projects} />
               </Tab.Pane>
+              <Tab.Pane eventKey="find-friends">
+                <Row xs={3} className="g-4">
+                  <FriendSearch />
+                </Row>
+              </Tab.Pane>
             </Tab.Content>
           </Col>
           <Col xs={3}>
@@ -97,34 +102,20 @@ const ProfileMain = (props) => {
                 <Nav.Item>
                   <Nav.Link eventKey="projects">Projects</Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="find-friends">Find Friends</Nav.Link>
+                </Nav.Item>
               </Nav>
             </Row>
             <Row>
+              <button className="btn ml-auto" onClick={handleClick}>
+                Add Friend
+              </button>
               <FriendList username={user.username} friends={user.friends} />
             </Row>
           </Col>
         </Row>
       </Tab.Container>
-=======
-    <Container id="profile-info" className="py-3">
-      <Row>
-        <Col xs={9}>
-          <Row>
-            <UserInfo username={user.username} joinDate={user.createdAt} />
-          </Row>
-        </Col>
-
-        <Col xs={3}>
-          <Row>
-            <ProfileNav />
-            <FriendList />
-            <button className="btn ml-auto" onClick={handleClick}>
-              Add Friend
-            </button>
-          </Row>
-        </Col>
-      </Row>
->>>>>>> 96afe5b17b2b8d77c2a1b8538d1c1e83b58a60a4
     </Container>
   );
 };
