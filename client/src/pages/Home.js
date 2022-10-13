@@ -16,7 +16,7 @@ const Home = () => {
     // section for Homepage
     <div id="home" className="scroll-margin">
       {/* section for hero */}
-      <section id="hero" className="py-4 py-md-5 dark-card-bg text-center text-white">
+      <section id="hero" className="py-4 py-md-5 dark-card-bg text-center text-white bg-animation">
         <div className="py-md-5">
           {/* animated text using animate.css */}
           <h1 className="display-1 fw-semibold brand">
@@ -29,9 +29,9 @@ const Home = () => {
           </h1>
           <h2>
             <span className="animate__animated animate__fadeInRight animatespan custom-delay-2 ">Design</span>
-            <span className="px-3 animate__animated animate__fadeInRight animatespan custom-delay-3">/</span>
+            <span className="px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-3">/</span>
             <span className="animate__animated animate__fadeInRight animatespan custom-delay-4">Develop</span>
-            <span className="px-3 animate__animated animate__fadeInRight animatespan custom-delay-5">/</span>
+            <span className="px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-5">/</span>
             <span className="animate__animated animate__fadeInRight animatespan custom-delay-6">Deploy</span>
           </h2>
         </div>

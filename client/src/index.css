@@ -37,7 +37,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Montserrat", "Segoe UI", "Roboto", "Oxygen",
+  font-family: "Rubik", "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -121,6 +121,24 @@ footer i:hover {
 
 .custom-delay-6 {
   animation-delay: 3.5s;
+}
+
+.bg-animation {
+  background-image: linear-gradient( 109.6deg,  rgba(18,18,26,1) 21.6%, rgba(39,41,61,1) 33.8%, rgba(18,18,26,1) 47.8%, rgba(18,18,26,1) 61.1%, rgba(39,41,61,1) 73.8%, rgba(18,18,26,1) 86.7% );
+  background-size: 400% 400%;
+  animation: gradient 30s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* card background */
