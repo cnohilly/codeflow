@@ -100,7 +100,9 @@ footer i:hover {
   font-family: 'Bebas Neue', cursive;
 }
 
-#hero h1, #hero, h2 {
+#hero h1,
+#hero,
+h2 {
   text-shadow: 0px 0px 2px rgb(0, 0, 0);
 }
 
@@ -134,7 +136,7 @@ footer i:hover {
 }
 
 .bg-animation {
-  background-image: linear-gradient( 109.6deg,  rgba(18,18,26,1) 21.6%, rgba(39,41,61,1) 33.8%, rgba(18,18,26,1) 47.8%, rgba(18,18,26,1) 61.1%, rgba(39,41,61,1) 73.8%, rgba(18,18,26,1) 86.7% );
+  background-image: linear-gradient(109.6deg, rgba(18, 18, 26, 1) 21.6%, rgba(39, 41, 61, 1) 33.8%, rgba(18, 18, 26, 1) 47.8%, rgba(18, 18, 26, 1) 61.1%, rgba(39, 41, 61, 1) 73.8%, rgba(18, 18, 26, 1) 86.7%);
   background-size: 400% 400%;
   animation: gradient 30s ease-in-out infinite;
 }
@@ -143,9 +145,11 @@ footer i:hover {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -156,7 +160,8 @@ footer i:hover {
   background-color: var(--dark-accent) !important;
 }
 
-.card-header, #hero {
+.card-header,
+#hero {
   background-color: var(--dark-header) !important;
 }
 
@@ -197,4 +202,8 @@ select {
 .tagify__input::before,
 .tagify__input:focus:empty::before {
   color: gray;
+}
+
+.ar1x1 {
+  aspect-ratio: 1/1;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Col, Card, Row, Form, Button } from "react-bootstrap";
+import { Col, Card, Row, Form, Button } from "react-bootstrap";
 import BioButton from "../BioButton";
 import BioForm from "../BioForm";
 import { EDIT_USER } from "../../utils/mutations";
@@ -26,8 +26,6 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
     event.preventDefault();
 
     try {
-      console.log(pic);
-      console.log(Auth.getProfile().data._id);
       await editUser({
         variables: {
           id: Auth.getProfile().data._id,
@@ -63,7 +61,7 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                   src={profilePic}
                   alt="profile-pic"
                   style={{ width: "125px" }}
-                  className="rounded-circle"
+                  className="rounded-circle ar1x1"
                 />
               </div>
             </Col>

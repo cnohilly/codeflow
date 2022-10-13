@@ -64,6 +64,7 @@ const Comment = (props) => {
                   src={comment.createdBy.profileImage || "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"}
                   alt={`Avatar for ${comment.createdBy.username}`}
                   style={{ width: "36px", borderRadius: "50%" }}
+                  className="ar1x1"
                 />
               </div>
 

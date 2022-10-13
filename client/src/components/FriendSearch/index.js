@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
@@ -10,13 +9,11 @@ const FriendSearch = (props) => {
   const { loading, data } = useQuery(QUERY_USERS);
 
   const [addFriend] = useMutation(ADD_FRIEND);
-  console.log(props);
   if (loading) {
     return <div>Loading...</div>;
   }
 
   const handleClick = async (event) => {
-    console.log(event.target.value);
     try {
       await addFriend({
         variables: { id: event.target.value },
@@ -29,13 +26,13 @@ const FriendSearch = (props) => {
 
 
 
-const friendIds = props.friends.map((friend) => { return friend._id; });
+  const friendIds = props.friends.map((friend) => { return friend._id; });
 
- const friends = data.users.filter((user) => {
-  return friendIds.indexOf(user._id) < 0;
-})
-     
-  
+  const friends = data.users.filter((user) => {
+    return friendIds.indexOf(user._id) < 0;
+  })
+
+
   return (
     <>
       {friends.map((user) => (

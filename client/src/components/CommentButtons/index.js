@@ -23,7 +23,6 @@ const CommentButtons = (props) => {
   }
 
   const handleDelete = event => {
-    console.log(comment._id);
     deleteComment({
       variables: { id: comment._id }
     });
