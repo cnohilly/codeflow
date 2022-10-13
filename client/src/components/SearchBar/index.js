@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Card, Form, Button, InputGroup } from 'react-bootstrap';
+import React, { useRef } from 'react';
+import { Card, Form, InputGroup } from 'react-bootstrap';
 
 const SearchBar = (props) => {
   const {
-    searchOptions
+    searchOptions,
+    updateSearch
   } = props;
 
   const searchType = useRef();
-  // const [searchVal, setSearchVal] = useState('');
   const searchVal = useRef();
 
-  useEffect(() => {
-    console.log(searchType.current.value, searchVal);
-  }, [searchVal])
+  const onSearchChange = () => {
+    updateSearch(searchType.current.value, searchVal.current.value);
+  }
 
   return (
     // search bar card
@@ -25,9 +25,11 @@ const SearchBar = (props) => {
               aria-label="Select"
               className="bg-dark text-light w-100"
               ref={searchType}
+              onChange={onSearchChange}
             >
               {searchOptions.map(option => {
-                return (<option value={option.toLowerCase().split(' ').join('-')}>{option}</option>)
+                const val = option.toLowerCase().split(' ').join('-');
+                return (<option key={val} value={val}>{option}</option>)
               })};
               {/* <option value="title">Title</option> */}
               {/* <option value="tag">Tag</option> */}
@@ -39,15 +41,9 @@ const SearchBar = (props) => {
               className="bg-dark text-light"
               // value={searchVal}
               ref={searchVal}
-              maxlength="100"
+              onChange={onSearchChange}
+              maxLength="100"
             />
-            <Button
-              variant="success"
-              id="button-addon2"
-              type="submit"
-            >
-              <i className="bi bi-search"></i>
-            </Button>
           </InputGroup>
         </Form>
       </Card.Body>

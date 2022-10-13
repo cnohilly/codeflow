@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Container } from 'react-bootstrap';
 import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
@@ -10,32 +10,36 @@ import { useQuery } from '@apollo/client';
 const Home = () => {
 
   const { loading, data } = useQuery(QUERY_PROJECTS);
-  const projects = data?.projects || [];
-  let filteredProjects = [];
+
+  const projects = useMemo(() => data?.projects || [], [data]);
+
+  const [displayedProjects, setDisplayedProjects] = useState(projects);
 
   const searchOptions = ['Title', 'Tag'];
 
-  const [searchState, setSearchState] = useState({ type: 'title', value: '' });
-
   const updateSearch = (type, val) => {
-    setSearchState = setSearchState({ type: type, value: val });
+    console.log(type, val);
+    if (!loading) {
+      if (!val) {
+        setDisplayedProjects(projects);
+      } else if (type === 'title') {
+        setDisplayedProjects(projects.filter(project => {
+          return project.projectTitle.toLowerCase().includes(val.toLowerCase());
+        }));
+      } else if (type === 'tag') {
+        setDisplayedProjects(projects.filter(project => {
+          return project.projectTags.filter(tag => {
+            return tag.toLowerCase().includes(val.toLowerCase());
+          }).length > 0;
+        }));
+      }
+    }
   }
 
   useEffect(() => {
-    if (!loading) {
-      if (!searchState.value) {
-        filteredProjects = [];
-      } else if (searchState.type === 'title') {
-        filteredProjects = projects.filter(project => {
-          return project.projectTitle.contains(searchState.value);
-        });
-      } else if (searchState.type === 'tag'){
-        filteredProjects = projects.filter(project => {
-          return project.projectTags.includes(searchState.value);
-        })
-      }
-    }
-  }, [searchState])
+    setDisplayedProjects(projects);
+  }, [projects])
+
 
   return (
     // section for Homepage
@@ -68,7 +72,7 @@ const Home = () => {
       <Container id="home-project-list" className="py-4">
 
         {/* Search Bar */}
-        <SearchBar searchOptions={searchOptions} />
+        <SearchBar searchOptions={searchOptions} updateSearch={updateSearch} />
 
         {/* Project Form */}
         <ProjectForm />
@@ -76,7 +80,7 @@ const Home = () => {
         {/* Project List */}
         {loading
           ? <h2 className="text-white text-center">Loading Projects...</h2>
-          : <ProjectList projects={filteredProjects ? filteredProjects : projects} />
+          : <ProjectList projects={displayedProjects} />
         }
 
       </Container>

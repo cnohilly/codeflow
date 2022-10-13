@@ -39,6 +39,9 @@ const ProjectForm = () => {
     },
   });
 
+  let tagify = useRef();
+  tagify.current = null;
+
   useEffect(() => {
     const tagifyWhitelist = ["HTML", "CSS", "JavaScript", "Node", "Handlebars", "Express", "MongoDB", "MySQL", "GraphQL", "React", "MERN"];
     const tagifySettings = {
@@ -58,10 +61,13 @@ const ProjectForm = () => {
         keepInvalid: false
       }
     }
-    new Tagify(document.querySelector('input[name="tagify-tags"]'), tagifySettings);
+    const inputEl = document.querySelector('input[name="tagify-tags"]');
+
+    if (!tagify.current && inputEl) {
+      tagify.current = new Tagify(inputEl, tagifySettings);
+    }
+
   }, [displayProjectForm]);
-
-
 
   // submit form
   const handleFormSubmit = async (event) => {
