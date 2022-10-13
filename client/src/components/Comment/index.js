@@ -74,9 +74,15 @@ const Comment = (props) => {
                   <Card.Subtitle
                     className="my-2 d-flex flex-column flex-md-row justify-content-between"
                   >
-                    <div className="fw-bold mb-1 mb-md-0">
-                      {comment.createdBy.username}
-                    </div>
+                    <Card.Link
+                      href={`../profile/${comment.createdBy.username}`}
+                      className="text-decoration-none link-light"
+                    >
+
+                      <div className="fw-bold mb-1 mb-md-0">
+                        {comment.createdBy.username}
+                      </div>
+                    </Card.Link>
                     <div className="text-secondary">
                       {!comment.lastEditedAt
                         ? `Posted on ${comment.createdAt}`

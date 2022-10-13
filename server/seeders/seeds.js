@@ -61,8 +61,8 @@ db.once('open', async () => {
             projectBody: faker.lorem.words(Math.round(Math.random() * 20) + 1),
             projectTags: tags,
             createdBy: createdUsers.insertedIds[randomUserIndex]._id,
-            repoLink: faker.internet.domainName(),
-            deployedLink: faker.internet.domainName()
+            repoLink: "http://" + faker.internet.domainName(),
+            deployedLink: "http://" + faker.internet.domainName()
         };
 
         const createdProject = await Project.create({ ...projectData });

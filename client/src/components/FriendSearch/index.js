@@ -39,12 +39,17 @@ const FriendSearch = (props) => {
         <Col key={user.username}>
           <Card className="text-white shadow">
             <Card.Body className="d-flex flex-column align-items-center">
-              <img
-                src={user.profileImage}
-                alt="profilepic"
-                style={{ width: "75px" }}
-                className="rounded-circle mb-2"
-              ></img>
+              <Card.Link
+                href={`../profile/${user.username}`}
+                className="text-decoration-none link-light"
+              >
+                <img
+                  src={user.profileImage}
+                  alt="profilepic"
+                  style={{ width: "75px" }}
+                  className="rounded-circle mb-2"
+                ></img>
+              </Card.Link>
               <p className="mb-4 fs-5">{user.username}</p>
               <Button
                 variant="primary"
