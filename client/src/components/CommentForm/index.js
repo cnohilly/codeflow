@@ -104,10 +104,10 @@ const CommentForm = (props) => {
             <div className="d-flex justify-content-end mt-3">
               {/* comment button */}
               <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 size="sm"
-                className="rounded-pill px-3 fw-semibold"
+                className="rounded-pill px-3 fw-bold"
               >
                 {!parentCommentId ? "Comment" : "Reply"}
               </Button>
@@ -116,7 +116,7 @@ const CommentForm = (props) => {
                   variant="danger"
                   type="button"
                   size="sm"
-                  className="rounded-pill px-3 ms-2 fw-semibold"
+                  className="rounded-pill px-3 ms-2 fw-bold"
                   onClick={toggleReplyForm}
                 >
                   Cancel

@@ -148,20 +148,22 @@ const ProjectForm = () => {
         <Card.Body>
           {/* Toggle project form */}
           {!displayProjectForm ? (
-            <Button
-              variant="primary"
-              type="button"
-              className="rounded-pill fw-semibold"
-              onClick={() => setDisplayProjectForm(!displayProjectForm)}
-            >
-              <i className="bi bi-plus-lg me-1"></i>
-              Create Project
-            </Button>
+            <div className="d-grid">
+              <Button
+                variant="success"
+                type="button"
+                className="rounded-pill fw-bold"
+                onClick={() => setDisplayProjectForm(!displayProjectForm)}
+              >
+                <i className="bi bi-plus-lg me-2"></i>
+                Create Project
+              </Button>
+            </div>
           ) : (
             <Form onSubmit={handleFormSubmit}>
               {/* project title input */}
               <Form.Group className="mb-3" controlId="formProjectTitle">
-                <Form.Label>Title</Form.Label>
+                <Form.Label className="fs-5">Title</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Title"
@@ -171,13 +173,12 @@ const ProjectForm = () => {
                 />
               </Form.Group>
 
-              {/* Look up Tagify or Bootstrap Tags Input to manage tag input field*/}
               {/* project tag input */}
               <Form.Group className="mb-3" controlId="formProjectTags">
-                <Form.Label>Tags</Form.Label>
+                <Form.Label className="fs-5">Tags</Form.Label>
                 <Form.Control
                   name="tagify-tags"
-                  class="some_class_name"
+                  className="some_class_name bg-dark text-white"
                   placeholder="Tags"
                   value={projectTags}
                   onChange={handleChangeTags}
@@ -186,7 +187,7 @@ const ProjectForm = () => {
 
               {/* project description textarea */}
               <Form.Group className="mb-3" controlId="formProjectDescription">
-                <Form.Label>Description</Form.Label>
+                <Form.Label className="fs-5">Description</Form.Label>
                 <Form.Control
                   as="textarea"
                   placeholder="Description"
@@ -204,7 +205,7 @@ const ProjectForm = () => {
                   controlId="formDeployedLink"
                   className="mb-3"
                 >
-                  <Form.Label>Deployed Application Link</Form.Label>
+                  <Form.Label className="fs-5">Deployed Application Link</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter deployed application link"
@@ -215,7 +216,7 @@ const ProjectForm = () => {
                 </Form.Group>
                 {/* project repo link input */}
                 <Form.Group as={Col} controlId="formRepoLink" className="mb-3">
-                  <Form.Label>GitHub Repository Link</Form.Label>
+                  <Form.Label className="fs-5">GitHub Repository Link</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter GitHub repository link"
@@ -229,10 +230,10 @@ const ProjectForm = () => {
               <div className="d-flex justify-content-end mt-3">
                 {/* submit button */}
                 <Button
-                  variant="primary"
+                  variant="success"
                   type="submit"
                   size="sm"
-                  className="rounded-pill px-3 me-2 fw-semibold"
+                  className="rounded-pill px-3 me-2 fw-bold"
                 >
                   Submit
                 </Button>
@@ -241,7 +242,7 @@ const ProjectForm = () => {
                   variant="danger"
                   type="button"
                   size="sm"
-                  className="rounded-pill px-3 fw-semibold"
+                  className="rounded-pill px-3 fw-bold"
                   onClick={() => setDisplayProjectForm(!displayProjectForm)}
                 >
                   Cancel

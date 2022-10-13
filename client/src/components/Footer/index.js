@@ -53,7 +53,7 @@ const Footer = () => {
     {
       name: "email",
       symbol: "bi bi-envelope-fill",
-      text: "poseidon@gmail.com"
+      text: "codeflow@gmail.com"
     },
     {
       name: "phone",
@@ -64,18 +64,18 @@ const Footer = () => {
 
   return (
     // section for Footer component
-    <footer className="mt-auto pt-5 pb-4 bg-black text-center text-md-start text-white">
+    <footer className="mt-auto pt-5 pb-4 bg-black text-center text-md-start text-secondary">
       <Container>
         <Row xs={1} md={4}>
           <Col>
-            <h5 className="text-uppercase">About us</h5>
+            <h5 className="text-uppercase text-white">About us</h5>
             <p>
-            Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, Braulio Loaiza, and Ian Zyvith
+              Made by Kyle Tang, Stephon Treadwell, Chris Nohilly, Braulio Loaiza, and Ian Zyvith
             </p>
           </Col>
           {/* company */}
           <Col>
-            <h5 className="text-uppercase">Company</h5>
+            <h5 className="text-uppercase text-white">Company</h5>
             <ul className="list-unstyled d-flex flex-column">
               {companyLinks.map(companyLink => (
                 <li 
@@ -84,7 +84,7 @@ const Footer = () => {
                 >
                   <a 
                     href="/"
-                    className="text-white text-decoration-none"
+                    className="text-secondary text-decoration-none"
                   >
                     {companyLink.text}
                   </a>
@@ -94,7 +94,7 @@ const Footer = () => {
           </Col>
           {/* follow us */}
           <Col>
-            <h5 className="text-uppercase">Follow Us</h5>
+            <h5 className="text-uppercase text-white">Follow Us</h5>
             <ul className="list-inline">
               {socialMediaLinks.map(socialMediaLink => (
                 <li 
@@ -113,7 +113,7 @@ const Footer = () => {
           </Col>
           {/* contact */}
           <Col>
-            <h5 className="text-uppercase">Contact</h5>
+            <h5 className="text-uppercase text-white">Contact</h5>
             <ul className="list-unstyled d-flex flex-column">
               {contactLinks.map(contactLink => (
                 <li 
@@ -122,7 +122,7 @@ const Footer = () => {
                 >
                   <a 
                     href="/" 
-                    className="text-white text-decoration-none"
+                    className="text-secondary text-decoration-none"
                   >
                     <i className={`${contactLink.symbol} pe-2`}
                     ></i>
@@ -137,7 +137,7 @@ const Footer = () => {
         <div>
           <ul className="list-unstyled d-flex flex-column flex-md-row">
             <li className="mb-2 order-last order-md-first">
-              &copy; 2022 Poseidon, Inc. All Rights Reserved.
+              &copy; 2022 CodeFlow, Inc. All Rights Reserved.
             </li>
             <li className="mb-2 mx-md-4">
               <a href="/" className="nav-link">Terms and Conditions</a>

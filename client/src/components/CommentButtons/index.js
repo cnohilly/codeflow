@@ -32,7 +32,7 @@ const CommentButtons = (props) => {
   return (
     <ButtonToolbar aria-label="Comment toolbar with button groups">
       {/* like button */}
-      <div className="d-flex align-items-center me-2">
+      <div className="d-flex align-items-center me-2 fw-semibold">
         <Button
           variant="link"
           type="button"
@@ -56,7 +56,7 @@ const CommentButtons = (props) => {
               variant="link"
               type="button"
               aria-label="Reply"
-              className="link-info"
+              className="link-success"
               onClick={toggleReplyForm}
             >
               <i className="bi bi-chat-square-fill"></i>

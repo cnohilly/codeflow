@@ -61,10 +61,10 @@ const EditForm = (props) => {
       <div className="d-flex justify-content-end mt-3">
         {/* update button */}
         <Button
-          variant="primary"
+          variant="success"
           type="submit"
           size="sm"
-          className="rounded-pill px-3 me-2 fw-semibold"
+          className="rounded-pill px-3 me-2 fw-bold"
         >
           Update
         </Button>
@@ -73,7 +73,7 @@ const EditForm = (props) => {
           variant="danger"
           type="button"
           size="sm"
-          className="rounded-pill px-3 fw-semibold"
+          className="rounded-pill px-3 fw-bold"
           onClick={toggleEditForm}
         >
           Cancel

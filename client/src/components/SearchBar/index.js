@@ -12,7 +12,7 @@ const SearchBar = () => {
             {/* select menu */}
             <Form.Select 
               aria-label="Select"
-              className="bg-dark text-light w-100 fw-semibold"
+              className="bg-dark text-light w-100"
             >
               <option value="title">Title</option>
               <option value="tag">Tag</option>
@@ -24,7 +24,7 @@ const SearchBar = () => {
               className="bg-dark text-light"
             />
             <Button 
-              variant="primary" 
+              variant="success" 
               id="button-addon2"
               type="submit"
             >

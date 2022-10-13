@@ -140,7 +140,7 @@ const Comment = (props) => {
               variant="success"
               type="button"
               aria-label="Show Replies"
-              className="mt-3 fw-semibold"
+              className="mt-3 fw-bold rounded-pill"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}

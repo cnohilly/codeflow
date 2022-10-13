@@ -37,7 +37,7 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: "Montserrat", "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -87,14 +87,18 @@ footer a:hover, footer i:hover {
   font-family: 'Bebas Neue', cursive;
 }
 
-/* hero */
-/* #hero h1, .brand {
-  background-image: linear-gradient( 112.9deg,  rgba(112,255,151,1) 6.2%, rgba(70,195,255,1) 99.7% );
-  background-image: linear-gradient( 89.9deg,  rgba(255,243,110,1) 16.9%, rgba(30,204,214,1) 55.1%, rgba(5,54,154,1) 90.7% );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-} */
+#hero h1, #hero, h2 {
+  text-shadow: 0px 0px 2px rgb(0, 0, 0);
+}
+
+/* card background */
+.card {
+  background-color: var(--dark-accent) !important;
+}
+
+.card-header, #hero {
+  background-color: var(--dark-header) !important;
+}
 
 /* Project Form */
 select {
@@ -102,18 +106,21 @@ select {
 }
 
 /* FORM */
-.form-label,
-.form-input,
-.form-textarea {
+#signUpForm .form-textarea,
+#loginForm .form-textarea {
   display: block;
 }
 
-.form-label {
+#signUpForm .form-label,
+#loginForm .form-label {
+  display: block;
   font-size: 1.2rem;
   margin: 0.625rem 0 0.25rem;
 }
 
-.form-input {
+#signUpForm .form-input,
+#loginForm .form-input {
+  display: block;
   width: 100%;
   padding: 0.75rem;
   margin: 0.2rem 0;
