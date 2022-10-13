@@ -38,6 +38,10 @@ const ProjectForm = () => {
     },
   });
 
+  if (error) {
+    console.log(error);
+  }
+
   let tagify = useRef();
   tagify.current = null;
 
@@ -172,7 +176,7 @@ const ProjectForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder='Enter deployed application link (Please include "https://www.")'
+                    placeholder='Enter deployed application link (Please include "http(s)://www.")'
                     className="bg-dark text-white"
                     ref={deployedRef}
                     maxLength="100"
@@ -185,7 +189,7 @@ const ProjectForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder='Enter GitHub repository link (Please include "https://www.")'
+                    placeholder='Enter GitHub repository link (Please include "http(s)://www.")'
                     className="bg-dark text-white"
                     ref={repoRef}
                     maxLength="100"
