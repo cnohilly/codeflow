@@ -1,7 +1,11 @@
 import React from 'react';
 import { Card, Form, Button, InputGroup } from 'react-bootstrap';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const {
+    searchTypeRef,
+    searchValueRef
+  } = props;
 
   return (
     // search bar card
@@ -13,6 +17,7 @@ const SearchBar = () => {
             <Form.Select 
               aria-label="Select"
               className="bg-dark text-light w-100"
+              ref={searchTypeRef}
             >
               <option value="title">Title</option>
               <option value="tag">Tag</option>
@@ -22,6 +27,7 @@ const SearchBar = () => {
               type="text"
               placeholder="Search projects by title or tag"
               className="bg-dark text-light"
+              ref={searchValueRef}
             />
             <Button 
               variant="success" 
