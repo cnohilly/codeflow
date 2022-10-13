@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Card, Row, Form, Button } from "react-bootstrap";
-import Auth from "../../utils/auth";
+import { CHANGE_PROFILE_PIC } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 const UserInfo = ({ username, joinDate, profilePic }) => {
+  // update profile pic function
+  const [pic, setPic] = useState("");
+  const [updatePic] = useMutation(CHANGE_PROFILE_PIC);
+
+  const handleChangePic = (event) => {
+    setPic(event.target.value);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await updatePic({
+        variables: {
+          pic,
+        },
+      });
+
+      // clear form value
+      setPic("");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Col>
       {/* User Info card */}
@@ -41,14 +67,16 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
                       officiis sed laborum labore saepe impedit.
                     </p>
 
-                    <Form>
+                    <Form onSubmit={handleFormSubmit}>
                       <Form.Group className="mb-3" controlId="newProfilePic">
                         <Form.Label>New Profile Pic</Form.Label>
                         <Form.Control
                           as="textarea"
                           placeholder="Use Image Link"
+                          value={pic}
                           rows={1}
                           className="bg-dark text-white"
+                          onChange={handleChangePic}
                         />
                       </Form.Group>
                       <Button
