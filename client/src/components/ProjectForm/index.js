@@ -1,43 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Col, Row, Card, Form, Button } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import { QUERY_PROJECTS, QUERY_ME } from "../../utils/queries";
 import Tagify from "@yaireo/tagify";
+import Tags from "@yaireo/tagify/dist/react.tagify";
+// import TagInput from '../TagInput';
+import { useEffect } from "react";
 
 const ProjectForm = () => {
-  // tagify function
-  var input = document.querySelector('input[name="tagify-tags"]'),
-    // init Tagify script on the above inputs
-    tagify = new Tagify(input, {
-      whitelist: [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "Node",
-        "Handlebars",
-        "Express",
-        "MongoDB",
-        "GraphQL",
-        "React",
-        "MERN",
-      ],
-      maxTags: 10,
-      dropdown: {
-        maxItems: 20, // <- mixumum allowed rendered suggestions
-        classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
-        enabled: 0, // <- show suggestions on focus
-        closeOnSelect: false, // <- do not hide the suggestions dropdown once an item has been selected
-      },
-    });
 
   const [projectTitle, setTitle] = useState("");
   const [projectBody, setBody] = useState("");
   const [projectTags, setTags] = useState("");
   const [repoLink, setRepo] = useState("");
   const [deployedLink, setDeploy] = useState("");
-  const [characterCount, setCharacterCount] = useState(0);
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
     update(cache, { data: { addProject } }) {
@@ -62,65 +40,22 @@ const ProjectForm = () => {
     },
   });
 
-  // update state based on form input changes
-  const handleChangeTitle = (event) => {
-    if (event.target.value.length <= 300) {
-      setTitle(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
-
-  const handleChangeBody = (event) => {
-    if (event.target.value.length <= 300) {
-      setBody(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
-
-  const handleChangeTags = (event) => {
-    if (event.target.value.length <= 300) {
-      setTags(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
-
-  const handleChangeRepo = (event) => {
-    if (event.target.value.length <= 300) {
-      setRepo(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
-
-  const handleChangeDeploy = (event) => {
-    if (event.target.value.length <= 300) {
-      setDeploy(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // makes tags only strings of alphabetic characters and keeps tags to a length of 10
-    const tagsRegex = /[A-z]+/g;
-    const tags = [...projectTags.matchAll(tagsRegex)]
-      .join(" ")
-      .split(" ")
-      .map((tag, index) => {
-        if (tag.length > 10) return tag.substring(0, 9);
-        return tag;
-      });
-    if (tags.length > 10) {
-      tags.splice(10, tags.length - 10);
-    }
+    const tags = JSON.parse(tagifyRef.current.value);
+    console.log(tags);
+    console.log(tags.map(tag => {
+      return tag.value;
+    }))
 
     try {
       await addProject({
         variables: {
           projectTitle,
           projectBody,
-          projectTags: tags,
+          projectTags: JSON.parse(tagifyRef.current.value).map(tag => { return tag.value }),
           repoLink,
           deployedLink,
         },
@@ -129,10 +64,9 @@ const ProjectForm = () => {
       // clear form value
       setTitle("");
       setBody("");
-      setTags("");
+      tagifyRef.current.value = '';
       setRepo("");
       setDeploy("");
-      setCharacterCount(0);
     } catch (e) {
       console.error(e);
     }
@@ -140,6 +74,33 @@ const ProjectForm = () => {
 
   // displaying project form
   const [displayProjectForm, setDisplayProjectForm] = useState(false);
+
+
+
+  const tagifyRef = useRef();
+
+  useEffect(() => {
+    const tagifyWhitelist = ["HTML", "CSS", "JavaScript", "Node", "Handlebars", "Express", "MongoDB", "MySQL", "GraphQL", "React", "MERN"];
+    const tagifySettings = {
+      backspace: "edit",
+      // delimiters: ',| ',
+      pattern: /^\S{1,20}$/,
+      whitelist: tagifyWhitelist,
+      dropdown: {
+        enabled: 0,
+        fuzzySearch: true,
+        caseSensitive: false
+      },
+      maxTags: 10,
+      keepInvalid: false,
+      editTags: {
+        clicks: 1,
+        keepInvalid: false
+      }
+    }
+    console.log(tagifyRef);
+    new Tagify(document.querySelector('input[name="tagify-tags"]'), tagifySettings);
+  }, [displayProjectForm])
 
   return (
     // project form card
@@ -174,13 +135,12 @@ const ProjectForm = () => {
               {/* Look up Tagify or Bootstrap Tags Input to manage tag input field*/}
               {/* project tag input */}
               <Form.Group className="mb-3" controlId="formProjectTags">
-                <Form.Label>Tags</Form.Label>
                 <Form.Control
                   name="tagify-tags"
-                  class="some_class_name"
+                  className="bg-dark text-white"
                   placeholder="Tags"
-                  value={projectTags}
                   onChange={handleChangeTags}
+                  ref={tagifyRef}
                 />
               </Form.Group>
 
@@ -211,6 +171,7 @@ const ProjectForm = () => {
                     value={deployedLink}
                     className="bg-dark text-white"
                     onChange={handleChangeDeploy}
+                    maxLength="100"
                   />
                 </Form.Group>
                 {/* project repo link input */}
@@ -222,6 +183,7 @@ const ProjectForm = () => {
                     value={repoLink}
                     className="bg-dark text-white"
                     onChange={handleChangeRepo}
+                    maxLength="100"
                   />
                 </Form.Group>
               </Row>

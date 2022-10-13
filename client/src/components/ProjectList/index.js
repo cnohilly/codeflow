@@ -4,7 +4,6 @@ import Project from "../Project";
 
 const ProjectList = (props) => {
   const { projects } = props;
-  console.log(projects);
   if (!projects.length > 0) {
     return (
       <Row xs={1} className="gy-4">
