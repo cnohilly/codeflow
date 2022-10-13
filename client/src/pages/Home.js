@@ -18,7 +18,7 @@ const Home = () => {
   const [searchState, setSearchState] = useState({ type: 'title', value: '' });
 
   const updateSearch = (type, val) => {
-    setSearchState = useState({ type: type, value: val });
+    setSearchState = setSearchState({ type: type, value: val });
   }
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Home = () => {
       <Container id="home-project-list" className="py-4">
 
         {/* Search Bar */}
-        <SearchBar searchTypeRef={searchTypeRef} searchValueRef={searchValueRef} />
+        <SearchBar searchOptions={searchOptions} />
 
         {/* Project Form */}
         <ProjectForm />

@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Form, Button, InputGroup } from 'react-bootstrap';
 
 const SearchBar = (props) => {
   const {
-    searchTypeRef,
-    searchValueRef
+    searchOptions
   } = props;
+
+  const searchType = useRef();
+  // const [searchVal, setSearchVal] = useState('');
+  const searchVal = useRef();
+
+  useEffect(() => {
+    console.log(searchType.current.value, searchVal);
+  }, [searchVal])
 
   return (
     // search bar card
@@ -14,23 +21,28 @@ const SearchBar = (props) => {
         <Form>
           <InputGroup>
             {/* select menu */}
-            <Form.Select 
+            <Form.Select
               aria-label="Select"
               className="bg-dark text-light w-100"
-              ref={searchTypeRef}
+              ref={searchType}
             >
-              <option value="title">Title</option>
-              <option value="tag">Tag</option>
+              {searchOptions.map(option => {
+                return (<option value={option.toLowerCase().split(' ').join('-')}>{option}</option>)
+              })};
+              {/* <option value="title">Title</option> */}
+              {/* <option value="tag">Tag</option> */}
             </Form.Select>
             {/* search field */}
             <Form.Control
               type="text"
               placeholder="Search projects by title or tag"
               className="bg-dark text-light"
-              ref={searchValueRef}
+              // value={searchVal}
+              ref={searchVal}
+              maxlength="100"
             />
-            <Button 
-              variant="success" 
+            <Button
+              variant="success"
               id="button-addon2"
               type="submit"
             >
