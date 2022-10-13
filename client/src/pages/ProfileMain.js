@@ -59,6 +59,7 @@ const ProfileMain = (props) => {
       await addFriend({
         variables: { id: user._id },
       });
+      console.log('added');
     } catch (e) {
       console.error(e);
     }
@@ -89,7 +90,7 @@ const ProfileMain = (props) => {
               </Tab.Pane>
               <Tab.Pane eventKey="find-friends">
                 <Row xs={1} md={2} lg={3} className="g-3">
-                  <FriendSearch friends={user.friends}/>
+                  <FriendSearch friends={user.friends} />
                 </Row>
               </Tab.Pane>
             </Tab.Content>
@@ -107,13 +108,16 @@ const ProfileMain = (props) => {
                   <Nav.Link eventKey="find-friends">Find Friends</Nav.Link>
                 </Nav.Item>
               </Nav>
-              <Button
-                variant="success"
-                className="mt-3 fw-bold"
-                onClick={handleClick}
-              >
-                Add Friend
-              </Button>
+              {!(user._id === Auth.getProfile().data._id) &&
+                <Button
+                  variant="success"
+                  className="mt-3 fw-bold"
+                  onClick={handleClick}
+                >
+                  Add Friend
+                </Button>
+              }
+
               <FriendList username={user.username} friends={user.friends} />
             </Row>
           </Col>
