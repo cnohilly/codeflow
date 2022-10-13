@@ -3,6 +3,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Tab, Tabs, Nav } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
+import FriendSearch from "../components/FriendSearch";
 import ProfileError from "../components/ProfileError";
 import ProjectForm from "../components/ProjectForm";
 import { useQuery, useMutation } from "@apollo/client";
@@ -11,7 +12,11 @@ import CommentList from "../components/CommentList";
 import ProjectList from "../components/ProjectList";
 import Auth from "../utils/auth";
 
+import { ADD_FRIEND } from "../utils/mutations";
+
 const ProfileMain = (props) => {
+  const [addFriend] = useMutation(ADD_FRIEND);
+
   const { username: userParam } = useParams();
   console.log(userParam);
 
@@ -49,6 +54,16 @@ const ProfileMain = (props) => {
     );
   }
 
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { id: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Container className="py-4">
       <Tab.Container
@@ -71,6 +86,11 @@ const ProfileMain = (props) => {
                 <ProjectForm />
                 <ProjectList projects={user.projects} />
               </Tab.Pane>
+              <Tab.Pane eventKey="find-friends">
+                <Row xs={3} className="g-4">
+                  <FriendSearch />
+                </Row>
+              </Tab.Pane>
             </Tab.Content>
           </Col>
           <Col xs={3}>
@@ -82,9 +102,15 @@ const ProfileMain = (props) => {
                 <Nav.Item>
                   <Nav.Link eventKey="projects">Projects</Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="find-friends">Find Friends</Nav.Link>
+                </Nav.Item>
               </Nav>
             </Row>
             <Row>
+              <button className="btn ml-auto" onClick={handleClick}>
+                Add Friend
+              </button>
               <FriendList username={user.username} friends={user.friends} />
             </Row>
           </Col>
