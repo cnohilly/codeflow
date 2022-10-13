@@ -21,8 +21,8 @@ const Header = () => {
                 src="/logo192.png"
                 width="30"
                 height="30"
-                className="d-inline-block align-top me-1"
-                alt="React Bootstrap logo"
+                className="d-inline-block align-top me-2"
+                alt="CodeFlow logo"
               />
               <div className="d-none d-sm-block brand fs-4">
                 {/* Codename-Poseidon */}
@@ -30,9 +30,11 @@ const Header = () => {
               </div>
             </Navbar.Brand>
           </NavLink>
-          {/* menu button */}
 
+          {/* menu button */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+          {/* responsive menu */}
           <Navbar.Collapse id="responsive-navbar-nav">
             {Auth.loggedIn() ? (
               <Nav className="ms-auto">

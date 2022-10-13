@@ -25,18 +25,30 @@ export const ADD_USER = gql`
   }
 `;
 
-export const CHANGE_PROFILE_PIC = gql`
-  mutation updateProfilePic($id: ID!) {
-    updateProfilePic(_id: $id) {
-      _id
-      profileImage
+export const EDIT_USER = gql`
+  mutation editUser($input: EditUserInput!, $id: ID!) {
+    editUser(input: $input, _id: $id) {
+      token
+      user {
+        _id
+        profileImage
+        bio
+      }
     }
   }
 `;
 
 export const ADD_COMMENT = gql`
-  mutation Mutation($projectId: ID!, $parentCommentId: ID, $commentBody: String!) {
-    addComment(projectId: $projectId, parentCommentId: $parentCommentId, commentBody: $commentBody) {
+  mutation Mutation(
+    $projectId: ID!
+    $parentCommentId: ID
+    $commentBody: String!
+  ) {
+    addComment(
+      projectId: $projectId
+      parentCommentId: $parentCommentId
+      commentBody: $commentBody
+    ) {
       _id
       commentBody
       createdAt
@@ -60,13 +72,13 @@ export const ADD_COMMENT = gql`
 `;
 
 export const EDIT_COMMENT = gql`
-mutation Mutation($id: ID!, $commentBody: String!) {
-  editComment(_id: $id, commentBody: $commentBody) {
-    _id
-    commentBody
-    lastEditedAt
+  mutation Mutation($id: ID!, $commentBody: String!) {
+    editComment(_id: $id, commentBody: $commentBody) {
+      _id
+      commentBody
+      lastEditedAt
+    }
   }
-}
 `;
 
 export const DELETE_COMMENT = gql`
@@ -88,8 +100,20 @@ export const UPDATE_LIKE_COMMENT = gql`
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($projectTitle: String!, $projectTags: [String]!, $projectBody: String!, $repoLink: String, $deployedLink: String) {
-    addProject(projectTitle: $projectTitle, projectTags: $projectTags projectBody: $projectBody, repoLink: $repoLink, deployedLink: $deployedLink) {
+  mutation addProject(
+    $projectTitle: String!
+    $projectTags: [String]!
+    $projectBody: String!
+    $repoLink: String
+    $deployedLink: String
+  ) {
+    addProject(
+      projectTitle: $projectTitle
+      projectTags: $projectTags
+      projectBody: $projectBody
+      repoLink: $repoLink
+      deployedLink: $deployedLink
+    ) {
       _id
       projectTitle
       projectBody
@@ -104,6 +128,20 @@ export const ADD_PROJECT = gql`
       deployedLink
       lastEditedAt
       commentCount
+    }
+  }
+`;
+
+export const ADD_FRIEND = gql`
+  mutation addFriend($id: ID!) {
+    addFriend(_id: $id) {
+      _id
+      username
+      friendCount
+      friends {
+        _id
+        username
+      }
     }
   }
 `;

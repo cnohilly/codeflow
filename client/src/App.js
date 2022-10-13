@@ -17,8 +17,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import SingleProject from "./pages/SingleProject";
 import ProfileMain from "./pages/ProfileMain";
-import ProfileProjects from "./pages/ProfileProjects";
-import ProfileComments from "./pages/ProfileComments";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -51,7 +49,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profile/" >
+              <Route path="/profile" >
                 <Route
                   path=""
                   element={<ProfileMain />}
@@ -60,21 +58,13 @@ function App() {
                   path=":username"
                   element={<ProfileMain />}
                 />
-                {/* <Route
-                  path="user-projects"
-                  element={<ProfileProjects />}
-                />
-                <Route
-                  path="user-comments"
-                  element={<ProfileComments />}
-                /> */}
               </Route>
             </Routes>
           </main>
           <Footer />
         </div>
-      </Router>
-    </ApolloProvider>
+      </Router >
+    </ApolloProvider >
   );
 }
 

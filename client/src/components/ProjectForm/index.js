@@ -1,43 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Col, Row, Card, Form, Button } from "react-bootstrap";
-
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import { QUERY_PROJECTS, QUERY_ME } from "../../utils/queries";
 import Tagify from "@yaireo/tagify";
 
 const ProjectForm = () => {
-  // tagify function
-  var input = document.querySelector('input[name="tagify-tags"]'),
-    // init Tagify script on the above inputs
-    tagify = new Tagify(input, {
-      whitelist: [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "Node",
-        "Handlebars",
-        "Express",
-        "MongoDB",
-        "GraphQL",
-        "React",
-        "MERN",
-      ],
-      maxTags: 10,
-      dropdown: {
-        maxItems: 20, // <- mixumum allowed rendered suggestions
-        classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
-        enabled: 0, // <- show suggestions on focus
-        closeOnSelect: false, // <- do not hide the suggestions dropdown once an item has been selected
-      },
-    });
 
-  const [projectTitle, setTitle] = useState("");
-  const [projectBody, setBody] = useState("");
-  const [projectTags, setTags] = useState("");
-  const [repoLink, setRepo] = useState("");
-  const [deployedLink, setDeploy] = useState("");
-  const [characterCount, setCharacterCount] = useState(0);
+  const titleRef = useRef();
+  const bodyRef = useRef();
+  const tagsRef = useRef();
+  const repoRef = useRef();
+  const deployedRef = useRef();
+
+  // displaying project form
+  const [displayProjectForm, setDisplayProjectForm] = useState(false);
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
     update(cache, { data: { addProject } }) {
@@ -62,84 +39,61 @@ const ProjectForm = () => {
     },
   });
 
-  // update state based on form input changes
-  const handleChangeTitle = (event) => {
-    if (event.target.value.length <= 300) {
-      setTitle(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
+  let tagify = useRef();
+  tagify.current = null;
 
-  const handleChangeBody = (event) => {
-    if (event.target.value.length <= 300) {
-      setBody(event.target.value);
-      setCharacterCount(event.target.value.length);
+  useEffect(() => {
+    const tagifyWhitelist = ["HTML", "CSS", "JavaScript", "Node", "Handlebars", "Express", "MongoDB", "MySQL", "GraphQL", "React", "MERN"];
+    const tagifySettings = {
+      backspace: "edit",
+      // delimiters: ',| ',
+      pattern: /^\S{1,20}$/,
+      whitelist: tagifyWhitelist,
+      dropdown: {
+        enabled: 0,
+        fuzzySearch: true,
+        caseSensitive: false
+      },
+      maxTags: 10,
+      keepInvalid: false,
+      editTags: {
+        clicks: 1,
+        keepInvalid: false
+      }
     }
-  };
+    const inputEl = document.querySelector('input[name="tagify-tags"]');
 
-  const handleChangeTags = (event) => {
-    if (event.target.value.length <= 300) {
-      setTags(event.target.value);
-      setCharacterCount(event.target.value.length);
+    if (!tagify.current && inputEl) {
+      tagify.current = new Tagify(inputEl, tagifySettings);
     }
-  };
 
-  const handleChangeRepo = (event) => {
-    if (event.target.value.length <= 300) {
-      setRepo(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
-
-  const handleChangeDeploy = (event) => {
-    if (event.target.value.length <= 300) {
-      setDeploy(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
-  };
+  }, [displayProjectForm]);
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // makes tags only strings of alphabetic characters and keeps tags to a length of 10
-    const tagsRegex = /[A-z]+/g;
-    const tags = [...projectTags.matchAll(tagsRegex)]
-      .join(" ")
-      .split(" ")
-      .map((tag, index) => {
-        if (tag.length > 10) return tag.substring(0, 9);
-        return tag;
-      });
-    if (tags.length > 10) {
-      tags.splice(10, tags.length - 10);
-    }
-
     try {
       await addProject({
         variables: {
-          projectTitle,
-          projectBody,
-          projectTags: tags,
-          repoLink,
-          deployedLink,
+          projectTitle: titleRef.current.value,
+          projectBody: bodyRef.current.value,
+          projectTags: JSON.parse(tagsRef.current.value).map(tag => { return tag.value }),
+          repoLink: repoRef.current.value,
+          deployedLink: deployedRef.current.value,
         },
       });
 
       // clear form value
-      setTitle("");
-      setBody("");
-      setTags("");
-      setRepo("");
-      setDeploy("");
-      setCharacterCount(0);
+      titleRef.current.value = '';
+      bodyRef.current.value = '';
+      tagsRef.current.value = '';
+      repoRef.current.value = '';
+      deployedRef.current.value = '';
     } catch (e) {
       console.error(e);
     }
   };
-
-  // displaying project form
-  const [displayProjectForm, setDisplayProjectForm] = useState(false);
 
   return (
     // project form card
@@ -148,52 +102,49 @@ const ProjectForm = () => {
         <Card.Body>
           {/* Toggle project form */}
           {!displayProjectForm ? (
-            <Button
-              variant="primary"
-              type="button"
-              className="rounded-pill fw-semibold"
-              onClick={() => setDisplayProjectForm(!displayProjectForm)}
-            >
-              <i className="bi bi-plus-lg me-1"></i>
-              Create Project
-            </Button>
+            <div className="d-grid">
+              <Button
+                variant="success"
+                type="button"
+                className="rounded-pill fw-bold"
+                onClick={() => setDisplayProjectForm(!displayProjectForm)}
+              >
+                <i className="bi bi-plus-lg me-2"></i>
+                Create Project
+              </Button>
+            </div>
           ) : (
             <Form onSubmit={handleFormSubmit}>
               {/* project title input */}
               <Form.Group className="mb-3" controlId="formProjectTitle">
-                <Form.Label>Title</Form.Label>
+                <Form.Label className="fs-5">Title</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Title"
-                  value={projectTitle}
                   className="bg-dark text-white"
-                  onChange={handleChangeTitle}
+                  ref={titleRef}
                 />
               </Form.Group>
 
-              {/* Look up Tagify or Bootstrap Tags Input to manage tag input field*/}
               {/* project tag input */}
               <Form.Group className="mb-3" controlId="formProjectTags">
-                <Form.Label>Tags</Form.Label>
                 <Form.Control
                   name="tagify-tags"
-                  class="some_class_name"
+                  className="bg-dark text-white"
                   placeholder="Tags"
-                  value={projectTags}
-                  onChange={handleChangeTags}
+                  ref={tagsRef}
                 />
               </Form.Group>
 
               {/* project description textarea */}
               <Form.Group className="mb-3" controlId="formProjectDescription">
-                <Form.Label>Description</Form.Label>
+                <Form.Label className="fs-5">Description</Form.Label>
                 <Form.Control
                   as="textarea"
                   placeholder="Description"
-                  value={projectBody}
                   rows={4}
                   className="bg-dark text-white"
-                  onChange={handleChangeBody}
+                  ref={bodyRef}
                 />
               </Form.Group>
 
@@ -204,24 +155,24 @@ const ProjectForm = () => {
                   controlId="formDeployedLink"
                   className="mb-3"
                 >
-                  <Form.Label>Deployed Application Link</Form.Label>
+                  <Form.Label className="fs-5">Deployed Application Link</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter deployed application link"
-                    value={deployedLink}
                     className="bg-dark text-white"
-                    onChange={handleChangeDeploy}
+                    ref={deployedRef}
+                    maxLength="100"
                   />
                 </Form.Group>
                 {/* project repo link input */}
                 <Form.Group as={Col} controlId="formRepoLink" className="mb-3">
-                  <Form.Label>GitHub Repository Link</Form.Label>
+                  <Form.Label className="fs-5">GitHub Repository Link</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter GitHub repository link"
-                    value={repoLink}
                     className="bg-dark text-white"
-                    onChange={handleChangeRepo}
+                    ref={repoRef}
+                    maxLength="100"
                   />
                 </Form.Group>
               </Row>
@@ -229,10 +180,10 @@ const ProjectForm = () => {
               <div className="d-flex justify-content-end mt-3">
                 {/* submit button */}
                 <Button
-                  variant="primary"
+                  variant="success"
                   type="submit"
                   size="sm"
-                  className="rounded-pill px-3 me-2 fw-semibold"
+                  className="rounded-pill px-3 me-2 fw-bold"
                 >
                   Submit
                 </Button>
@@ -241,7 +192,7 @@ const ProjectForm = () => {
                   variant="danger"
                   type="button"
                   size="sm"
-                  className="rounded-pill px-3 fw-semibold"
+                  className="rounded-pill px-3 fw-bold"
                   onClick={() => setDisplayProjectForm(!displayProjectForm)}
                 >
                   Cancel

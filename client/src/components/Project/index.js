@@ -24,12 +24,12 @@ const Project = (props) => {
   return (
     <Col>
       {/* project card */}
-      <Card className="shadow dark-card-bg border-dark text-light">
+      <Card className="shadow border-dark text-light">
         <Card.Link
           href={`../single-project/${project._id}`}
           className="text-decoration-none link-light"
         >
-          <Card.Header className="header-bg-color border-success">
+          <Card.Header className="border-success">
             {/* project title */}
             <Card.Title>
               {project.projectTitle}
@@ -51,34 +51,37 @@ const Project = (props) => {
           <hr />
           {/* project description */}
           <Card.Text>{project.projectBody}</Card.Text>
-          <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex flex-column flex-md-row justify-content-between">
             {/* project number of comments */}
             <Card.Link
               href={`../single-project/${project._id}`}
-              className="text-decoration-none link-secondary text-truncate fw-semibold"
+              className="text-decoration-none link-secondary text-truncate fw-semibold order-2 order-md-1"
             >
+              <i className="bi bi-chat-square-fill pe-2"></i>
               {project.commentCount} {project.commentCount > 1 || project.commentCount === 0 ? 'comments' : 'comment'}
             </Card.Link>
-            <div>
+            <div className="order-1 order-md-2 mb-3 mb-md-0">
               {/* link to deployed project */}
               {project.deployedLink &&
                 <Button
                   href={project.deployedLink}
-                  variant="primary"
+                  variant="success"
                   size="sm"
-                  className="me-3 fw-semibold rounded-pill"
+                  className="me-2 fw-bold rounded-pill"
                 >
-                  Go to project
+                  Visit Project
                 </Button>
               }
               {/* link to project github */}
               {project.repoLink &&
                 <Button
                   href={project.repoLink}
-                  variant="primary"
-                  className="rounded-pill"
+                  variant="success"
+                  size="sm"
+                  className="rounded-pill fw-bold"
                 >
-                  <i className="bi bi-github"></i>
+                  <i className="bi bi-github me-2"></i>
+                  GitHub
                 </Button>
               }
             </div>

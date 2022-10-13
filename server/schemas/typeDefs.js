@@ -7,7 +7,9 @@ const typeDefs = gql`
     email: String
     createdAt: String
     profileImage: String
+    bio: String
     friends: [User]
+    friendCount: Int
     projects: [Project]
   }
 
@@ -55,6 +57,7 @@ const typeDefs = gql`
     email: String
     password: String
     profileImage: String
+    bio: String
   }
 
   input EditProjectInput {
@@ -77,8 +80,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    editUser(input: EditUserInput, _id: ID!): Auth
+    editUser(input: EditUserInput!, _id: ID!): Auth
     deleteUser(_id: ID!): User
+    addFriend(_id: ID!): User
     addProject(
       projectTitle: String!
       projectTags: [String]!

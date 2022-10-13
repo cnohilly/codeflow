@@ -64,6 +64,7 @@ const Comment = (props) => {
                   src={comment.createdBy.profileImage || "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png"}
                   alt={`Avatar for ${comment.createdBy.username}`}
                   style={{ width: "36px", borderRadius: "50%" }}
+                  className="ar1x1"
                 />
               </div>
 
@@ -73,7 +74,7 @@ const Comment = (props) => {
                   <Card.Subtitle
                     className="my-2 d-flex flex-column flex-md-row justify-content-between"
                   >
-                    <div className="me-5 fw-bold">
+                    <div className="fw-bold mb-1 mb-md-0">
                       {comment.createdBy.username}
                     </div>
                     <div className="text-secondary">
@@ -140,14 +141,14 @@ const Comment = (props) => {
               variant="success"
               type="button"
               aria-label="Show Replies"
-              className="mt-3 fw-semibold"
+              className="mt-3 fw-bold rounded-pill"
               onClick={() => setAreChildrenHidden(!areChildrenHidden)}
             >
               {`Show ${comment.commentCount} ${comment.commentCount > 1 ? 'Replies' : 'Reply'}`}
             </Button>
             :
             // container for nested child comments
-            <div className={`d-flex`}>
+            <div className="d-flex">
               {/* collapsing line button for hiding replies */}
               <Button
                 variant="success"

@@ -42,7 +42,7 @@ const Signup = () => {
     <Container>
       <section className="flex-row justify-center my-4">
         <div className="col-12 col-md-6 mx-auto">
-          <div className="card dark-card-bg text-light">
+          <div id="signUpForm" className="card dark-card-bg text-light">
             <h4 className="card-header header-bg-color text-light text-center">Sign Up</h4>
             <div className="card-body">
               <form onSubmit={handleFormSubmit}>
