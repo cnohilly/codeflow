@@ -11,11 +11,14 @@ import { useEffect } from "react";
 
 const ProjectForm = () => {
 
-  const [projectTitle, setTitle] = useState("");
-  const [projectBody, setBody] = useState("");
-  const [projectTags, setTags] = useState("");
-  const [repoLink, setRepo] = useState("");
-  const [deployedLink, setDeploy] = useState("");
+  const titleRef = useRef();
+  const bodyRef = useRef();
+  const tagsRef = useRef();
+  const repoRef = useRef();
+  const deployedRef = useRef();
+
+  // displaying project form
+  const [displayProjectForm, setDisplayProjectForm] = useState(false);
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
     update(cache, { data: { addProject } }) {
@@ -40,45 +43,6 @@ const ProjectForm = () => {
     },
   });
 
-
-  // submit form
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const tags = JSON.parse(tagifyRef.current.value);
-    console.log(tags);
-    console.log(tags.map(tag => {
-      return tag.value;
-    }))
-
-    try {
-      await addProject({
-        variables: {
-          projectTitle,
-          projectBody,
-          projectTags: JSON.parse(tagifyRef.current.value).map(tag => { return tag.value }),
-          repoLink,
-          deployedLink,
-        },
-      });
-
-      // clear form value
-      setTitle("");
-      setBody("");
-      tagifyRef.current.value = '';
-      setRepo("");
-      setDeploy("");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  // displaying project form
-  const [displayProjectForm, setDisplayProjectForm] = useState(false);
-
-
-
-  const tagifyRef = useRef();
-
   useEffect(() => {
     const tagifyWhitelist = ["HTML", "CSS", "JavaScript", "Node", "Handlebars", "Express", "MongoDB", "MySQL", "GraphQL", "React", "MERN"];
     const tagifySettings = {
@@ -98,9 +62,36 @@ const ProjectForm = () => {
         keepInvalid: false
       }
     }
-    console.log(tagifyRef);
     new Tagify(document.querySelector('input[name="tagify-tags"]'), tagifySettings);
-  }, [displayProjectForm])
+  }, [displayProjectForm]);
+
+
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await addProject({
+        variables: {
+          projectTitle: titleRef.current.value,
+          projectBody: bodyRef.current.value,
+          projectTags: JSON.parse(tagsRef.current.value).map(tag => { return tag.value }),
+          repoLink: repoRef.current.value,
+          deployedLink: deployedRef.current.value,
+        },
+      });
+
+      // clear form value
+      titleRef.current.value = '';
+      bodyRef.current.value = '';
+      tagsRef.current.value = '';
+      repoRef.current.value = '';
+      deployedRef.current.value = '';
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     // project form card
@@ -126,9 +117,8 @@ const ProjectForm = () => {
                 <Form.Control
                   type="text"
                   placeholder="Title"
-                  value={projectTitle}
                   className="bg-dark text-white"
-                  onChange={handleChangeTitle}
+                  ref={titleRef}
                 />
               </Form.Group>
 
@@ -139,8 +129,7 @@ const ProjectForm = () => {
                   name="tagify-tags"
                   className="bg-dark text-white"
                   placeholder="Tags"
-                  onChange={handleChangeTags}
-                  ref={tagifyRef}
+                  ref={tagsRef}
                 />
               </Form.Group>
 
@@ -150,10 +139,9 @@ const ProjectForm = () => {
                 <Form.Control
                   as="textarea"
                   placeholder="Description"
-                  value={projectBody}
                   rows={4}
                   className="bg-dark text-white"
-                  onChange={handleChangeBody}
+                  ref={bodyRef}
                 />
               </Form.Group>
 
@@ -168,9 +156,8 @@ const ProjectForm = () => {
                   <Form.Control
                     type="text"
                     placeholder="Enter deployed application link"
-                    value={deployedLink}
                     className="bg-dark text-white"
-                    onChange={handleChangeDeploy}
+                    ref={deployedRef}
                     maxLength="100"
                   />
                 </Form.Group>
@@ -180,9 +167,8 @@ const ProjectForm = () => {
                   <Form.Control
                     type="text"
                     placeholder="Enter GitHub repository link"
-                    value={repoLink}
                     className="bg-dark text-white"
-                    onChange={handleChangeRepo}
+                    ref={repoRef}
                     maxLength="100"
                   />
                 </Form.Group>
