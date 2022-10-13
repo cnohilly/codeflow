@@ -62,17 +62,19 @@ code {
 }
 
 /* nav link active color */
-.navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
+.navbar-nav .show>.nav-link,
+.navbar-nav .nav-link.active {
   color: var(--bs-success);
 }
 
-footer a:hover, footer i:hover {
+footer a:hover,
+footer i:hover {
   color: var(--bs-success) !important;
   transition: all ease-in-out 0.2s;
 }
 
 .dark-main-bg {
-  background: linear-gradient(#1b1b2b,#101018);
+  background: linear-gradient(#1b1b2b, #101018);
 }
 
 .dark-card-bg {
@@ -127,4 +129,14 @@ select {
   font-size: 1.2rem;
   border: 2px solid;
   border-radius: 50px;
+}
+
+.tagify__input,
+.tagify__input::after {
+  color: inherit;
+}
+
+.tagify__input::before,
+.tagify__input:focus:empty::before {
+  color: gray;
 }

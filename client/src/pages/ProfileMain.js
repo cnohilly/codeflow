@@ -7,8 +7,8 @@ import ProfileError from "../components/ProfileError";
 import ProjectForm from "../components/ProjectForm";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
-import CommentList from '../components/CommentList';
-import ProjectList from '../components/ProjectList';
+import CommentList from "../components/CommentList";
+import ProjectList from "../components/ProjectList";
 import Auth from "../utils/auth";
 
 const ProfileMain = (props) => {
@@ -30,7 +30,7 @@ const ProfileMain = (props) => {
 
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile/about" />;
+    return <Navigate to="/profile" />;
   }
 
   if (loading) {
@@ -51,12 +51,21 @@ const ProfileMain = (props) => {
 
   return (
     <Container className="py-4">
-      <Tab.Container id="profile-tabs" defaultActiveKey="about" className="mb-3">
-        <Row >
+      <Tab.Container
+        id="profile-tabs"
+        defaultActiveKey="about"
+        className="mb-3"
+      >
+        <Row>
           <Col xs={9}>
             <Tab.Content>
               <Tab.Pane eventKey="about">
-                <UserInfo username={user.username} joinDate={user.createdAt} profilePic={user.profileImage} />
+                <UserInfo
+                  userId={user._id}
+                  username={user.username}
+                  joinDate={user.createdAt}
+                  profilePic={user.profileImage}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="projects">
                 <ProjectForm />
@@ -75,13 +84,14 @@ const ProfileMain = (props) => {
                 </Nav.Item>
               </Nav>
             </Row>
-            <Row >
+            <Row>
               <FriendList username={user.username} friends={user.friends} />
             </Row>
           </Col>
         </Row>
       </Tab.Container>
-    </Container>)
+    </Container>
+  );
 };
 
 export default ProfileMain;
