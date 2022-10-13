@@ -93,6 +93,36 @@ footer i:hover {
   text-shadow: 0px 0px 2px rgb(0, 0, 0);
 }
 
+/* hero animations */
+.animatespan {
+  display: inline-block;
+}
+
+.custom-delay-1 {
+  animation-delay: .75s;
+  animation-duration: 1s;
+}
+
+.custom-delay-2 {
+  animation-delay: 1.5s;
+}
+
+.custom-delay-3 {
+  animation-delay: 2s;
+}
+
+.custom-delay-4 {
+  animation-delay: 2.5s;
+}
+
+.custom-delay-5 {
+  animation-delay: 3s;
+}
+
+.custom-delay-6 {
+  animation-delay: 3.5s;
+}
+
 /* card background */
 .card {
   background-color: var(--dark-accent) !important;

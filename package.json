@@ -23,5 +23,8 @@
   "homepage": "https://github.com/cnohilly/codename-poseidon#readme",
   "devDependencies": {
     "concurrently": "^7.4.0"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1"
   }
 }

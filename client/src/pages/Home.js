@@ -17,10 +17,22 @@ const Home = () => {
       {/* section for hero */}
       <section id="hero" className="py-4 py-md-5 dark-card-bg text-center text-white">
         <div className="py-md-5">
+          {/* animated text using animate.css */}
           <h1 className="display-1 fw-semibold brand">
-            Code<span className="text-success">Flow</span>
+            <span className="animate__animated animate__fadeInDown animatespan custom-delay-1">
+              Code
+            </span>
+            <span className="text-success animate__animated animate__fadeInUp animatespan custom-delay-1">
+              Flow
+            </span>
           </h1>
-          <h2>Design, Develop, Deploy</h2>
+          <h2>
+            <span className="animate__animated animate__fadeInRight animatespan custom-delay-2 ">Design</span>
+            <span className="px-3 animate__animated animate__fadeInRight animatespan custom-delay-3">/</span>
+            <span className="animate__animated animate__fadeInRight animatespan custom-delay-4">Develop</span>
+            <span className="px-3 animate__animated animate__fadeInRight animatespan custom-delay-5">/</span>
+            <span className="animate__animated animate__fadeInRight animatespan custom-delay-6">Deploy</span>
+          </h2>
         </div>
       </section>
 
