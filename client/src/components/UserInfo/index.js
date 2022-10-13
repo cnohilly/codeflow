@@ -56,21 +56,19 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
         </Card.Header>
         <Card.Body>
           <div className="d-flex flex-column flex-md-row">
-            <Row>
-              <Col xs={20}>
-                <div>
-                  {/* profile image */}
-                  <img
-                    src={profilePic}
-                    alt="profile-pic"
-                    style={{ width: "125px" }}
-                    className="rounded-circle"
-                  />
-                </div>
-              </Col>
-            </Row>
+            <Col xs={2}>
+              <div>
+                {/* profile image */}
+                <img
+                  src={profilePic}
+                  alt="profile-pic"
+                  style={{ width: "125px" }}
+                  className="rounded-circle"
+                />
+              </div>
+            </Col>
 
-            <Row>
+            <Col xs={10}>
               <div className="flex-grow-1">
                 <div className="ms-3">
                   {/* comment text */}
@@ -121,7 +119,7 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                   </Card.Body>
                 </div>
               </div>
-            </Row>
+            </Col>
           </div>
         </Card.Body>
       </Card>
