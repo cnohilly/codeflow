@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { EDIT_USER } from "../../utils/mutations";
@@ -10,17 +10,18 @@ const BioForm = (props) => {
   const { toggleBioForm, BioBody } = props;
 
   const [editBio, setBio] = useState(BioBody);
+  const bioRef = useRef();
 
   const [editBioBody] = useMutation(EDIT_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const bio = await editBioBody({
+    await editBioBody({
       variables: {
         id: Auth.getProfile().data._id,
         input: {
-          bio: setBio,
+          bio: bioRef.current.value,
         },
       },
     });
@@ -49,8 +50,7 @@ const BioForm = (props) => {
             as="textarea"
             placeholder="Edit Bio"
             className="bg-dark text-white"
-            value={editBio}
-            onChange={handleChange}
+            ref={bioRef}
             autoFocus
           />
         </FloatingLabel>
