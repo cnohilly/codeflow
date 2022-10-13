@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
-import { Link } from "react-router-dom";
-import { Row, Col, Card, Button, ButtonGroup } from "react-bootstrap";
+import { Col, Card, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { QUERY_USERS } from "../../utils/queries";
@@ -10,10 +9,6 @@ import { ADD_FRIEND } from "../../utils/mutations";
 const FriendSearch = () => {
   const { loading, data } = useQuery(QUERY_USERS);
   const [addFriend] = useMutation(ADD_FRIEND);
-
-  const [buttonText, setButtonText] = useState('Add Friend');
-
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -35,27 +30,27 @@ const FriendSearch = () => {
   return (
     <>
       {data.users.map((user) => (
-        <Col className="py-3" key={user.username}>
-
-          <Card className="bg-black bg-gradient text-white shadow">
-            <div className="d-flex flex-column align-items-center px-3">
+        <Col key={user.username}>
+          <Card className="text-white shadow">
+            <Card.Body className="d-flex flex-column align-items-center">
               <img
                 src={user.profileImage}
                 alt="profilepic"
-                style={{ borderRadius: "50%", width: "50%" }}
-                className="my-3"
+                style={{ width: "75px" }}
+                className="rounded-circle mb-2"
               ></img>
-              <h5>{user.username}</h5>
-              <button
-                className="btn w-100 display-block mb-2 btn-primary "
+              <p className="mb-4 fs-5">{user.username}</p>
+              <Button
+                variant="primary"
+                type="button"
+                className="rounded-pill fw-semibold text-white"
                 value={user._id}
                 onClick={handleClick}
               >
-                <i className="bi bi-suit-heart-fill text-white"></i> {buttonText}
-              </button>
-            </div>
+                <i className="bi bi-suit-heart-fill pe-1"></i>Add Friend
+              </Button>
+            </Card.Body>
           </Card>
-
         </Col>
       ))}
     </>

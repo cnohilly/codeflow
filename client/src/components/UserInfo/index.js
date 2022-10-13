@@ -38,15 +38,15 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
   return (
     <Col>
       {/* User Info card */}
-      <Card className="bg-dark bg-gradient text-white shadow">
-        <Card.Header className="bg-black bg-gradient text-white">
+      <Card className="text-white shadow">
+        <Card.Header className="text-white">
           <Card.Title>{username}</Card.Title>
           <Card.Subtitle className="text-white-50">
             Member Since {joinDate}
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
-          <div className="d-flex">
+          <div className="d-flex flex-column flex-md-row">
             <Row>
               <Col xs={20}>
                 <div>
@@ -54,7 +54,8 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
                   <img
                     src={profilePic}
                     alt="profile-pic"
-                    style={{ width: "150px" }}
+                    style={{ width: "125px" }}
+                    className="rounded-circle"
                   />
                 </div>
               </Col>
@@ -66,7 +67,7 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
                   {/* comment text */}
                   <Card.Body>
                     <h3>About Me:</h3>
-                    <p>
+                    <p className="text-secondary">
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                       Eos a alias aliquam veritatis cupiditate dolore qui sit
                       inventore possimus, natus odio molestiae illum quis
@@ -86,10 +87,9 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
                         />
                       </Form.Group>
                       <Button
-                        variant="primary"
+                        variant="success"
                         type="submit"
-                        size="sm"
-                        className="rounded-pill px-3 me-2 fw-semibold"
+                        className="rounded-pill px-3 fw-bold"
                       >
                         Submit
                       </Button>

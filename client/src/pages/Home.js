@@ -3,14 +3,14 @@ import { Container } from 'react-bootstrap';
 import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
 import SearchBar from '../components/SearchBar';
+import ScrollToTopBtn from '../components/ScrollToTopBtn';
 import { QUERY_PROJECTS } from '../utils/queries';
-import { useQuery, useState } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 const Home = () => {
 
   const { loading, data } = useQuery(QUERY_PROJECTS);
   const projects = data?.projects || [];
-
 
   return (
     // section for Homepage
@@ -28,18 +28,19 @@ const Home = () => {
             </span>
           </h1>
           <h2>
-            <span className="animate__animated animate__fadeInRight animatespan custom-delay-2 ">Design</span>
-            <span className="px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-3">/</span>
+            <span className="animate__animated animate__fadeInRight animatespan custom-delay-2">Design</span>
+            <span className="text-success px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-3">/</span>
             <span className="animate__animated animate__fadeInRight animatespan custom-delay-4">Develop</span>
-            <span className="px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-5">/</span>
+            <span className=" text-success px-0 px-md-3 animate__animated animate__fadeInRight animatespan custom-delay-5">/</span>
             <span className="animate__animated animate__fadeInRight animatespan custom-delay-6">Deploy</span>
           </h2>
         </div>
       </section>
 
+      <ScrollToTopBtn />
 
       {/* container for project card list */}
-      <Container id="home-project-list" className="py-4 ">
+      <Container id="home-project-list" className="py-4">
 
         {/* Search Bar */}
         <SearchBar />

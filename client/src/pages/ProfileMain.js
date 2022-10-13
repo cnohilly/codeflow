@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Tab, Tabs, Nav } from "react-bootstrap";
+import { Container, Row, Col, Tab, Tabs, Nav, Button } from "react-bootstrap";
 import UserInfo from "../components/UserInfo";
 import FriendList from "../components/FriendList";
 import FriendSearch from "../components/FriendSearch";
@@ -72,7 +72,7 @@ const ProfileMain = (props) => {
         className="mb-3"
       >
         <Row>
-          <Col xs={9}>
+          <Col xs={7} md={9}>
             <Tab.Content>
               <Tab.Pane eventKey="about">
                 <UserInfo
@@ -87,13 +87,13 @@ const ProfileMain = (props) => {
                 <ProjectList projects={user.projects} />
               </Tab.Pane>
               <Tab.Pane eventKey="find-friends">
-                <Row xs={3} className="g-4">
+                <Row xs={1} md={2} lg={3} className="g-3">
                   <FriendSearch />
                 </Row>
               </Tab.Pane>
             </Tab.Content>
           </Col>
-          <Col xs={3}>
+          <Col xs={5} md={3}>
             <Row className="gx-0">
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
@@ -106,11 +106,13 @@ const ProfileMain = (props) => {
                   <Nav.Link eventKey="find-friends">Find Friends</Nav.Link>
                 </Nav.Item>
               </Nav>
-            </Row>
-            <Row>
-              <button className="btn ml-auto" onClick={handleClick}>
+              <Button
+                variant="success"
+                className="mt-3 fw-bold"
+                onClick={handleClick}
+              >
                 Add Friend
-              </button>
+              </Button>
               <FriendList username={user.username} friends={user.friends} />
             </Row>
           </Col>

@@ -61,6 +61,14 @@ code {
   scroll-margin-top: 4rem;
 }
 
+/* back to top button */
+.back-to-top {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 20;
+}
+
 /* nav link active color */
 .navbar-nav .show>.nav-link,
 .navbar-nav .nav-link.active {
