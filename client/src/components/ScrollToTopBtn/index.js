@@ -28,13 +28,13 @@ const ScrollToTopBtn = () => {
     <>
       {showTopBtn && (
         <Button 
-          variant="success"
+          variant="dark"
           type="button"
           id="myBtn"
           className="back-to-top fs-4 rounded-circle animate__animated animate__fadeIn shadow"
           onClick={() => scrollToTop()}
         >
-          <i className="bi bi-arrow-up-circle"></i>
+          <i className="bi bi-arrow-up-circle text-success"></i>
         </Button>
       )}
     </>

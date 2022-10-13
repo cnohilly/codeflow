@@ -1,5 +1,5 @@
 :root {
-  --dark-shade: #1e1e2f;
+  --dark-shade: #1b1b2b;
   --dark-accent: #27293d;
   --dark-header: #12121a;
 }
@@ -64,9 +64,12 @@ code {
 /* back to top button */
 .back-to-top {
   position: fixed;
-  right: 2rem;
-  bottom: 2rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
   z-index: 20;
+  border: black;
+  background-color: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(1px);
 }
 
 /* nav link active color */
@@ -82,7 +85,7 @@ footer i:hover {
 }
 
 .dark-main-bg {
-  background: linear-gradient(#1b1b2b, #101018);
+  background: linear-gradient(var(--dark-shade), #101018);
 }
 
 .dark-card-bg {
@@ -108,7 +111,6 @@ footer i:hover {
 
 .custom-delay-1 {
   animation-delay: .75s;
-  animation-duration: 1s;
 }
 
 .custom-delay-2 {
