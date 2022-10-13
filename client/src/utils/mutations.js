@@ -25,8 +25,8 @@ export const ADD_USER = gql`
   }
 `;
 
-export const CHANGE_PROFILE_PIC = gql`
-  mutation editUser($input: EditUserInput, $id: ID!) {
+export const EDIT_USER = gql`
+  mutation editUser($input: EditUserInput!, $id: ID!) {
     editUser(input: $input, _id: $id) {
       token
       user {

@@ -37,6 +37,7 @@ const UserMutations = {
 
                 return { token, user };
             }
+            throw new AuthenticationError("You don't have permission to do that!");
         }
 
         throw new AuthenticationError("You need to be logged in!");
