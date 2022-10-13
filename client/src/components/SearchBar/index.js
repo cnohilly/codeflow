@@ -1,7 +1,18 @@
-import React from 'react';
-import { Card, Form, Button, InputGroup } from 'react-bootstrap';
+import React, { useRef } from 'react';
+import { Card, Form, InputGroup } from 'react-bootstrap';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const {
+    searchOptions,
+    updateSearch
+  } = props;
+
+  const searchType = useRef();
+  const searchVal = useRef();
+
+  const onSearchChange = () => {
+    updateSearch(searchType.current.value, searchVal.current.value);
+  }
 
   return (
     // search bar card
@@ -10,26 +21,29 @@ const SearchBar = () => {
         <Form>
           <InputGroup>
             {/* select menu */}
-            <Form.Select 
+            <Form.Select
               aria-label="Select"
               className="bg-dark text-light w-100"
+              ref={searchType}
+              onChange={onSearchChange}
             >
-              <option value="title">Title</option>
-              <option value="tag">Tag</option>
+              {searchOptions.map(option => {
+                const val = option.toLowerCase().split(' ').join('-');
+                return (<option key={val} value={val}>{option}</option>)
+              })};
+              {/* <option value="title">Title</option> */}
+              {/* <option value="tag">Tag</option> */}
             </Form.Select>
             {/* search field */}
             <Form.Control
               type="text"
               placeholder="Search projects by title or tag"
               className="bg-dark text-light"
+              // value={searchVal}
+              ref={searchVal}
+              onChange={onSearchChange}
+              maxLength="100"
             />
-            <Button 
-              variant="success" 
-              id="button-addon2"
-              type="submit"
-            >
-              <i className="bi bi-search"></i>
-            </Button>
           </InputGroup>
         </Form>
       </Card.Body>

@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Col, Card, Row, Form, Button } from "react-bootstrap";
+import { Container, Col, Card, Row, Form, Button } from "react-bootstrap";
+import BioButton from "../BioButton";
+import BioForm from "../BioForm";
 import { EDIT_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 
-const UserInfo = ({ username, joinDate, profilePic }) => {
+const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
+  // needed for updating bio form
+  const [displayBioForm, setDisplayBioForm] = useState(false);
+
+  const toggleBioForm = () => {
+    setDisplayBioForm(!displayBioForm);
+  };
+
   // update profile pic function
   const [pic, setPic] = useState("");
   const [editUser] = useMutation(EDIT_USER);
@@ -18,13 +27,13 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
 
     try {
       console.log(pic);
-      console.log(Auth.getProfile().data._id)
+      console.log(Auth.getProfile().data._id);
       await editUser({
         variables: {
           id: Auth.getProfile().data._id,
           input: {
-            profileImage: pic
-          }
+            profileImage: pic,
+          },
         },
       });
 
@@ -47,32 +56,45 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
         </Card.Header>
         <Card.Body>
           <div className="d-flex flex-column flex-md-row">
-            <Row>
-              <Col xs={20}>
-                <div>
-                  {/* profile image */}
-                  <img
-                    src={profilePic}
-                    alt="profile-pic"
-                    style={{ width: "125px" }}
-                    className="rounded-circle"
-                  />
-                </div>
-              </Col>
-            </Row>
+            <Col xs={2}>
+              <div>
+                {/* profile image */}
+                <img
+                  src={profilePic}
+                  alt="profile-pic"
+                  style={{ width: "125px" }}
+                  className="rounded-circle"
+                />
+              </div>
+            </Col>
 
-            <Row>
+            <Col xs={10}>
               <div className="flex-grow-1">
                 <div className="ms-3">
                   {/* comment text */}
                   <Card.Body>
-                    <h3>About Me:</h3>
-                    <p className="text-secondary">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Eos a alias aliquam veritatis cupiditate dolore qui sit
-                      inventore possimus, natus odio molestiae illum quis
-                      officiis sed laborum labore saepe impedit.
-                    </p>
+                    <Row>
+                      <Col xs={12} className="me-0">
+                        <h3>About Me</h3>
+                      </Col>
+                      <Col className="px-0">
+                        <BioButton toggleBioForm={toggleBioForm} />
+                      </Col>
+                    </Row>
+                    {!displayBioForm ? (
+                      <>
+                        <Row xs={12}>
+                          <p className="text-secondary">{userBio}</p>
+                        </Row>
+                      </>
+                    ) : (
+                      // edit bio
+                      <BioForm
+                        id={userId}
+                        bio={userBio}
+                        toggleBioForm={toggleBioForm}
+                      />
+                    )}
 
                     <Form onSubmit={handleFormSubmit}>
                       <Form.Group className="mb-3" controlId="newProfilePic">
@@ -97,7 +119,7 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
                   </Card.Body>
                 </div>
               </div>
-            </Row>
+            </Col>
           </div>
         </Card.Body>
       </Card>

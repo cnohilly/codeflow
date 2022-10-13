@@ -1,13 +1,13 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-
   type User {
     _id: ID
     username: String
     email: String
     createdAt: String
     profileImage: String
+    bio: String
     friends: [User]
     friendCount: Int
     projects: [Project]
@@ -57,6 +57,7 @@ const typeDefs = gql`
     email: String
     password: String
     profileImage: String
+    bio: String
   }
 
   input EditProjectInput {
