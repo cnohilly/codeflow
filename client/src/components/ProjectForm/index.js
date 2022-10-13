@@ -1,13 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Col, Row, Card, Form, Button } from "react-bootstrap";
-
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../../utils/mutations";
 import { QUERY_PROJECTS, QUERY_ME } from "../../utils/queries";
 import Tagify from "@yaireo/tagify";
-import Tags from "@yaireo/tagify/dist/react.tagify";
-// import TagInput from '../TagInput';
-import { useEffect } from "react";
 
 const ProjectForm = () => {
 
