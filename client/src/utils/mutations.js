@@ -128,5 +128,18 @@ export const ADD_PROJECT = gql`
       lastEditedAt
       commentCount
     }
+    `
+
+export const ADD_FRIEND = gql`
+  mutation addFriend($id: ID!) {
+    addFriend( _id: $id) {
+      _id
+      username
+      friendCount
+      friends {
+        _id
+        username
+      }
+    }
   }
 `;

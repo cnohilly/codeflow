@@ -11,7 +11,11 @@ import CommentList from "../components/CommentList";
 import ProjectList from "../components/ProjectList";
 import Auth from "../utils/auth";
 
+import { ADD_FRIEND } from "../utils/mutations";
+
 const ProfileMain = (props) => {
+  const [addFriend] = useMutation(ADD_FRIEND);
+
   const { username: userParam } = useParams();
   console.log(userParam);
 
@@ -49,7 +53,18 @@ const ProfileMain = (props) => {
     );
   }
 
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { id: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
+<<<<<<< HEAD
     <Container className="py-4">
       <Tab.Container
         id="profile-tabs"
@@ -90,6 +105,26 @@ const ProfileMain = (props) => {
           </Col>
         </Row>
       </Tab.Container>
+=======
+    <Container id="profile-info" className="py-3">
+      <Row>
+        <Col xs={9}>
+          <Row>
+            <UserInfo username={user.username} joinDate={user.createdAt} />
+          </Row>
+        </Col>
+
+        <Col xs={3}>
+          <Row>
+            <ProfileNav />
+            <FriendList />
+            <button className="btn ml-auto" onClick={handleClick}>
+              Add Friend
+            </button>
+          </Row>
+        </Col>
+      </Row>
+>>>>>>> 96afe5b17b2b8d77c2a1b8538d1c1e83b58a60a4
     </Container>
   );
 };
