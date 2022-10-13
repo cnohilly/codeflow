@@ -4,12 +4,13 @@ import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
 import SearchBar from '../components/SearchBar';
 import { QUERY_PROJECTS } from '../utils/queries';
-import { useQuery } from '@apollo/client';
+import { useQuery, useState } from '@apollo/client';
 
 const Home = () => {
 
   const { loading, data } = useQuery(QUERY_PROJECTS);
   const projects = data?.projects || [];
+
 
   return (
     // section for Homepage

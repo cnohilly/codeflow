@@ -34,6 +34,7 @@ const userSchema = new Schema({
   profileImage: {
     type: String,
     match: [/\.(jpg|jpeg|png|webp|svg)$/, "Must be a valid image link."],
+    trim: true,
     default:
       "https://toppng.com/uploads/thumbnail/roger-berry-avatar-placeholder-115629915618zfpmweri9.png",
   },

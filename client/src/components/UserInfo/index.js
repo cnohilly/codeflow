@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Col, Card, Row, Form, Button } from "react-bootstrap";
-import { CHANGE_PROFILE_PIC } from "../../utils/mutations";
+import { EDIT_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
 const UserInfo = ({ username, joinDate, profilePic }) => {
   // update profile pic function
   const [pic, setPic] = useState("");
-  const [updatePic] = useMutation(CHANGE_PROFILE_PIC);
+  const [editUser] = useMutation(EDIT_USER);
 
   const handleChangePic = (event) => {
     setPic(event.target.value);
@@ -16,9 +17,14 @@ const UserInfo = ({ username, joinDate, profilePic }) => {
     event.preventDefault();
 
     try {
-      await updatePic({
+      console.log(pic);
+      console.log(Auth.getProfile().data._id)
+      await editUser({
         variables: {
-          pic,
+          id: Auth.getProfile().data._id,
+          input: {
+            profileImage: pic
+          }
         },
       });
 
