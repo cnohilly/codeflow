@@ -34,9 +34,11 @@ const projectSchema = new Schema(
     },
     repoLink: {
       type: String,
+      match: [/^http(s?):\/\/.+$/, 'Must be a valid link starting with "http(s)://"']
     },
     deployedLink: {
       type: String,
+      match: [/^http(s?):\/\/.+$/, 'Must be a valid link starting with "http(s)://"']
     },
     lastEditedAt: {
       type: Date,

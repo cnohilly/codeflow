@@ -6,7 +6,6 @@ import { QUERY_PROJECTS, QUERY_ME } from "../../utils/queries";
 import Tagify from "@yaireo/tagify";
 
 const ProjectForm = () => {
-
   const titleRef = useRef();
   const bodyRef = useRef();
   const tagsRef = useRef();
@@ -39,11 +38,27 @@ const ProjectForm = () => {
     },
   });
 
+  if (error) {
+    console.log(error);
+  }
+
   let tagify = useRef();
   tagify.current = null;
 
   useEffect(() => {
-    const tagifyWhitelist = ["HTML", "CSS", "JavaScript", "Node", "Handlebars", "Express", "MongoDB", "MySQL", "GraphQL", "React", "MERN"];
+    const tagifyWhitelist = [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node",
+      "Handlebars",
+      "Express",
+      "MongoDB",
+      "MySQL",
+      "GraphQL",
+      "React",
+      "MERN",
+    ];
     const tagifySettings = {
       backspace: "edit",
       // delimiters: ',| ',
@@ -52,21 +67,20 @@ const ProjectForm = () => {
       dropdown: {
         enabled: 0,
         fuzzySearch: true,
-        caseSensitive: false
+        caseSensitive: false,
       },
       maxTags: 10,
       keepInvalid: false,
       editTags: {
         clicks: 1,
-        keepInvalid: false
-      }
-    }
+        keepInvalid: false,
+      },
+    };
     const inputEl = document.querySelector('input[name="tagify-tags"]');
 
     if (!tagify.current && inputEl) {
       tagify.current = new Tagify(inputEl, tagifySettings);
     }
-
   }, [displayProjectForm]);
 
   // submit form
@@ -78,18 +92,20 @@ const ProjectForm = () => {
         variables: {
           projectTitle: titleRef.current.value,
           projectBody: bodyRef.current.value,
-          projectTags: JSON.parse(tagsRef.current.value).map(tag => { return tag.value }),
+          projectTags: JSON.parse(tagsRef.current.value).map((tag) => {
+            return tag.value;
+          }),
           repoLink: repoRef.current.value,
           deployedLink: deployedRef.current.value,
         },
       });
 
       // clear form value
-      titleRef.current.value = '';
-      bodyRef.current.value = '';
-      tagsRef.current.value = '';
-      repoRef.current.value = '';
-      deployedRef.current.value = '';
+      titleRef.current.value = "";
+      bodyRef.current.value = "";
+      tagsRef.current.value = "";
+      repoRef.current.value = "";
+      deployedRef.current.value = "";
     } catch (e) {
       console.error(e);
     }
@@ -155,10 +171,12 @@ const ProjectForm = () => {
                   controlId="formDeployedLink"
                   className="mb-3"
                 >
-                  <Form.Label className="fs-5">Deployed Application Link</Form.Label>
+                  <Form.Label className="fs-5">
+                    Deployed Application Link
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter deployed application link"
+                    placeholder='Enter deployed application link (Please include "http(s)://www.")'
                     className="bg-dark text-white"
                     ref={deployedRef}
                     maxLength="100"
@@ -166,10 +184,12 @@ const ProjectForm = () => {
                 </Form.Group>
                 {/* project repo link input */}
                 <Form.Group as={Col} controlId="formRepoLink" className="mb-3">
-                  <Form.Label className="fs-5">GitHub Repository Link</Form.Label>
+                  <Form.Label className="fs-5">
+                    GitHub Repository Link
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter GitHub repository link"
+                    placeholder='Enter GitHub repository link (Please include "http(s)://www.")'
                     className="bg-dark text-white"
                     ref={repoRef}
                     maxLength="100"
