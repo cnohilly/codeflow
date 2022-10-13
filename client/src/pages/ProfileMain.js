@@ -80,6 +80,7 @@ const ProfileMain = (props) => {
                   username={user.username}
                   joinDate={user.createdAt}
                   profilePic={user.profileImage}
+                  userBio={user.bio}
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="projects">

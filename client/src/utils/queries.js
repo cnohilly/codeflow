@@ -8,6 +8,7 @@ export const QUERY_USER = gql`
       email
       createdAt
       profileImage
+      bio
       friends {
         _id
         username
@@ -39,6 +40,7 @@ export const QUERY_ME = gql`
       email
       createdAt
       profileImage
+      bio
       friends {
         _id
         username
@@ -131,14 +133,15 @@ export const QUERY_COMMENT = gql`
 `;
 
 export const QUERY_USERS = gql`
-query Query {
-  users {
-    _id
-    username
-    profileImage
-    projects {
-      projectTitle
+  query Query {
+    users {
+      _id
+      username
+      profileImage
+      bio
+      projects {
+        projectTitle
+      }
     }
   }
-}
 `;

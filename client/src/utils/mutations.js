@@ -32,6 +32,7 @@ export const EDIT_USER = gql`
       user {
         _id
         profileImage
+        bio
       }
     }
   }
@@ -129,11 +130,11 @@ export const ADD_PROJECT = gql`
       commentCount
     }
   }
-    `
+`;
 
 export const ADD_FRIEND = gql`
   mutation addFriend($id: ID!) {
-    addFriend( _id: $id) {
+    addFriend(_id: $id) {
       _id
       username
       friendCount
