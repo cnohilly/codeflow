@@ -112,7 +112,7 @@ Special thanks to these developers for making this project possible:
 
 - [Link to deployed application on Heroku](https://code-flow-app.herokuapp.com/)
 
-- [Link to GitHub repository](https://github.com/cnohilly/codename-poseidon)
+- [Link to GitHub repository](https://github.com/cnohilly/codeflow)
 
 ## License
 
