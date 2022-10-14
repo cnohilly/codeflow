@@ -102,7 +102,7 @@ const ProfileMain = (props) => {
                   <Nav.Link eventKey="find-friends">Find Friends</Nav.Link>
                 </Nav.Item>
               </Nav>
-              {!(user._id === Auth.getProfile().data._id) &&
+              {(Auth.loggedIn() && !user._id === Auth.getProfile().data._id) &&
                 <Button
                   variant="success"
                   className="mt-3 fw-bold"
