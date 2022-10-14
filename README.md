@@ -47,6 +47,21 @@ To install this application on your local machine:
 
 ## Usage
 
+- To start the server, type the following command:
+
+```
+npm run develop
+```
+
+- This will open a local host tab in your browser with the application.
+- Sign up as a new user or log in as an existing user in the upper right of the navigation bar to begin posting projects or liking and adding comments to existing projects.
+- On the homepage, the most recent projects posted will be shown. By clicking on them you will be taken to the individual project page which will show all comments and replies.
+- In the navigation bar on the top of the page is a search bar allowing you to search for projects. Select either title or tag from the dropdown and input your title or tag the search field. A search results page will display projects matching the user input.
+- You can like a comment by clicking on the heart below the comment text.
+- You can also leave a comment by filling out the comment form field and clicking on the comment button. The page will automaticaly update with the new comments appearing below the form.
+- Clicking on the profile link in the navigation bar will take you to your profile and allow them to add a profile picture, update their biography, view their previous project posts or add friends.
+- To log out of your account, click on the logout button on the upper right of the navigation bar.
+
 ## Screenshots
 
 The following images demonstrate the application's appearance and functionality.
