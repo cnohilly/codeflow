@@ -4,49 +4,60 @@
 
 ## Description
 
-
-
 Check out the links section for the link to the deployed application on Heroku!
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Screenshots](#screenshots)
-* [Technologies Used](#technologies-used)
-* [Credits](#credits)
-* [Links](#links)
-* [License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Credits](#credits)
+- [Links](#links)
+- [License](#license)
 
 ## Installation
-
 
 To install this application on your local machine:
 
 - Clone the application's repository and place it into a local directory on your computer.
 - Ensure that your computer has node.js installed.
 - Open a command-line interface (VS Code, Git Bash, etc.) and navigate to the root directory.
-- In the command-line, download the application's dependencies by typing: 
+- In the command-line, download the application's dependencies by typing:
+
 ```
     npm install
 ```
+
 - To seed the database, type the following command:
+
 ```
     npm run seed
 ```
-- Start the application by typing the following command. Your default web browser will then open the application in a new tab. 
+
+- Start the application by typing the following command. Your default web browser will then open the application in a new tab.
+
 ```
     npm run develop
 ```
 
 ## Usage
 
-
-
 ## Screenshots
 
 The following images demonstrate the application's appearance and functionality.
 
+### Homepage
+
+![alt='homepage'](./assets/Screen%20Shot%202022-10-13%20at%207.12.33%20PM.png)
+
+### Project Forms
+
+![alt='projectform](./assets/Screen%20Shot%202022-10-13%20at%208.21.45%20PM.png)
+
+### User Profile Page
+
+![alt='profilepage'](./assets/Screen%20Shot%202022-10-13%20at%208.23.06%20PM.png)
 
 ## Technologies Used
 
