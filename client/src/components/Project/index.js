@@ -25,21 +25,28 @@ const Project = (props) => {
     <Col>
       {/* project card */}
       <Card className="shadow border-dark text-light">
-        <Card.Link
-          href={`../single-project/${project._id}`}
-          className="text-decoration-none link-light"
-        >
-          <Card.Header className="border-success">
-            {/* project title */}
+        <Card.Header className="border-success">
+          {/* project title */}
+          <Card.Link
+            href={`../single-project/${project._id}`}
+            className="text-decoration-none link-light"
+          >
             <Card.Title>
               {project.projectTitle}
             </Card.Title>
             {/* project user info */}
-            <Card.Subtitle className="text-secondary">
-              Posted by {project.createdBy.username} on {project.createdAt}
-            </Card.Subtitle>
-          </Card.Header>
-        </Card.Link>
+          </Card.Link>
+          <Card.Subtitle className="text-secondary">
+            Posted by{' '}
+            <Card.Link
+              href={`../profile/${project.createdBy.username}`}
+              className="text-decoration-none link-light"
+            >
+              {project.createdBy.username}
+            </Card.Link>
+            {' '}on {project.createdAt}
+          </Card.Subtitle>
+        </Card.Header>
         <Card.Body>
           {/* project tags */}
           <div>
