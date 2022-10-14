@@ -75,7 +75,7 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                       <Col xs={12} className="me-0">
                         <h3>About Me</h3>
                       </Col>
-                      {(userId === Auth.getProfile().data._id) &&
+                      {(Auth.loggedIn() && userId === Auth.getProfile().data._id) &&
                         <Col className="px-0">
                           <BioButton toggleBioForm={toggleBioForm} />
                         </Col>
@@ -96,7 +96,7 @@ const UserInfo = ({ userId, username, joinDate, profilePic, userBio }) => {
                       />
                     )}
 
-                    {(userId === Auth.getProfile().data._id) &&
+                    {(Auth.loggedIn() && userId === Auth.getProfile().data._id) &&
                       <Form onSubmit={handleFormSubmit}>
                         <Form.Group className="mb-3" controlId="newProfilePic">
                           <Form.Label>New Profile Pic</Form.Label>
