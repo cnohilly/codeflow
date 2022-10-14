@@ -4,7 +4,11 @@
 
 ## Description
 
-Check out the links section for the link to the deployed application on Heroku!
+CodeFlow is a social media application where users can post and share their coding projects with others. By logging in or signing up the user will be able to use the project form to submit their project with a title, description, tags, repository link and deployed application link. Other users can then view those projects and like it, comment on it and also reply to other comments made on the project.
+
+Along with this the user will have access to their own personal profile page where they can add a biography and custom profile picture and view their posted projects. The user also has the option to friend other users which allows them to view their friends profiles and projects.
+
+Check out the deployed application using the links below!
 
 ## Table of Contents
 
