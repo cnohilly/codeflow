@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Card, Row } from "react-bootstrap";
+import { Col, Card } from "react-bootstrap";
 
 const ProfileError = ({ username, joinDate }) => {
   return (

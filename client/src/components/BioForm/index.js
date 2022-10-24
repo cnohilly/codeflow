@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { EDIT_USER } from "../../utils/mutations";
